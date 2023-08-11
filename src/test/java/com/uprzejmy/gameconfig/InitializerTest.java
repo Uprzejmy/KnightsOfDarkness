@@ -6,8 +6,7 @@ class InitializerTest {
 
     @Test
     void readGameConfig() {
-        var initializer = new Initializer();
-        var config = initializer.readGameConfig();
+        var config = Initializer.readGameConfig();
         System.out.println(config.toString());
     }
 }

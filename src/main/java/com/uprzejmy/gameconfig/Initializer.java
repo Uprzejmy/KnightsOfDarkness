@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 
 public class Initializer {
-    public GameConfig readGameConfig() {
+    public static GameConfig readGameConfig() {
         var mapper = new ObjectMapper();
 
         try (var input = Thread.currentThread().getContextClassLoader().getResourceAsStream("gameconfig.json")) {
