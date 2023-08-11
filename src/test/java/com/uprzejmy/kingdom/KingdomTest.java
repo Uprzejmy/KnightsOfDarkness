@@ -5,10 +5,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-class KingdomTest {
+class KingdomTest
+{
 
     @Test
-    void buildTest() {
+    void buildTest()
+    {
         var kingdom = new KingdomBuilder().withBuildingPoints(10000).build();
         var housesBeforeBuild = kingdom.getBuildings().houses;
         var buildingPointsBeforeBuild = kingdom.getResources().buildingPoints;

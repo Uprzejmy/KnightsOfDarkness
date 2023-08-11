@@ -1,3 +1,5 @@
 package com.uprzejmy.gameconfig;
 
-public record GameConfig (BuildingPointCosts buildingPointCosts){}
+public record GameConfig(BuildingPointCosts buildingPointCosts)
+{
+}

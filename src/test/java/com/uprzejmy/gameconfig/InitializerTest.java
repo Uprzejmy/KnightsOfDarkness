@@ -2,10 +2,12 @@ package com.uprzejmy.gameconfig;
 
 import org.junit.jupiter.api.Test;
 
-class InitializerTest {
+class InitializerTest
+{
 
     @Test
-    void readGameConfig() {
+    void readGameConfig()
+    {
         var config = Initializer.readGameConfig();
         System.out.println(config.toString());
     }

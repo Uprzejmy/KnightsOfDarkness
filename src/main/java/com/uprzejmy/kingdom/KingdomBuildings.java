@@ -1,6 +1,7 @@
 package com.uprzejmy.kingdom;
 
-public class KingdomBuildings {
+public class KingdomBuildings
+{
     public int houses = 0;
     public int goldMines = 0;
     public int ironMines = 0;
@@ -12,6 +13,7 @@ public class KingdomBuildings {
     public int towers = 0;
     public int castles = 0;
 
-    public KingdomBuildings() {
+    public KingdomBuildings()
+    {
     }
 }
