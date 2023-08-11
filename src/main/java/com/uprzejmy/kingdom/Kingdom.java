@@ -7,6 +7,7 @@ public class Kingdom
     private final GameConfig config;
     private final KingdomResources resources;
     private final KingdomBuildings buildings;
+    private final KingdomBuildAction kingdomBuildAction = new KingdomBuildAction(this);
 
     public Kingdom(GameConfig config, KingdomResources resources, KingdomBuildings buildings)
     {
@@ -15,15 +16,9 @@ public class Kingdom
         this.buildings = buildings;
     }
 
-    public void build(KingdomBuildings buildingToBuild)
+    public void build(KingdomBuildings buildingsToBuild)
     {
-        // simplest algorithm to build from top until the building points are depleted
-        var buildingCost = config.buildingPointCosts().house();
-        var pointsToPutIntoBuilding = Math.min(resources.buildingPoints, buildingToBuild.houses * buildingCost);
-        var fullBuildings = pointsToPutIntoBuilding / buildingCost;
-
-        resources.buildingPoints -= pointsToPutIntoBuilding;
-        buildings.houses += fullBuildings;
+        kingdomBuildAction.build(buildingsToBuild);
     }
 
     public KingdomResources getResources()
@@ -34,5 +29,10 @@ public class Kingdom
     public KingdomBuildings getBuildings()
     {
         return buildings;
+    }
+
+    public GameConfig getConfig()
+    {
+        return config;
     }
 }

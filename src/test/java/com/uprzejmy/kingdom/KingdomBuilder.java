@@ -1,7 +1,6 @@
 package com.uprzejmy.kingdom;
 
 import com.uprzejmy.gameconfig.GameConfig;
-import com.uprzejmy.gameconfig.Initializer;
 
 public class KingdomBuilder
 {
@@ -9,11 +8,11 @@ public class KingdomBuilder
     private final KingdomBuildings buildings;
     private final GameConfig config;
 
-    public KingdomBuilder()
+    public KingdomBuilder(GameConfig config)
     {
         this.resources = new KingdomResources();
         this.buildings = new KingdomBuildings();
-        this.config = Initializer.readGameConfig();
+        this.config = config;
     }
 
     public KingdomBuilder withBuildingPoints(int buildingPoints)

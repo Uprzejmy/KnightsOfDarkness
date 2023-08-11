@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 class InitializerTest
 {
-
     @Test
     void readGameConfig()
     {
