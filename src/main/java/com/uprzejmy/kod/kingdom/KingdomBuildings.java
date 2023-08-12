@@ -1,19 +1,27 @@
 package com.uprzejmy.kod.kingdom;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class KingdomBuildings
 {
-    public int houses = 0;
-    public int goldMines = 0;
-    public int ironMines = 0;
-    public int workshops = 0;
-    public int farms = 0;
-    public int markets = 0;
-    public int barracks = 0;
-    public int spyGuilds = 0;
-    public int towers = 0;
-    public int castles = 0;
+    public Map<BuildingName, Integer> buildings = new HashMap<>();
 
     public KingdomBuildings()
     {
+        for (var name : BuildingName.values())
+        {
+            buildings.put(name, 0);
+        }
+    }
+
+    public int getCount(BuildingName name)
+    {
+        return buildings.get(name);
+    }
+
+    public void addCount(BuildingName name, int count)
+    {
+        buildings.put(name, buildings.get(name) + count);
     }
 }

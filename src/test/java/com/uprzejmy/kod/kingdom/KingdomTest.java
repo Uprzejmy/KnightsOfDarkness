@@ -41,20 +41,20 @@ class KingdomTest
     void buildHousesAndGoldMinesTest()
     {
         var kingdom = kingdomBuilder.withBuildingPoints(10000).build();
-        var housesBeforeBuild = kingdom.getBuildings().houses;
-        var goldMinesBeforeBuild = kingdom.getBuildings().goldMines;
+        var housesBeforeBuild = kingdom.getBuildings().getCount(BuildingName.house);
+        var goldMinesBeforeBuild = kingdom.getBuildings().getCount(BuildingName.goldMine);
         var buildingPointsBeforeBuild = kingdom.getResources().buildingPoints;
 
         var housesToBuild = 5;
         var goldMinesToBuild = 2;
         var toBuild = new KingdomBuildings();
-        toBuild.houses = housesToBuild;
-        toBuild.goldMines = goldMinesToBuild;
+        toBuild.addCount(BuildingName.house, housesToBuild);
+        toBuild.addCount(BuildingName.goldMine, goldMinesToBuild);
 
         kingdom.build(toBuild);
 
-        assertEquals(housesBeforeBuild + 5, kingdom.getBuildings().houses);
-        assertEquals(goldMinesBeforeBuild + 2, kingdom.getBuildings().goldMines);
+        assertEquals(housesBeforeBuild + 5, kingdom.getBuildings().getCount(BuildingName.house));
+        assertEquals(goldMinesBeforeBuild + 2, kingdom.getBuildings().getCount(BuildingName.goldMine));
 
         var housesCost = housesToBuild * config.buildingPointCosts().house();
         var goldMinesCost = goldMinesToBuild * config.buildingPointCosts().goldMine();
