@@ -1,4 +1,4 @@
-package com.uprzejmy.gameconfig;
+package com.uprzejmy.kod.gameconfig;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.github.victools.jsonschema.generator.*;

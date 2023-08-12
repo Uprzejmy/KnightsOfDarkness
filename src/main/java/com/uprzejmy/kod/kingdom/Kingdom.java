@@ -1,6 +1,6 @@
-package com.uprzejmy.kingdom;
+package com.uprzejmy.kod.kingdom;
 
-import com.uprzejmy.gameconfig.GameConfig;
+import com.uprzejmy.kod.gameconfig.GameConfig;
 
 public class Kingdom
 {

@@ -1,4 +1,4 @@
-package com.uprzejmy;
+package com.uprzejmy.kod;
 
 public class Main
 {

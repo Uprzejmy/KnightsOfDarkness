@@ -1,4 +1,4 @@
-package com.uprzejmy.kingdom;
+package com.uprzejmy.kod.kingdom;
 
 public class KingdomBuildings
 {

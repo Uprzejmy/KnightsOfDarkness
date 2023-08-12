@@ -1,7 +1,7 @@
-package com.uprzejmy.kingdom;
+package com.uprzejmy.kod.kingdom;
 
-import com.uprzejmy.TestGameConfig;
-import com.uprzejmy.gameconfig.GameConfig;
+import com.uprzejmy.kod.TestGameConfig;
+import com.uprzejmy.kod.gameconfig.GameConfig;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

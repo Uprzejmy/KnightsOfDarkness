@@ -1,4 +1,4 @@
-package com.uprzejmy.gameconfig;
+package com.uprzejmy.kod.gameconfig;
 
 import org.junit.jupiter.api.Test;
 
