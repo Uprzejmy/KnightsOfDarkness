@@ -21,6 +21,12 @@ public class Kingdom
         kingdomBuildAction.build(buildingsToBuild);
     }
 
+    public int getUnusedLand()
+    {
+        return resources.land - buildings.countAll();
+    }
+
+
     public KingdomResources getResources()
     {
         return resources;

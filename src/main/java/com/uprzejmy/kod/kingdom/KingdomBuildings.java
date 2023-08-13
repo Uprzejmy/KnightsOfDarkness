@@ -15,6 +15,12 @@ public class KingdomBuildings
         }
     }
 
+    public int countAll()
+    {
+        // TODO return sum of all counts of buildings, not only houses
+        return getCount(BuildingName.house);
+    }
+
     public int getCount(BuildingName name)
     {
         return buildings.get(name);

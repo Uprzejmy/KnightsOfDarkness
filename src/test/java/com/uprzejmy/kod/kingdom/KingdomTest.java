@@ -62,4 +62,19 @@ class KingdomTest
 
         assertEquals(buildingPointsBeforeBuild - totalCost, kingdom.getResources().buildingPoints);
     }
+
+    @Test
+    void whenBuildingFiveBuildings_KingdomShouldHaveFiveLessUnusedLand()
+    {
+        var kingdom = kingdomBuilder.withBuildingPoints(10000).withLand(100).build();
+        var unusedLandBeforeBuild = kingdom.getUnusedLand();
+
+        var housesToBuild = 5;
+        var toBuild = new KingdomBuildings();
+        toBuild.addCount(BuildingName.house, housesToBuild);
+
+        kingdom.build(toBuild);
+
+        assertEquals(unusedLandBeforeBuild - housesToBuild, kingdom.getUnusedLand());
+    }
 }

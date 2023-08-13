@@ -21,6 +21,12 @@ public class KingdomBuilder
         return this;
     }
 
+    public KingdomBuilder withLand(int land)
+    {
+        this.resources.land = land;
+        return this;
+    }
+
     public Kingdom build()
     {
         return new Kingdom(config, resources, buildings);

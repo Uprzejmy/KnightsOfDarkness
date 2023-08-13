@@ -1,5 +1,7 @@
 package com.uprzejmy.kod.kingdom;
 
+import java.util.EnumSet;
+
 public class KingdomBuildAction
 {
     private final Kingdom kingdom;
@@ -14,12 +16,14 @@ public class KingdomBuildAction
      */
     public void build(KingdomBuildings buildingsToBuild)
     {
-        for (var entry : buildingsToBuild.buildings.entrySet())
+        // by using EnumSet we make sure the names are ordered as specified in the enum declaration
+        var buildingNames = EnumSet.copyOf(buildingsToBuild.buildings.keySet());
+        for (var buildingName : buildingNames)
         {
-            var buildingCost = kingdom.getConfig().buildingPointCosts().getCost(entry.getKey());
-            var pointsToPutIntoBuilding = Math.min(kingdom.getResources().buildingPoints, entry.getValue() * buildingCost);
+            var buildingCost = kingdom.getConfig().buildingPointCosts().getCost(buildingName);
+            var pointsToPutIntoBuilding = Math.min(kingdom.getResources().buildingPoints, buildingsToBuild.getCount(buildingName) * buildingCost);
             var fullBuildings = pointsToPutIntoBuilding / buildingCost;
-            kingdom.getBuildings().addCount(entry.getKey(), fullBuildings);
+            kingdom.getBuildings().addCount(buildingName, fullBuildings);
             kingdom.getResources().buildingPoints -= pointsToPutIntoBuilding;
         }
     }
