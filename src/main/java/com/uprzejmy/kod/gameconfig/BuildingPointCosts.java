@@ -6,20 +6,13 @@ public record BuildingPointCosts(int house, int goldMine, int ironMine, int work
 {
     public int getCost(BuildingName name)
     {
-        switch (name)
+        return switch (name)
         {
-            case house:
-                return house;
-            case goldMine:
-                return goldMine;
-            case ironMine:
-                return ironMine;
-            case workshop:
-                return workshop;
-            case farm:
-                return farm;
-        }
-
-        throw new RuntimeException("BuildingName value not handled for " + name);
+            case house -> house;
+            case goldMine -> goldMine;
+            case ironMine -> ironMine;
+            case workshop -> workshop;
+            case farm -> farm;
+        };
     }
 }
