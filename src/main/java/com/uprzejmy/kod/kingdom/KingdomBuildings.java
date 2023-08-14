@@ -16,9 +16,14 @@ public class KingdomBuildings
     }
 
     public int countAll()
-    {
-        // TODO return sum of all counts of buildings, not only houses
-        return getCount(BuildingName.house);
+    {   int sum= 0;
+
+        for(Integer entry: buildings.values())
+        {
+            sum+= entry;
+        }
+
+        return sum;
     }
 
     public int getCount(BuildingName name)

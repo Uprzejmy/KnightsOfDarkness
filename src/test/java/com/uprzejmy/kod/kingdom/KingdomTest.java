@@ -77,4 +77,20 @@ class KingdomTest
 
         assertEquals(unusedLandBeforeBuild - housesToBuild, kingdom.getUnusedLand());
     }
+
+    @Test
+    void buildingCount()
+    {
+        var kingdom = kingdomBuilder.withBuildingPoints(10000).withLand(100).build();
+
+        var toBuild = new KingdomBuildings();
+        toBuild.addCount(BuildingName.house, 1);
+        toBuild.addCount(BuildingName.farm, 3);
+        toBuild.addCount(BuildingName.goldMine, 2);
+        toBuild.addCount(BuildingName.workshop, 1);
+
+        kingdom.build(toBuild);
+
+        assertEquals(7, kingdom.getBuildings().countAll());
+    }
 }
