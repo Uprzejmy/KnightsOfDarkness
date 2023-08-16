@@ -13,6 +13,11 @@ public record BuildingPointCosts(int house, int goldMine, int ironMine, int work
             case ironMine -> ironMine;
             case workshop -> workshop;
             case farm -> farm;
+            case market -> market;
+            case barracks -> barracks;
+            case spyGuild -> spyGuild;
+            case tower -> tower;
+            case castle -> castle;
         };
     }
 }

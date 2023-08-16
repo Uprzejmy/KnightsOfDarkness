@@ -13,16 +13,28 @@
   },
   "kingdomStartConfiguration": {
     "buildings": {
-      "house": 10,
-      "goldMine": 5,
-      "ironMine": 5,
-      "farm": 10,
+      "house": 30,
+      "goldMine": 10,
+      "ironMine": 2,
+      "farm": 5,
       "workshop": 5,
       "market": 0,
-      "barracks": 0,
+      "barracks": 1,
       "spyGuild": 0,
-      "castle": 0,
-      "tower": 0
+      "castle": 1,
+      "tower": 4
     }
+  },
+  "buildingCapacity": {
+    "house": 5,
+    "goldMine": 5,
+    "ironMine": 5,
+    "farm": 5,
+    "workshop": 5,
+    "market": 50,
+    "barracks": 100,
+    "spyGuild": 50,
+    "castle": 0,
+    "tower": 10
   }
 }

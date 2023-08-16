@@ -2,9 +2,9 @@ package com.uprzejmy.kod.gameconfig;
 
 import com.uprzejmy.kod.kingdom.BuildingName;
 
-public record KingdomStartBuildings(int house, int goldMine, int ironMine, int workshop, int farm, int market, int barracks, int spyGuild, int tower, int castle)
+public record BuildingCapacity(int house, int goldMine, int ironMine, int workshop, int farm, int market, int barracks, int spyGuild, int tower, int castle)
 {
-    public int getCount(BuildingName name)
+    public int getCapacity(BuildingName name)
     {
         return switch (name)
         {

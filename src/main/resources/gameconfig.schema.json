@@ -2,6 +2,41 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "type": "object",
   "properties": {
+    "buildingCapacity": {
+      "type": "object",
+      "properties": {
+        "barracks": {
+          "type": "integer"
+        },
+        "castle": {
+          "type": "integer"
+        },
+        "farm": {
+          "type": "integer"
+        },
+        "goldMine": {
+          "type": "integer"
+        },
+        "house": {
+          "type": "integer"
+        },
+        "ironMine": {
+          "type": "integer"
+        },
+        "market": {
+          "type": "integer"
+        },
+        "spyGuild": {
+          "type": "integer"
+        },
+        "tower": {
+          "type": "integer"
+        },
+        "workshop": {
+          "type": "integer"
+        }
+      }
+    },
     "buildingPointCosts": {
       "type": "object",
       "properties": {
