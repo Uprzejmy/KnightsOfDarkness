@@ -1,11 +1,11 @@
 package com.uprzejmy.kod.kingdom;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class KingdomBuildings
 {
-    public Map<BuildingName, Integer> buildings = new HashMap<>();
+    Map<BuildingName, Integer> buildings = new EnumMap<>(BuildingName.class);
 
     public KingdomBuildings()
     {
