@@ -16,14 +16,8 @@ public class KingdomBuildings
     }
 
     public int countAll()
-    {   int sum= 0;
-
-        for(Integer entry: buildings.values())
-        {
-            sum+= entry;
-        }
-
-        return sum;
+    {
+        return buildings.values().stream().mapToInt(Integer::intValue).sum();
     }
 
     public int getCount(BuildingName name)

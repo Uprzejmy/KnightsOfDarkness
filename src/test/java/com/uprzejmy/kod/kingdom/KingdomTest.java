@@ -93,4 +93,5 @@ class KingdomTest
 
         assertEquals(7, kingdom.getBuildings().countAll());
     }
+
 }
