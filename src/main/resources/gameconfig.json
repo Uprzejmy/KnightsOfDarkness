@@ -10,5 +10,19 @@
     "spyGuild": 1000,
     "castle": 100000,
     "tower": 1000
+  },
+  "kingdomStartConfiguration": {
+    "buildings": {
+      "house": 10,
+      "goldMine": 5,
+      "ironMine": 5,
+      "farm": 10,
+      "workshop": 5,
+      "market": 0,
+      "barracks": 0,
+      "spyGuild": 0,
+      "castle": 0,
+      "tower": 0
+    }
   }
 }

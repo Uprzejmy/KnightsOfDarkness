@@ -11,7 +11,7 @@ public class KingdomBuilder
     public KingdomBuilder(GameConfig config)
     {
         this.resources = new KingdomResources();
-        this.buildings = new KingdomBuildings();
+        this.buildings = new KingdomBuildings(config.kingdomStartConfiguration().buildings());
         this.config = config;
     }
 

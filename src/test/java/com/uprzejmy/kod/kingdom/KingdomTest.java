@@ -82,6 +82,7 @@ class KingdomTest
     void buildingCount()
     {
         var kingdom = kingdomBuilder.withBuildingPoints(10000).withLand(100).build();
+        var existingBuildingsCount = kingdom.getBuildings().countAll();
 
         var toBuild = new KingdomBuildings();
         toBuild.addCount(BuildingName.house, 1);
@@ -91,7 +92,7 @@ class KingdomTest
 
         kingdom.build(toBuild);
 
-        assertEquals(7, kingdom.getBuildings().countAll());
+        assertEquals(existingBuildingsCount + 7, kingdom.getBuildings().countAll());
     }
 
 }

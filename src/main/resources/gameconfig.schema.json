@@ -1,36 +1,79 @@
 {
-  "$schema" : "https://json-schema.org/draft/2020-12/schema",
-  "type" : "object",
-  "properties" : {
-    "buildingPointCosts" : {
-      "type" : "object",
-      "properties" : {
-        "barracks" : {
-          "type" : "integer"
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "buildingPointCosts": {
+      "type": "object",
+      "properties": {
+        "barracks": {
+          "type": "integer"
         },
-        "castle" : {
-          "type" : "integer"
+        "castle": {
+          "type": "integer"
         },
-        "farm" : {
-          "type" : "integer"
+        "farm": {
+          "type": "integer"
         },
-        "goldMine" : {
-          "type" : "integer"
+        "goldMine": {
+          "type": "integer"
         },
-        "house" : {
-          "type" : "integer"
+        "house": {
+          "type": "integer"
         },
-        "ironMine" : {
-          "type" : "integer"
+        "ironMine": {
+          "type": "integer"
         },
-        "market" : {
-          "type" : "integer"
+        "market": {
+          "type": "integer"
         },
-        "tower" : {
-          "type" : "integer"
+        "spyGuild": {
+          "type": "integer"
         },
-        "workshop" : {
-          "type" : "integer"
+        "tower": {
+          "type": "integer"
+        },
+        "workshop": {
+          "type": "integer"
+        }
+      }
+    },
+    "kingdomStartConfiguration": {
+      "type": "object",
+      "properties": {
+        "buildings": {
+          "type": "object",
+          "properties": {
+            "barracks": {
+              "type": "integer"
+            },
+            "castle": {
+              "type": "integer"
+            },
+            "farm": {
+              "type": "integer"
+            },
+            "goldMine": {
+              "type": "integer"
+            },
+            "house": {
+              "type": "integer"
+            },
+            "ironMine": {
+              "type": "integer"
+            },
+            "market": {
+              "type": "integer"
+            },
+            "spyGuild": {
+              "type": "integer"
+            },
+            "tower": {
+              "type": "integer"
+            },
+            "workshop": {
+              "type": "integer"
+            }
+          }
         }
       }
     }
