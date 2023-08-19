@@ -7,6 +7,7 @@
     "workshop": 100,
     "market": 500,
     "barracks": 2000,
+    "guardHouse": 1000,
     "spyGuild": 1000,
     "castle": 100000,
     "tower": 1000
@@ -20,6 +21,7 @@
       "workshop": 5,
       "market": 0,
       "barracks": 1,
+      "guardHouse": 1,
       "spyGuild": 0,
       "castle": 1,
       "tower": 4
@@ -33,8 +35,66 @@
     "workshop": 5,
     "market": 50,
     "barracks": 100,
+    "guardHouse": 10,
     "spyGuild": 50,
     "castle": 0,
     "tower": 10
+  },
+  "trainingCost": {
+    "goldMiner": {
+      "gold": 4000,
+      "tools": 15,
+      "weapons": 0
+    },
+    "ironMiner": {
+      "gold": 4000,
+      "tools": 15,
+      "weapons": 0
+    },
+    "farmer": {
+      "gold": 3000,
+      "tools": 5,
+      "weapons": 0
+    },
+    "blacksmith": {
+      "gold": 7000,
+      "tools": 10,
+      "weapons": 0
+    },
+    "builder": {
+      "gold": 5000,
+      "tools": 20,
+      "weapons": 0
+    },
+    "carrier": {
+      "gold": 700,
+      "tools": 2,
+      "weapons": 0
+    },
+    "guard": {
+      "gold": 5000,
+      "tools": 0,
+      "weapons": 10
+    },
+    "spy": {
+      "gold": 10000,
+      "tools": 0,
+      "weapons": 5
+    },
+    "bowmen": {
+      "gold": 15000,
+      "tools": 0,
+      "weapons": 5
+    },
+    "infantry": {
+      "gold": 15000,
+      "tools": 0,
+      "weapons": 10
+    },
+    "cavalry": {
+      "gold": 30000,
+      "tools": 0,
+      "weapons": 20
+    }
   }
 }

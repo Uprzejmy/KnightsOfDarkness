@@ -1,5 +1,21 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "UnitTrainingCost": {
+      "type": "object",
+      "properties": {
+        "gold": {
+          "type": "integer"
+        },
+        "tools": {
+          "type": "integer"
+        },
+        "weapons": {
+          "type": "integer"
+        }
+      }
+    }
+  },
   "type": "object",
   "properties": {
     "buildingCapacity": {
@@ -109,6 +125,41 @@
               "type": "integer"
             }
           }
+        }
+      }
+    },
+    "trainingCost": {
+      "type": "object",
+      "properties": {
+        "blacksmith": {
+          "$ref": "#/$defs/UnitTrainingCost"
+        },
+        "bowmen": {
+          "$ref": "#/$defs/UnitTrainingCost"
+        },
+        "builder": {
+          "$ref": "#/$defs/UnitTrainingCost"
+        },
+        "carrier": {
+          "$ref": "#/$defs/UnitTrainingCost"
+        },
+        "cavalry": {
+          "$ref": "#/$defs/UnitTrainingCost"
+        },
+        "farmer": {
+          "$ref": "#/$defs/UnitTrainingCost"
+        },
+        "goldMiner": {
+          "$ref": "#/$defs/UnitTrainingCost"
+        },
+        "infantry": {
+          "$ref": "#/$defs/UnitTrainingCost"
+        },
+        "ironMiner": {
+          "$ref": "#/$defs/UnitTrainingCost"
+        },
+        "spy": {
+          "$ref": "#/$defs/UnitTrainingCost"
         }
       }
     }

@@ -2,7 +2,7 @@ package com.uprzejmy.kod.gameconfig;
 
 import com.uprzejmy.kod.kingdom.BuildingName;
 
-public record KingdomStartBuildings(int house, int goldMine, int ironMine, int workshop, int farm, int market, int barracks, int spyGuild, int tower, int castle)
+public record KingdomStartBuildings(int house, int goldMine, int ironMine, int workshop, int farm, int market, int barracks, int guardHouse, int spyGuild, int tower, int castle)
 {
     public int getCount(BuildingName name)
     {
@@ -15,6 +15,7 @@ public record KingdomStartBuildings(int house, int goldMine, int ironMine, int w
             case farm -> farm;
             case market -> market;
             case barracks -> barracks;
+            case guardHouse -> guardHouse;
             case spyGuild -> spyGuild;
             case tower -> tower;
             case castle -> castle;
