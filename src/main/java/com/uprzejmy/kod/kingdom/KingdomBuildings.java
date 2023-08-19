@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class KingdomBuildings
 {
-    Map<BuildingName, Integer> buildings = new EnumMap<>(BuildingName.class);
+    final Map<BuildingName, Integer> buildings = new EnumMap<>(BuildingName.class);
 
     public KingdomBuildings()
     {
