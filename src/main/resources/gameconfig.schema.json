@@ -137,11 +137,63 @@
             "tools",
             "weapons"
           ]
+        },
+        "units": {
+          "type": "object",
+          "properties": {
+            "goldMiner": {
+              "type": "integer"
+            },
+            "ironMiner": {
+              "type": "integer"
+            },
+            "builder": {
+              "type": "integer"
+            },
+            "blacksmith": {
+              "type": "integer"
+            },
+            "farmer": {
+              "type": "integer"
+            },
+            "carrier": {
+              "type": "integer"
+            },
+            "guard": {
+              "type": "integer"
+            },
+            "spy": {
+              "type": "integer"
+            },
+            "bowmen": {
+              "type": "integer"
+            },
+            "infantry": {
+              "type": "integer"
+            },
+            "cavalry": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "goldMiner",
+            "ironMiner",
+            "builder",
+            "blacksmith",
+            "farmer",
+            "carrier",
+            "guard",
+            "spy",
+            "bowmen",
+            "infantry",
+            "cavalry"
+          ]
         }
       },
       "required": [
         "buildings",
-        "resources"
+        "resources",
+        "units"
       ]
     },
     "buildingCapacity": {
