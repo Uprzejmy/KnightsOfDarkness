@@ -116,6 +116,9 @@
             "buildingPoints": {
               "type": "integer"
             },
+            "unemployed": {
+              "type": "integer"
+            },
             "gold": {
               "type": "integer"
             },
@@ -132,6 +135,7 @@
           "required": [
             "land",
             "buildingPoints",
+            "unemployed",
             "gold",
             "iron",
             "tools",

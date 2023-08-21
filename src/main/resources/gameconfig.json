@@ -29,6 +29,7 @@
     "resources": {
       "land": 100,
       "buildingPoints": 10000,
+      "unemployed": 0,
       "gold": 200000,
       "iron": 100,
       "tools": 500,
