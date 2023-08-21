@@ -25,6 +25,14 @@
       "spyGuild": 0,
       "castle": 1,
       "tower": 4
+    },
+    "resources": {
+      "land": 100,
+      "buildingPoints": 10000,
+      "gold": 200000,
+      "iron": 100,
+      "tools": 500,
+      "weapons": 10
     }
   },
   "buildingCapacity": {
