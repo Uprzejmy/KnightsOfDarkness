@@ -1,6 +1,6 @@
 package com.uprzejmy.kod.kingdom;
 
-import com.uprzejmy.kod.gameconfig.KingdomStartBuildings;
+import com.uprzejmy.kod.gameconfig.KingdomStartingBuildings;
 
 import java.util.EnumMap;
 import java.util.Map;
@@ -17,7 +17,7 @@ public class KingdomBuildings
         }
     }
 
-    public KingdomBuildings(KingdomStartBuildings startConfiguration)
+    public KingdomBuildings(KingdomStartingBuildings startConfiguration)
     {
         for (var name : BuildingName.values())
         {

@@ -1,5 +1,5 @@
 package com.uprzejmy.kod.gameconfig;
 
-public record KingdomStartConfiguration(KingdomStartBuildings buildings, KingdomStartResources resources)
+public record KingdomStartConfiguration(KingdomStartingBuildings buildings, KingdomStartingResources resources)
 {
 }
