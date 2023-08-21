@@ -17,13 +17,13 @@ public class KingdomBuilder
 
     public KingdomBuilder withBuildingPoints(int buildingPoints)
     {
-        this.resources.buildingPoints = buildingPoints;
+        this.resources.setCount(ResourceName.buildingPoints, buildingPoints);
         return this;
     }
 
     public KingdomBuilder withLand(int land)
     {
-        this.resources.land = land;
+        this.resources.setCount(ResourceName.land, land);
         return this;
     }
 

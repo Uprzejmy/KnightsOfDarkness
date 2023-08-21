@@ -21,10 +21,10 @@ public class KingdomBuildAction
         for (var buildingName : buildingNames)
         {
             var buildingCost = kingdom.getConfig().buildingPointCosts().getCost(buildingName);
-            var pointsToPutIntoBuilding = Math.min(kingdom.getResources().buildingPoints, buildingsToBuild.getCount(buildingName) * buildingCost);
+            var pointsToPutIntoBuilding = Math.min(kingdom.getResources().getCount(ResourceName.buildingPoints), buildingsToBuild.getCount(buildingName) * buildingCost);
             var fullBuildings = pointsToPutIntoBuilding / buildingCost;
             kingdom.getBuildings().addCount(buildingName, fullBuildings);
-            kingdom.getResources().buildingPoints -= pointsToPutIntoBuilding;
+            kingdom.getResources().subtractCount(ResourceName.buildingPoints, pointsToPutIntoBuilding);
         }
     }
 }

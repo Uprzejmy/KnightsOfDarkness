@@ -29,12 +29,12 @@ class KingdomTest
     void buildSanityTest()
     {
         var kingdom = kingdomBuilder.withBuildingPoints(10000).build();
-        var buildingPointsBeforeBuild = kingdom.getResources().buildingPoints;
+        var buildingPointsBeforeBuild = kingdom.getResources().getCount(ResourceName.buildingPoints);
         var toBuild = new KingdomBuildings();
 
         kingdom.build(toBuild);
 
-        assertEquals(buildingPointsBeforeBuild, kingdom.getResources().buildingPoints);
+        assertEquals(buildingPointsBeforeBuild, kingdom.getResources().getCount(ResourceName.buildingPoints));
     }
 
     @Test
@@ -43,7 +43,7 @@ class KingdomTest
         var kingdom = kingdomBuilder.withBuildingPoints(10000).build();
         var housesBeforeBuild = kingdom.getBuildings().getCount(BuildingName.house);
         var goldMinesBeforeBuild = kingdom.getBuildings().getCount(BuildingName.goldMine);
-        var buildingPointsBeforeBuild = kingdom.getResources().buildingPoints;
+        var buildingPointsBeforeBuild = kingdom.getResources().getCount(ResourceName.buildingPoints);
 
         var housesToBuild = 5;
         var goldMinesToBuild = 2;
@@ -60,7 +60,7 @@ class KingdomTest
         var goldMinesCost = goldMinesToBuild * config.buildingPointCosts().goldMine();
         var totalCost = housesCost + goldMinesCost;
 
-        assertEquals(buildingPointsBeforeBuild - totalCost, kingdom.getResources().buildingPoints);
+        assertEquals(buildingPointsBeforeBuild - totalCost, kingdom.getResources().getCount(ResourceName.buildingPoints));
     }
 
     @Test

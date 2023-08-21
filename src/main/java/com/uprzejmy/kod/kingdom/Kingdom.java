@@ -23,9 +23,8 @@ public class Kingdom
 
     public int getUnusedLand()
     {
-        return resources.land - buildings.countAll();
+        return resources.getCount(ResourceName.land) - buildings.countAll();
     }
-
 
     public KingdomResources getResources()
     {
