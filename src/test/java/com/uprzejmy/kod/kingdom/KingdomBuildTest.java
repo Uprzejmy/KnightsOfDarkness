@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class KingdomTest
+class KingdomBuildTest
 {
     private static GameConfig config;
     private KingdomBuilder kingdomBuilder;

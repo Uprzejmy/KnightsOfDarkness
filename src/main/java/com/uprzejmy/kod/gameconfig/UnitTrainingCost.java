@@ -11,7 +11,7 @@ public record UnitTrainingCost(int gold, int tools, int weapons)
             case gold -> gold;
             case tools -> tools;
             case weapons -> weapons;
-            default -> gold;
+            default -> throw new RuntimeException("Invalid training cost resource: " + name);
         };
     }
 }

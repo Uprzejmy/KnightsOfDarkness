@@ -30,6 +30,24 @@ public class KingdomBuilder
         return this;
     }
 
+    public KingdomBuilder withGold(int gold)
+    {
+        this.resources.setCount(ResourceName.gold, gold);
+        return this;
+    }
+
+    public KingdomBuilder withTools(int tools)
+    {
+        this.resources.setCount(ResourceName.tools, tools);
+        return this;
+    }
+
+    public KingdomBuilder withUnemployed(int unemployed)
+    {
+        this.resources.setCount(ResourceName.unemployed, unemployed);
+        return this;
+    }
+
     public Kingdom build()
     {
         return new Kingdom(config, resources, buildings, units);
