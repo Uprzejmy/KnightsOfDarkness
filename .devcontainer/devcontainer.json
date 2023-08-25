@@ -1,0 +1,17 @@
+{
+  "image": "mcr.microsoft.com/devcontainers/java",
+	"features": {
+		"ghcr.io/devcontainers/features/java:1": {
+			"installMaven": "false",
+			"installGradle": "false"
+		}
+	},
+	"postCreateCommand": "./gradlew build",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"vscjava.vscode-java-pack"
+			]
+		}
+	}
+}
