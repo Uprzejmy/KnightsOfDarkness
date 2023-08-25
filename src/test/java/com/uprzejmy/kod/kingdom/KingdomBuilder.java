@@ -42,6 +42,12 @@ public class KingdomBuilder
         return this;
     }
 
+    public KingdomBuilder withWeapons(int weapons)
+    {
+        this.resources.setCount(ResourceName.weapons, weapons);
+        return this;
+    }
+
     public KingdomBuilder withUnemployed(int unemployed)
     {
         this.resources.setCount(ResourceName.unemployed, unemployed);
@@ -52,4 +58,6 @@ public class KingdomBuilder
     {
         return new Kingdom(config, resources, buildings, units);
     }
+
+
 }
