@@ -29,7 +29,6 @@ public class Kingdom
         kingdomTrainAction.train(unitsToTrain);
     }
 
-
     public int getUnusedLand()
     {
         return resources.getCount(ResourceName.land) - buildings.countAll();
