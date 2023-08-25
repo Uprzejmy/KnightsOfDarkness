@@ -84,7 +84,6 @@ class KingdomTrainTest
     void trainAllUnitsTest()
     {
         var kingdom = kingdomBuilder.withGold(9999999).withTools(999999).withWeapons(999999).withUnemployed(9999).build();
-        Map<ResourceName, Integer> resourcesBeforeTraining = new EnumMap<>(kingdom.getResources().resources);
         var unitsBeforeTraining = new EnumMap<>(kingdom.getUnits().units);
         var toTrain = new KingdomStartingUnits(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 
