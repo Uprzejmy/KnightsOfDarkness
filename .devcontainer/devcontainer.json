@@ -6,4 +6,12 @@
 			"installGradle": "false"
 		}
 	},
+	"postCreateCommand": "./gradlew build",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"vscjava.vscode-java-pack"
+			]
+		}
+	}
 }
