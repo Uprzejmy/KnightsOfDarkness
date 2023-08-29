@@ -118,5 +118,27 @@
       "tools": 0,
       "weapons": 20
     }
+  },
+  "production": {
+    "goldMiner": {
+      "rate": 10,
+      "resource": "gold"
+    },
+    "ironMiner": {
+      "rate": 10,
+      "resource": "iron"
+    },
+    "farmer": {
+      "rate": 10,
+      "resource": "food"
+    },
+    "blacksmith": {
+      "rate": 10,
+      "resource": "tools"
+    },
+    "builder": {
+      "rate": 10,
+      "resource": "buildingPoints"
+    }
   }
 }

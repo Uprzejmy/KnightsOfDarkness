@@ -93,6 +93,5 @@ class KingdomTrainTest
         {
             assertEquals(unitsBeforeTraining.get(unitName) + 1, kingdom.getUnits().getCount(unitName));
         }
-
     }
 }

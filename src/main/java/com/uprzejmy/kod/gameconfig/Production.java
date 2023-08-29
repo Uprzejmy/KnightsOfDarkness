@@ -14,7 +14,7 @@ public record Production(UnitProduction goldMiner, UnitProduction ironMiner, Uni
             case farmer -> farmer.rate();
             case blacksmith -> blacksmith.rate();
             case builder -> builder.rate();
-            default -> throw new RuntimeException("This unit doesn't have production capabilities");
+            default -> throw new RuntimeException(name + " unit does not have production capabilities");
         };
     }
 
@@ -27,7 +27,7 @@ public record Production(UnitProduction goldMiner, UnitProduction ironMiner, Uni
             case farmer -> farmer.resource();
             case blacksmith -> blacksmith.resource();
             case builder -> builder.resource();
-            default -> throw new RuntimeException("This unit doesn't have production capabilities");
+            default -> throw new RuntimeException(name + " unit does not have production capabilities");
         };
     }
 }

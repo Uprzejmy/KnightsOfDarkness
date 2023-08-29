@@ -477,12 +477,100 @@
         "infantry",
         "cavalry"
       ]
+    },
+    "production": {
+      "type": "object",
+      "properties": {
+        "goldMiner": {
+          "type": "object",
+          "properties": {
+            "rate": {
+              "type": "integer"
+            },
+            "resource": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "rate",
+            "resource"
+          ]
+        },
+        "ironMiner": {
+          "type": "object",
+          "properties": {
+            "rate": {
+              "type": "integer"
+            },
+            "resource": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "rate",
+            "resource"
+          ]
+        },
+        "farmer": {
+          "type": "object",
+          "properties": {
+            "rate": {
+              "type": "integer"
+            },
+            "resource": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "rate",
+            "resource"
+          ]
+        },
+        "blacksmith": {
+          "type": "object",
+          "properties": {
+            "rate": {
+              "type": "integer"
+            },
+            "resource": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "rate",
+            "resource"
+          ]
+        },
+        "builder": {
+          "type": "object",
+          "properties": {
+            "rate": {
+              "type": "integer"
+            },
+            "resource": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "rate",
+            "resource"
+          ]
+        }
+      },
+      "required": [
+        "goldMiner",
+        "ironMiner",
+        "farmer",
+        "blacksmith",
+        "builder"
+      ]
     }
   },
   "required": [
     "buildingPointCosts",
     "kingdomStartConfiguration",
     "buildingCapacity",
-    "trainingCost"
+    "trainingCost",
+    "production"
   ]
 }

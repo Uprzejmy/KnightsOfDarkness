@@ -10,6 +10,7 @@ public class Kingdom
     private final KingdomUnits units;
     private final KingdomBuildAction kingdomBuildAction = new KingdomBuildAction(this);
     private final KingdomTrainAction kingdomTrainAction = new KingdomTrainAction(this);
+    private final KingdomTurnAction kingdomTurnAction = new KingdomTurnAction(this);
 
     public Kingdom(GameConfig config, KingdomResources resources, KingdomBuildings buildings, KingdomUnits units)
     {
@@ -27,6 +28,11 @@ public class Kingdom
     public void train(KingdomUnits unitsToTrain)
     {
         kingdomTrainAction.train(unitsToTrain);
+    }
+
+    public void passTurn()
+    {
+        kingdomTurnAction.passTurn();
     }
 
     public int getUnusedLand()

@@ -54,6 +54,13 @@ public class KingdomBuilder
         return this;
     }
 
+    public KingdomBuilder withGoldMiners(int goldMiners)
+    {
+        this.units.setCount(UnitName.goldMiner, goldMiners);
+        return this;
+    }
+
+
     public Kingdom build()
     {
         return new Kingdom(config, resources, buildings, units);

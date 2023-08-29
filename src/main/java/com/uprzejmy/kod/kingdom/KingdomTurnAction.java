@@ -11,24 +11,18 @@ public class KingdomTurnAction
 
     public void passTurn()
     {
-        processResources();
-        // by using EnumSet we make sure the names are ordered as specified in the enum declaration
-//        var unitNames = EnumSet.copyOf(unitsToTrain.units.keySet());
-//        for (var unitName : unitNames)
-//        {
-//            var trainingCost = kingdom.getConfig().trainingCost().getTrainingCost(unitName);
-//            var maximumToAfford = calculateMaximumToAfford(kingdom.getResources(), trainingCost);
-//            var howManyToTrain = Math.min(unitsToTrain.getCount(unitName), maximumToAfford);
-//            kingdom.getResources().subtractCount(ResourceName.gold, howManyToTrain * trainingCost.gold());
-//            kingdom.getResources().subtractCount(ResourceName.tools, howManyToTrain * trainingCost.tools());
-//            kingdom.getResources().subtractCount(ResourceName.weapons, howManyToTrain * trainingCost.weapons());
-//            kingdom.getResources().subtractCount(ResourceName.unemployed, howManyToTrain);
-//            kingdom.getUnits().addCount(unitName, howManyToTrain);
-//        }
+        doProduction();
     }
 
-    private void processResources()
+    private void doProduction()
     {
+        var production = kingdom.getConfig().production();
 
+        for (var unitName : UnitName.getProductionUnits())
+        {
+            var resourceType = production.getResource(unitName);
+            var resourceProduction = kingdom.getUnits().getCount(unitName) * production.getProductionRate(unitName);
+            kingdom.getResources().addCount(resourceType, resourceProduction);
+        }
     }
 }
