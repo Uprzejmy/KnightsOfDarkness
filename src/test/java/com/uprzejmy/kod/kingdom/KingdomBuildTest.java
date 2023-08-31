@@ -28,7 +28,7 @@ class KingdomBuildTest
     @Test
     void buildSanityTest()
     {
-        var kingdom = kingdomBuilder.withBuildingPoints(10000).build();
+        var kingdom = kingdomBuilder.withResource(ResourceName.buildingPoints, 10000).build();
         var buildingPointsBeforeBuild = kingdom.getResources().getCount(ResourceName.buildingPoints);
         var toBuild = new KingdomBuildings();
 
@@ -40,7 +40,7 @@ class KingdomBuildTest
     @Test
     void buildHousesAndGoldMinesTest()
     {
-        var kingdom = kingdomBuilder.withBuildingPoints(10000).build();
+        var kingdom = kingdomBuilder.withResource(ResourceName.buildingPoints, 10000).build();
         var housesBeforeBuild = kingdom.getBuildings().getCount(BuildingName.house);
         var goldMinesBeforeBuild = kingdom.getBuildings().getCount(BuildingName.goldMine);
         var buildingPointsBeforeBuild = kingdom.getResources().getCount(ResourceName.buildingPoints);
@@ -66,7 +66,7 @@ class KingdomBuildTest
     @Test
     void whenBuildingFiveBuildings_KingdomShouldHaveFiveLessUnusedLand()
     {
-        var kingdom = kingdomBuilder.withBuildingPoints(10000).withLand(100).build();
+        var kingdom = kingdomBuilder.withResource(ResourceName.buildingPoints, 10000).withResource(ResourceName.land, 100).build();
         var unusedLandBeforeBuild = kingdom.getUnusedLand();
 
         var housesToBuild = 5;
@@ -81,7 +81,7 @@ class KingdomBuildTest
     @Test
     void buildingCount()
     {
-        var kingdom = kingdomBuilder.withBuildingPoints(10000).withLand(100).build();
+        var kingdom = kingdomBuilder.withResource(ResourceName.buildingPoints, 10000).withResource(ResourceName.land, 100).build();
         var existingBuildingsCount = kingdom.getBuildings().countAll();
 
         var toBuild = new KingdomBuildings();

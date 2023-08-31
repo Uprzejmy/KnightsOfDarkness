@@ -40,12 +40,13 @@ class KingdomTrainTest
         kingdom.train(toTrain);
 
         assertEquals(resourcesBeforeBuild, kingdom.getResources().resources);
+
     }
 
     @Test
     void trainBasicTest()
     {
-        var kingdom = kingdomBuilder.withGold(99999999).withTools(999999).withUnemployed(9999).build();
+        var kingdom = kingdomBuilder.withResource(ResourceName.gold, 99999999).withResource(ResourceName.tools, 999999).withResource(ResourceName.unemployed, 9999).build();
         Map<ResourceName, Integer> resourcesBeforeTraining = new EnumMap<>(kingdom.getResources().resources);
         var toTrain = new KingdomStartingUnits(10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0);
 
@@ -57,7 +58,7 @@ class KingdomTrainTest
     @Test
     void trainInsufficientGoldTest()
     {
-        var kingdom = kingdomBuilder.withGold(0).withTools(999999).withUnemployed(9999).build();
+        var kingdom = kingdomBuilder.withResource(ResourceName.gold, 0).withResource(ResourceName.tools, 999999).withResource(ResourceName.unemployed, 9999).build();
         Map<ResourceName, Integer> resourcesBeforeTraining = new EnumMap<>(kingdom.getResources().resources);
         var toTrain = new KingdomStartingUnits(10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0);
 
@@ -70,7 +71,7 @@ class KingdomTrainTest
     @Test
     void trainPartiallySufficientGoldTest()
     {
-        var kingdom = kingdomBuilder.withGold(10000).withTools(999999).withUnemployed(9999).build();
+        var kingdom = kingdomBuilder.withResource(ResourceName.gold, 10000).withResource(ResourceName.tools, 999999).withResource(ResourceName.unemployed, 9999).build();
         Map<ResourceName, Integer> resourcesBeforeTraining = new EnumMap<>(kingdom.getResources().resources);
         var toTrain = new KingdomStartingUnits(10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0);
 
@@ -83,7 +84,7 @@ class KingdomTrainTest
     @Test
     void trainAllUnitsTest()
     {
-        var kingdom = kingdomBuilder.withGold(9999999).withTools(999999).withWeapons(999999).withUnemployed(9999).build();
+        var kingdom = kingdomBuilder.withResource(ResourceName.gold, 9999999).withResource(ResourceName.tools, 999999).withResource(ResourceName.weapons, 999999).withResource(ResourceName.unemployed, 9999).build();
         var unitsBeforeTraining = new EnumMap<>(kingdom.getUnits().units);
         var toTrain = new KingdomStartingUnits(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 

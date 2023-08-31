@@ -18,39 +18,9 @@ public class KingdomBuilder
         this.config = config;
     }
 
-    public KingdomBuilder withBuildingPoints(int buildingPoints)
+    public KingdomBuilder withResource(ResourceName resource, int count)
     {
-        this.resources.setCount(ResourceName.buildingPoints, buildingPoints);
-        return this;
-    }
-
-    public KingdomBuilder withLand(int land)
-    {
-        this.resources.setCount(ResourceName.land, land);
-        return this;
-    }
-
-    public KingdomBuilder withGold(int gold)
-    {
-        this.resources.setCount(ResourceName.gold, gold);
-        return this;
-    }
-
-    public KingdomBuilder withTools(int tools)
-    {
-        this.resources.setCount(ResourceName.tools, tools);
-        return this;
-    }
-
-    public KingdomBuilder withWeapons(int weapons)
-    {
-        this.resources.setCount(ResourceName.weapons, weapons);
-        return this;
-    }
-
-    public KingdomBuilder withUnemployed(int unemployed)
-    {
-        this.resources.setCount(ResourceName.unemployed, unemployed);
+        this.resources.setCount(resource, count);
         return this;
     }
 
