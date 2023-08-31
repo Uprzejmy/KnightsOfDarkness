@@ -29,10 +29,35 @@ class KingdomTurnTest
     }
 
     @Test
-    void passTurn()
+    void passTurnSanityTest()
+    {
+        var kingdom = kingdomBuilder.withUnit(UnitName.goldMiner, 0).build();
+        Map<ResourceName, Integer> resourcesBeforeTurn = new EnumMap<>(kingdom.getResources().resources);
+
+        kingdom.passTurn();
+
+        assertEquals(resourcesBeforeTurn.get(ResourceName.gold), kingdom.getResources().getCount(ResourceName.gold));
+    }
+
+    @Test
+    void passTurnGoldMinersProductionTest()
     {
         var goldMinersCount = 10;
-        var kingdom = kingdomBuilder.withGoldMiners(goldMinersCount).build();
+        var kingdom = kingdomBuilder.withUnit(UnitName.goldMiner, goldMinersCount).build();
+        Map<ResourceName, Integer> resourcesBeforeTurn = new EnumMap<>(kingdom.getResources().resources);
+
+        kingdom.passTurn();
+
+        var newProduction = goldMinersCount * config.production().getProductionRate(UnitName.goldMiner);
+
+        assertEquals(resourcesBeforeTurn.get(ResourceName.gold) + newProduction, kingdom.getResources().getCount(ResourceName.gold));
+    }
+
+    @Test
+    void passTurnAllProductionTest()
+    {
+        var goldMinersCount = 10;
+        var kingdom = kingdomBuilder.withUnit(UnitName.goldMiner, goldMinersCount).build();
         Map<ResourceName, Integer> resourcesBeforeTurn = new EnumMap<>(kingdom.getResources().resources);
 
         kingdom.passTurn();

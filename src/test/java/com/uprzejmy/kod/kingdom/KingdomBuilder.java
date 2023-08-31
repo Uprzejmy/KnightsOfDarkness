@@ -54,12 +54,11 @@ public class KingdomBuilder
         return this;
     }
 
-    public KingdomBuilder withGoldMiners(int goldMiners)
+    public KingdomBuilder withUnit(UnitName unit, int count)
     {
-        this.units.setCount(UnitName.goldMiner, goldMiners);
+        this.units.setCount(unit, count);
         return this;
     }
-
 
     public Kingdom build()
     {
