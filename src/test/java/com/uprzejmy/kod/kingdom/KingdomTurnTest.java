@@ -10,6 +10,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class KingdomTurnTest
 {
@@ -50,20 +51,33 @@ class KingdomTurnTest
 
         var newProduction = goldMinersCount * config.production().getProductionRate(UnitName.goldMiner);
 
-        assertEquals(resourcesBeforeTurn.get(ResourceName.gold) + newProduction, kingdom.getResources().getCount(ResourceName.gold));
+        assertEquals(resourcesBeforeTurn.get(ResourceName.gold) + newProduction,
+                kingdom.getResources().getCount(ResourceName.gold));
     }
 
     @Test
     void passTurnAllProductionTest()
     {
-        var goldMinersCount = 10;
-        var kingdom = kingdomBuilder.withUnit(UnitName.goldMiner, goldMinersCount).build();
+        for (var unitName : UnitName.values())
+        {
+            kingdomBuilder.withUnit(unitName, 10);
+        }
+
+        var kingdom = kingdomBuilder.build();
         Map<ResourceName, Integer> resourcesBeforeTurn = new EnumMap<>(kingdom.getResources().resources);
 
         kingdom.passTurn();
 
-        var newProduction = goldMinersCount * config.production().getProductionRate(UnitName.goldMiner);
-
-        assertEquals(resourcesBeforeTurn.get(ResourceName.gold) + newProduction, kingdom.getResources().getCount(ResourceName.gold));
+        for (var resourceName : ResourceName.productionResourceNames())
+        {
+            if (resourceName == ResourceName.weapons)
+            {
+                // TODO support tools/weapons production split
+                break;
+            }
+            var countBeforeTurn = resourcesBeforeTurn.get(resourceName);
+            var countAfterTurn = kingdom.getResources().getCount(resourceName);
+            assertTrue(countBeforeTurn < countAfterTurn, "Resource " + resourceName + " before turn was " + countBeforeTurn + " and should be smaller than after production " + countAfterTurn);
+        }
     }
 }
