@@ -58,7 +58,7 @@ class KingdomTurnTest
     @Test
     void passTurnAllProductionTest()
     {
-        for (var unitName : UnitName.values())
+        for (var unitName : UnitName.getProductionUnits())
         {
             kingdomBuilder.withUnit(unitName, 10);
         }
@@ -68,13 +68,9 @@ class KingdomTurnTest
 
         kingdom.passTurn();
 
-        for (var resourceName : ResourceName.productionResourceNames())
+        for (var unitName : UnitName.getProductionUnits())
         {
-            if (resourceName == ResourceName.weapons)
-            {
-                // TODO support tools/weapons production split
-                break;
-            }
+            var resourceName = config.production().getResource(unitName);
             var countBeforeTurn = resourcesBeforeTurn.get(resourceName);
             var countAfterTurn = kingdom.getResources().getCount(resourceName);
             assertTrue(countBeforeTurn < countAfterTurn, "Resource " + resourceName + " before turn was " + countBeforeTurn + " and should be smaller than after production " + countAfterTurn);
