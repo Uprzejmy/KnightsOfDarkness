@@ -44,4 +44,9 @@ public class KingdomUnits
     {
         units.put(name, count);
     }
+
+    public int countAll()
+    {
+        return units.values().stream().mapToInt(Integer::intValue).sum();
+    }
 }

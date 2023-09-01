@@ -12,6 +12,7 @@ public class KingdomTurnAction
     public void passTurn()
     {
         doProduction();
+        getNewPeople();
     }
 
     private void doProduction()
@@ -24,5 +25,12 @@ public class KingdomTurnAction
             var resourceProduction = kingdom.getUnits().getCount(unitName) * production.getProductionRate(unitName);
             kingdom.getResources().addCount(resourceType, resourceProduction);
         }
+    }
+
+    private void getNewPeople()
+    {
+        var housingCapacity = kingdom.getBuildings().getCount(BuildingName.house) * kingdom.getConfig().buildingCapacity().getCapacity(BuildingName.house);
+        var peopleCount = kingdom.getUnits().countAll() + kingdom.getResources().getCount(ResourceName.unemployed);
+        kingdom.getResources().addCount(ResourceName.unemployed, housingCapacity - peopleCount);
     }
 }

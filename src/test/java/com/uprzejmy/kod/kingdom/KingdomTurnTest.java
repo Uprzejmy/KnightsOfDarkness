@@ -76,4 +76,30 @@ class KingdomTurnTest
             assertTrue(countBeforeTurn < countAfterTurn, "Resource " + resourceName + " before turn was " + countBeforeTurn + " and should be smaller than after production " + countAfterTurn);
         }
     }
+
+    @Test
+    void passTurnNewPeopleTest()
+    {
+        var kingdom = kingdomBuilder.withResource(ResourceName.unemployed, 0).build();
+        Map<ResourceName, Integer> resourcesBeforeTurn = new EnumMap<>(kingdom.getResources().resources);
+
+        kingdom.passTurn();
+
+        var beforeTurn = resourcesBeforeTurn.get(ResourceName.unemployed);
+        var afterTurn = kingdom.getResources().getCount(ResourceName.unemployed);
+        assertTrue(beforeTurn < afterTurn, "Expected number of unemployed before turn " + beforeTurn + " to be lower than after turn " + afterTurn);
+    }
+
+    @Test
+    void passTurn_WithFullHousingCapacity_NewPeopleShouldNotArriveTest()
+    {
+        var kingdom = kingdomBuilder.withResource(ResourceName.unemployed, 9999).build();
+        Map<ResourceName, Integer> resourcesBeforeTurn = new EnumMap<>(kingdom.getResources().resources);
+
+        kingdom.passTurn();
+
+        var beforeTurn = resourcesBeforeTurn.get(ResourceName.unemployed);
+        var afterTurn = kingdom.getResources().getCount(ResourceName.unemployed);
+        assertTrue(beforeTurn >= afterTurn, "Expected number of unemployed before turn " + beforeTurn + " to NOT be lower than after turn " + afterTurn);
+    }
 }
