@@ -8,6 +8,6 @@ public enum ResourceName
 
     static Set<ResourceName> productionResourceNames()
     {
-        return Set.of(gold, iron, food, tools, weapons);
+        return Set.of(gold, iron, food, tools, weapons, buildingPoints);
     }
 }
