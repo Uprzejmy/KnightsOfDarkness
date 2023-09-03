@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.EnumMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class KingdomTurnTest
 {
@@ -101,5 +100,21 @@ class KingdomTurnTest
         var beforeTurn = resourcesBeforeTurn.get(ResourceName.unemployed);
         var afterTurn = kingdom.getResources().getCount(ResourceName.unemployed);
         assertTrue(beforeTurn >= afterTurn, "Expected number of unemployed before turn " + beforeTurn + " to NOT be lower than after turn " + afterTurn);
+    }
+
+    @Test
+    void passMoreTurnsThanMaximumTest()
+    {
+        var kingdom = kingdomBuilder.build();
+        var numberOfTurns = kingdom.getResources().getCount(ResourceName.turns);
+
+        // first we pass every turn that kingdom has
+        for (int i = 0; i < numberOfTurns; i++)
+        {
+            assertTrue(kingdom.passTurn());
+        }
+
+        // then we try to pass turn which is not available
+        assertFalse(kingdom.passTurn());
     }
 }

@@ -33,7 +33,8 @@
       "gold": 200000,
       "iron": 100,
       "tools": 500,
-      "weapons": 10
+      "weapons": 10,
+      "turns": 20
     },
     "units": {
       "goldMiner": 30,

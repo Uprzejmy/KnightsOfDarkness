@@ -4,7 +4,7 @@ import java.util.Set;
 
 public enum ResourceName
 {
-    land, buildingPoints, unemployed, gold, iron, food, tools, weapons;
+    land, buildingPoints, unemployed, gold, iron, food, tools, weapons, turns;
 
     static Set<ResourceName> productionResourceNames()
     {

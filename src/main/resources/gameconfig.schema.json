@@ -130,6 +130,9 @@
             },
             "weapons": {
               "type": "integer"
+            },
+            "turns": {
+              "type": "integer"
             }
           },
           "required": [
@@ -139,7 +142,8 @@
             "gold",
             "iron",
             "tools",
-            "weapons"
+            "weapons",
+            "turns"
           ]
         },
         "units": {

@@ -30,9 +30,9 @@ public class Kingdom
         kingdomTrainAction.train(unitsToTrain);
     }
 
-    public void passTurn()
+    public boolean passTurn()
     {
-        kingdomTurnAction.passTurn();
+        return kingdomTurnAction.passTurn();
     }
 
     public int getUnusedLand()

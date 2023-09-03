@@ -9,10 +9,18 @@ public class KingdomTurnAction
         this.kingdom = kingdom;
     }
 
-    public void passTurn()
+    public boolean passTurn()
     {
+        if (kingdom.getResources().getCount(ResourceName.turns) <= 0)
+        {
+            return false;
+        }
+
+        kingdom.getResources().subtractCount(ResourceName.turns, 1);
         doProduction();
         getNewPeople();
+
+        return true;
     }
 
     private void doProduction()

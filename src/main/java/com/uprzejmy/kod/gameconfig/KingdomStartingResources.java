@@ -2,7 +2,7 @@ package com.uprzejmy.kod.gameconfig;
 
 import com.uprzejmy.kod.kingdom.ResourceName;
 
-public record KingdomStartingResources(int land, int buildingPoints, int unemployed, int gold, int iron, int food, int tools, int weapons)
+public record KingdomStartingResources(int land, int buildingPoints, int unemployed, int gold, int iron, int food, int tools, int weapons, int turns)
 {
     public int getCount(ResourceName name)
     {
@@ -16,6 +16,7 @@ public record KingdomStartingResources(int land, int buildingPoints, int unemplo
             case food -> food;
             case tools -> tools;
             case weapons -> weapons;
+            case turns -> turns;
         };
     }
 }
