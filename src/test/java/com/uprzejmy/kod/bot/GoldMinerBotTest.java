@@ -3,6 +3,7 @@ package com.uprzejmy.kod.bot;
 import com.uprzejmy.kod.TestGameConfig;
 import com.uprzejmy.kod.gameconfig.GameConfig;
 import com.uprzejmy.kod.kingdom.KingdomBuilder;
+import com.uprzejmy.kod.kingdom.ResourceName;
 import com.uprzejmy.kod.kingdom.UnitName;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,7 +31,7 @@ class GoldMinerBotTest
     @Test
     void simulateTenTurnsTest()
     {
-        var kingdom = kingdomBuilder.build();
+        var kingdom = kingdomBuilder.withResource(ResourceName.turns, 10).build();
         var goldMinersBefore = kingdom.getUnits().getCount(UnitName.goldMiner);
         var unusedLandBefore = kingdom.getUnusedLand();
 
