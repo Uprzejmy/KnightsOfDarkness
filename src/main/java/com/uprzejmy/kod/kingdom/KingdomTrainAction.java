@@ -13,8 +13,9 @@ public class KingdomTrainAction
         this.kingdom = kingdom;
     }
 
-    public void train(KingdomUnits unitsToTrain)
+    public KingdomUnits train(KingdomUnits unitsToTrain)
     {
+        var trainedUnits = new KingdomUnits();
         // by using EnumSet we make sure the names are ordered as specified in the enum declaration
         var unitNames = EnumSet.copyOf(unitsToTrain.units.keySet());
         for (var unitName : unitNames)
@@ -27,7 +28,10 @@ public class KingdomTrainAction
             kingdom.getResources().subtractCount(ResourceName.weapons, howManyToTrain * trainingCost.weapons());
             kingdom.getResources().subtractCount(ResourceName.unemployed, howManyToTrain);
             kingdom.getUnits().addCount(unitName, howManyToTrain);
+            trainedUnits.addCount(unitName, howManyToTrain);
         }
+
+        return trainedUnits;
     }
 
     private int calculateMaximumToAfford(KingdomResources resources, UnitTrainingCost trainingCost)

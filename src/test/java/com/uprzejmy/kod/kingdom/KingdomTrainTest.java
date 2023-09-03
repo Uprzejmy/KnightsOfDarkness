@@ -2,13 +2,9 @@ package com.uprzejmy.kod.kingdom;
 
 import com.uprzejmy.kod.TestGameConfig;
 import com.uprzejmy.kod.gameconfig.GameConfig;
-import com.uprzejmy.kod.gameconfig.KingdomStartingUnits;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.EnumMap;
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -34,65 +30,89 @@ class KingdomTrainTest
     void trainSanityTest()
     {
         var kingdom = kingdomBuilder.build();
-        var resourcesBeforeBuild = new EnumMap<>(kingdom.getResources().resources);
         var toTrain = new KingdomUnits();
 
-        kingdom.train(toTrain);
+        var trainedUnits = kingdom.train(toTrain);
 
-        assertEquals(resourcesBeforeBuild, kingdom.getResources().resources);
-
+        assertEquals(0, trainedUnits.countAll());
     }
 
     @Test
     void trainBasicTest()
     {
         var kingdom = kingdomBuilder.withResource(ResourceName.gold, 99999999).withResource(ResourceName.tools, 999999).withResource(ResourceName.unemployed, 9999).build();
-        Map<ResourceName, Integer> resourcesBeforeTraining = new EnumMap<>(kingdom.getResources().resources);
-        var toTrain = new KingdomStartingUnits(10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0);
+        var toTrain = new KingdomUnits();
+        toTrain.addCount(UnitName.goldMiner, 10);
 
-        kingdom.train(new KingdomUnits(toTrain));
+        var trainedUnits = kingdom.train(toTrain);
 
-        assertEquals(resourcesBeforeTraining.get(ResourceName.unemployed) - 50, kingdom.getResources().getCount(ResourceName.unemployed));
+        assertEquals(10, trainedUnits.getCount(UnitName.goldMiner));
     }
 
     @Test
-    void trainInsufficientGoldTest()
+    void trainInsufficientGold()
     {
         var kingdom = kingdomBuilder.withResource(ResourceName.gold, 0).withResource(ResourceName.tools, 999999).withResource(ResourceName.unemployed, 9999).build();
-        Map<ResourceName, Integer> resourcesBeforeTraining = new EnumMap<>(kingdom.getResources().resources);
-        var toTrain = new KingdomStartingUnits(10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0);
+        var toTrain = new KingdomUnits();
+        toTrain.addCount(UnitName.goldMiner, 10);
 
-        kingdom.train(new KingdomUnits(toTrain));
+        var trainedUnits = kingdom.train(toTrain);
 
-        assertEquals(resourcesBeforeTraining.get(ResourceName.gold), kingdom.getResources().getCount(ResourceName.gold));
-        assertEquals(resourcesBeforeTraining.get(ResourceName.unemployed), kingdom.getResources().getCount(ResourceName.unemployed));
+        assertEquals(0, trainedUnits.getCount(UnitName.goldMiner));
+    }
+
+    @Test
+    void trainInsufficientTools()
+    {
+        var kingdom = kingdomBuilder.withResource(ResourceName.gold, 999999).withResource(ResourceName.tools, 0).withResource(ResourceName.unemployed, 9999).build();
+        var toTrain = new KingdomUnits();
+        toTrain.addCount(UnitName.goldMiner, 10);
+
+        var trainedUnits = kingdom.train(toTrain);
+
+        assertEquals(0, trainedUnits.getCount(UnitName.goldMiner));
+    }
+
+    @Test
+    void trainInsufficientUnemployed()
+    {
+        var kingdom = kingdomBuilder.withResource(ResourceName.gold, 999999).withResource(ResourceName.tools, 999999).withResource(ResourceName.unemployed, 0).build();
+        var toTrain = new KingdomUnits();
+        toTrain.addCount(UnitName.goldMiner, 10);
+
+        var trainedUnits = kingdom.train(toTrain);
+
+        assertEquals(0, trainedUnits.getCount(UnitName.goldMiner));
     }
 
     @Test
     void trainPartiallySufficientGoldTest()
     {
         var kingdom = kingdomBuilder.withResource(ResourceName.gold, 10000).withResource(ResourceName.tools, 999999).withResource(ResourceName.unemployed, 9999).build();
-        Map<ResourceName, Integer> resourcesBeforeTraining = new EnumMap<>(kingdom.getResources().resources);
-        var toTrain = new KingdomStartingUnits(10, 10, 10, 10, 10, 0, 0, 0, 0, 0, 0);
+        var toTrain = new KingdomUnits();
+        toTrain.addCount(UnitName.goldMiner, 10);
 
-        kingdom.train(new KingdomUnits(toTrain));
+        var trainedUnits = kingdom.train(toTrain);
 
-        assertTrue(resourcesBeforeTraining.get(ResourceName.gold) > kingdom.getResources().getCount(ResourceName.gold), "The amount of gold before the training: " + resourcesBeforeTraining.get(ResourceName.gold) + " is not higher than after: " + kingdom.getResources().getCount(ResourceName.gold));
-        assertTrue(resourcesBeforeTraining.get(ResourceName.unemployed) > kingdom.getResources().getCount(ResourceName.unemployed), "The amount of unemployed before the training: " + resourcesBeforeTraining.get(ResourceName.unemployed) + " is not higher than after: " + kingdom.getResources().getCount(ResourceName.unemployed));
+        assertTrue(trainedUnits.countAll() > 0, "At least one unit should have been trained");
+        assertTrue(trainedUnits.countAll() < 10, "Number of trained units was supposed to be smaller than desired");
     }
 
     @Test
     void trainAllUnitsTest()
     {
         var kingdom = kingdomBuilder.withResource(ResourceName.gold, 9999999).withResource(ResourceName.tools, 999999).withResource(ResourceName.weapons, 999999).withResource(ResourceName.unemployed, 9999).build();
-        var unitsBeforeTraining = new EnumMap<>(kingdom.getUnits().units);
-        var toTrain = new KingdomStartingUnits(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+        var toTrain = new KingdomUnits();
+        for (var unitName : UnitName.values())
+        {
+            toTrain.addCount(unitName, 1);
+        }
 
-        kingdom.train(new KingdomUnits(toTrain));
+        var trainedUnits = kingdom.train(toTrain);
 
         for (var unitName : UnitName.values())
         {
-            assertEquals(unitsBeforeTraining.get(unitName) + 1, kingdom.getUnits().getCount(unitName));
+            assertEquals(1, trainedUnits.getCount(unitName));
         }
     }
 }

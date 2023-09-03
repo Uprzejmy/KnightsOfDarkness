@@ -25,9 +25,9 @@ public class Kingdom
         kingdomBuildAction.build(buildingsToBuild);
     }
 
-    public void train(KingdomUnits unitsToTrain)
+    public KingdomUnits train(KingdomUnits unitsToTrain)
     {
-        kingdomTrainAction.train(unitsToTrain);
+        return kingdomTrainAction.train(unitsToTrain);
     }
 
     public boolean passTurn()
