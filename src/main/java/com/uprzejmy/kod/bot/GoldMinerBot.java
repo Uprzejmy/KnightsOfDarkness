@@ -11,27 +11,36 @@ public class GoldMinerBot
         this.kingdom = kingdom;
     }
 
-    public void doActions()
+    public void doAllActions()
     {
-        build();
-        train();
+        doBuildAction();
+        doTrainAction();
     }
 
-    private void build()
+    public void doBuildAction()
     {
         var toBuild = new KingdomBuildings();
-        toBuild.addCount(BuildingName.house, 5);
-        toBuild.addCount(BuildingName.goldMine, 5);
-        kingdom.build(toBuild);
+        var cheaperBuildingCost = Math.min(kingdom.getConfig().buildingPointCosts().goldMine(), kingdom.getConfig().buildingPointCosts().house());
+        while (kingdom.getResources().getCount(ResourceName.buildingPoints) > cheaperBuildingCost)
+        {
+            toBuild.addCount(BuildingName.house, 1);
+            toBuild.addCount(BuildingName.goldMine, 1);
+            kingdom.build(toBuild);
+        }
     }
 
-    private void train()
+    public void doTrainAction()
     {
         var toTrain = new KingdomUnits();
-        toTrain.addCount(UnitName.goldMiner, 10);
-        toTrain.addCount(UnitName.builder, 2);
-        kingdom.train(toTrain);
+        KingdomUnits trainedUnits;
+        do
+        {
+            toTrain.addCount(UnitName.goldMiner, 10);
+            toTrain.addCount(UnitName.builder, 2);
+            trainedUnits = kingdom.train(toTrain);
+        } while (trainedUnits.countAll() > 0);
     }
+
 
     public void passTurn()
     {
