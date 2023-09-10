@@ -115,4 +115,16 @@ class KingdomTrainTest
             assertEquals(1, trainedUnits.getCount(unitName));
         }
     }
+
+    @Test
+    void trainInsufficientBuildingCapacityTest()
+    {
+        var kingdom = kingdomBuilder.withBuilding(BuildingName.goldMine, 0).withUnit(UnitName.goldMiner, 0).withResource(ResourceName.gold, 9999999).withResource(ResourceName.tools, 999999).withResource(ResourceName.unemployed, 100).build();
+        var toTrain = new KingdomUnits();
+        toTrain.addCount(UnitName.goldMiner, 1);
+
+        var trainedUnits = kingdom.train(toTrain);
+
+        assertEquals(0, trainedUnits.getCount(UnitName.goldMiner));
+    }
 }

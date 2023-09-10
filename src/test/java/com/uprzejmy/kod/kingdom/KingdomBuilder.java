@@ -30,6 +30,12 @@ public class KingdomBuilder
         return this;
     }
 
+    public KingdomBuilder withBuilding(BuildingName building, int count)
+    {
+        this.buildings.setCount(building, count);
+        return this;
+    }
+
     public Kingdom build()
     {
         return new Kingdom(config, resources, buildings, units);

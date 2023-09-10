@@ -23,6 +23,14 @@ public class KingdomTrainAction
             var trainingCost = kingdom.getConfig().trainingCost().getTrainingCost(unitName);
             var maximumToAfford = calculateMaximumToAfford(kingdom.getResources(), trainingCost);
             var howManyToTrain = Math.min(unitsToTrain.getCount(unitName), maximumToAfford);
+            if (unitName != UnitName.builder) // TODO clear this please
+            {
+                var buildingType = BuildingName.getByUnit(unitName);
+                var buildingCapacity = kingdom.getConfig().buildingCapacity().getCapacity(buildingType);
+                var buildingOccupancy = kingdom.getUnits().getCount(unitName);
+                var freeCapacity = kingdom.getBuildings().getCount(buildingType) * buildingCapacity - buildingOccupancy;
+                howManyToTrain = Math.min(howManyToTrain, freeCapacity);
+            }
             kingdom.getResources().subtractCount(ResourceName.gold, howManyToTrain * trainingCost.gold());
             kingdom.getResources().subtractCount(ResourceName.tools, howManyToTrain * trainingCost.tools());
             kingdom.getResources().subtractCount(ResourceName.weapons, howManyToTrain * trainingCost.weapons());

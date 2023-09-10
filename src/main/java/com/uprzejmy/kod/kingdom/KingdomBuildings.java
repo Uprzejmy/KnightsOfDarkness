@@ -39,4 +39,9 @@ public class KingdomBuildings
     {
         buildings.put(name, buildings.get(name) + count);
     }
+
+    public void setCount(BuildingName name, int count)
+    {
+        buildings.put(name, count);
+    }
 }
