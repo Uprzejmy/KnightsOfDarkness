@@ -29,7 +29,7 @@ public class KingdomTrainAction
                 var buildingCapacity = kingdom.getConfig().buildingCapacity().getCapacity(buildingType);
                 var buildingOccupancy = kingdom.getUnits().getCount(unitName);
                 var freeCapacity = kingdom.getBuildings().getCount(buildingType) * buildingCapacity - buildingOccupancy;
-                howManyToTrain = Math.min(howManyToTrain, freeCapacity);
+                howManyToTrain = Math.max(0, Math.min(howManyToTrain, freeCapacity));
             }
             kingdom.getResources().subtractCount(ResourceName.gold, howManyToTrain * trainingCost.gold());
             kingdom.getResources().subtractCount(ResourceName.tools, howManyToTrain * trainingCost.tools());

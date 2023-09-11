@@ -101,7 +101,12 @@ class KingdomTrainTest
     @Test
     void trainAllUnitsTest()
     {
-        var kingdom = kingdomBuilder.withResource(ResourceName.gold, 9999999).withResource(ResourceName.tools, 999999).withResource(ResourceName.weapons, 999999).withResource(ResourceName.unemployed, 9999).build();
+        var builder = kingdomBuilder.withResource(ResourceName.gold, 9999999).withResource(ResourceName.tools, 999999).withResource(ResourceName.weapons, 999999).withResource(ResourceName.unemployed, 9999);
+        for (var building : BuildingName.values())
+        {
+            builder.withBuilding(building, 7);
+        }
+        var kingdom = builder.build();
         var toTrain = new KingdomUnits();
         for (var unitName : UnitName.values())
         {
@@ -112,8 +117,21 @@ class KingdomTrainTest
 
         for (var unitName : UnitName.values())
         {
-            assertEquals(1, trainedUnits.getCount(unitName));
+            var trainedCount = trainedUnits.getCount(unitName);
+            assertEquals(1, trainedCount, String.format("Expected %d, actual %d when training %s", 1, trainedCount, unitName));
         }
+    }
+
+    @Test
+    void trainingShouldNotResultInLessUnits()
+    {
+        var kingdom = kingdomBuilder.withBuilding(BuildingName.goldMine, 0).withUnit(UnitName.goldMiner, 10).withResource(ResourceName.gold, 9999999).withResource(ResourceName.tools, 999999).withResource(ResourceName.unemployed, 100).build();
+        var toTrain = new KingdomUnits();
+        toTrain.addCount(UnitName.goldMiner, 1);
+
+        var trainedUnits = kingdom.train(toTrain);
+
+        assertEquals(0, trainedUnits.getCount(UnitName.goldMiner));
     }
 
     @Test
