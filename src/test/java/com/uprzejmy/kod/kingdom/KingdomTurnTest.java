@@ -79,7 +79,7 @@ class KingdomTurnTest
     @Test
     void passTurnNewPeopleTest()
     {
-        var kingdom = kingdomBuilder.withResource(ResourceName.unemployed, 0).build();
+        var kingdom = kingdomBuilder.withResource(ResourceName.unemployed, 0).withBuilding(BuildingName.house, 99999).build();
         Map<ResourceName, Integer> resourcesBeforeTurn = new EnumMap<>(kingdom.getResources().resources);
 
         kingdom.passTurn();

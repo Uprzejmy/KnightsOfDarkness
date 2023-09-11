@@ -101,12 +101,7 @@ class KingdomTrainTest
     @Test
     void trainAllUnitsTest()
     {
-        var builder = kingdomBuilder.withResource(ResourceName.gold, 9999999).withResource(ResourceName.tools, 999999).withResource(ResourceName.weapons, 999999).withResource(ResourceName.unemployed, 9999);
-        for (var building : BuildingName.values())
-        {
-            builder.withBuilding(building, 7);
-        }
-        var kingdom = builder.build();
+        var kingdom = kingdomBuilder.build();
         var toTrain = new KingdomUnits();
         for (var unitName : UnitName.values())
         {

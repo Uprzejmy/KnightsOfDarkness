@@ -11,9 +11,23 @@ public class KingdomBuilder
 
     public KingdomBuilder(GameConfig config)
     {
-        this.resources = new KingdomResources(config.kingdomStartConfiguration().resources());
-        this.buildings = new KingdomBuildings(config.kingdomStartConfiguration().buildings());
-        this.units = new KingdomUnits(config.kingdomStartConfiguration().units());
+        this.resources = new KingdomResources();
+        for (var resource : ResourceName.values())
+        {
+            this.resources.setCount(resource, 1000000);
+        }
+
+        this.buildings = new KingdomBuildings();
+        for (var building : BuildingName.values())
+        {
+            this.buildings.setCount(building, 1000);
+        }
+
+        this.units = new KingdomUnits();
+        for (var unit : UnitName.values())
+        {
+            this.units.setCount(unit, 1000);
+        }
 
         this.config = config;
     }
