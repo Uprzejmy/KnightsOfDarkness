@@ -1,7 +1,5 @@
 package com.uprzejmy.kod.kingdom;
 
-import com.uprzejmy.kod.gameconfig.KingdomStartingResources;
-
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -14,14 +12,6 @@ public class KingdomResources
         for (var name : ResourceName.values())
         {
             resources.put(name, 0);
-        }
-    }
-
-    public KingdomResources(KingdomStartingResources startConfiguration)
-    {
-        for (var name : ResourceName.values())
-        {
-            resources.put(name, startConfiguration.getCount(name));
         }
     }
 

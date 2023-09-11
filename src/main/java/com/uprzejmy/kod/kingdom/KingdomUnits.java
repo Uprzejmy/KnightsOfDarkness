@@ -1,7 +1,5 @@
 package com.uprzejmy.kod.kingdom;
 
-import com.uprzejmy.kod.gameconfig.KingdomStartingUnits;
-
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -14,14 +12,6 @@ public class KingdomUnits
         for (var name : UnitName.values())
         {
             units.put(name, 0);
-        }
-    }
-
-    public KingdomUnits(KingdomStartingUnits startConfiguration)
-    {
-        for (var name : UnitName.values())
-        {
-            units.put(name, startConfiguration.getCount(name));
         }
     }
 
