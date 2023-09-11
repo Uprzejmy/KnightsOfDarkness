@@ -40,7 +40,7 @@ class KingdomTrainTest
     @Test
     void trainBasicTest()
     {
-        var kingdom = kingdomBuilder.withResource(ResourceName.gold, 99999999).withResource(ResourceName.tools, 999999).withResource(ResourceName.unemployed, 9999).build();
+        var kingdom = kingdomBuilder.build();
         var toTrain = new KingdomUnits();
         toTrain.addCount(UnitName.goldMiner, 10);
 
@@ -52,7 +52,7 @@ class KingdomTrainTest
     @Test
     void trainInsufficientGold()
     {
-        var kingdom = kingdomBuilder.withResource(ResourceName.gold, 0).withResource(ResourceName.tools, 999999).withResource(ResourceName.unemployed, 9999).build();
+        var kingdom = kingdomBuilder.withResource(ResourceName.gold, 0).build();
         var toTrain = new KingdomUnits();
         toTrain.addCount(UnitName.goldMiner, 10);
 
@@ -64,7 +64,7 @@ class KingdomTrainTest
     @Test
     void trainInsufficientTools()
     {
-        var kingdom = kingdomBuilder.withResource(ResourceName.gold, 999999).withResource(ResourceName.tools, 0).withResource(ResourceName.unemployed, 9999).build();
+        var kingdom = kingdomBuilder.withResource(ResourceName.tools, 0).build();
         var toTrain = new KingdomUnits();
         toTrain.addCount(UnitName.goldMiner, 10);
 
@@ -76,7 +76,7 @@ class KingdomTrainTest
     @Test
     void trainInsufficientUnemployed()
     {
-        var kingdom = kingdomBuilder.withResource(ResourceName.gold, 999999).withResource(ResourceName.tools, 999999).withResource(ResourceName.unemployed, 0).build();
+        var kingdom = kingdomBuilder.withResource(ResourceName.unemployed, 0).build();
         var toTrain = new KingdomUnits();
         toTrain.addCount(UnitName.goldMiner, 10);
 
@@ -88,7 +88,7 @@ class KingdomTrainTest
     @Test
     void trainPartiallySufficientGoldTest()
     {
-        var kingdom = kingdomBuilder.withResource(ResourceName.gold, 10000).withResource(ResourceName.tools, 999999).withResource(ResourceName.unemployed, 9999).build();
+        var kingdom = kingdomBuilder.withResource(ResourceName.gold, 10000).build();
         var toTrain = new KingdomUnits();
         toTrain.addCount(UnitName.goldMiner, 10);
 
@@ -120,7 +120,7 @@ class KingdomTrainTest
     @Test
     void trainingShouldNotResultInLessUnits()
     {
-        var kingdom = kingdomBuilder.withBuilding(BuildingName.goldMine, 0).withUnit(UnitName.goldMiner, 10).withResource(ResourceName.gold, 9999999).withResource(ResourceName.tools, 999999).withResource(ResourceName.unemployed, 100).build();
+        var kingdom = kingdomBuilder.withBuilding(BuildingName.goldMine, 0).build();
         var toTrain = new KingdomUnits();
         toTrain.addCount(UnitName.goldMiner, 1);
 
@@ -132,7 +132,7 @@ class KingdomTrainTest
     @Test
     void trainInsufficientBuildingCapacityTest()
     {
-        var kingdom = kingdomBuilder.withBuilding(BuildingName.goldMine, 0).withUnit(UnitName.goldMiner, 0).withResource(ResourceName.gold, 9999999).withResource(ResourceName.tools, 999999).withResource(ResourceName.unemployed, 100).build();
+        var kingdom = kingdomBuilder.withBuilding(BuildingName.goldMine, 0).withUnit(UnitName.goldMiner, 0).build();
         var toTrain = new KingdomUnits();
         toTrain.addCount(UnitName.goldMiner, 1);
 

@@ -50,8 +50,7 @@ class KingdomTurnTest
 
         var newProduction = goldMinersCount * config.production().getProductionRate(UnitName.goldMiner);
 
-        assertEquals(resourcesBeforeTurn.get(ResourceName.gold) + newProduction,
-                kingdom.getResources().getCount(ResourceName.gold));
+        assertEquals(resourcesBeforeTurn.get(ResourceName.gold) + newProduction, kingdom.getResources().getCount(ResourceName.gold));
     }
 
     @Test
