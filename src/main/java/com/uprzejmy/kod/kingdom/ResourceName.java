@@ -10,4 +10,15 @@ public enum ResourceName
     {
         return Set.of(gold, iron, food, tools, weapons, buildingPoints);
     }
+
+    static ResourceName from(MarketResource resource)
+    {
+        return switch (resource)
+        {
+            case food -> food;
+            case iron -> iron;
+            case tools -> tools;
+            case weapons -> weapons;
+        };
+    }
 }
