@@ -1,29 +1,30 @@
 package com.uprzejmy.kod.kingdom;
 
-import com.uprzejmy.kod.TestGameConfig;
-import com.uprzejmy.kod.gameconfig.GameConfig;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import com.uprzejmy.kod.TestGame;
+import com.uprzejmy.kod.game.Game;
 
 class KingdomTrainTest
 {
-    private static GameConfig config;
+    private static Game game;
     private KingdomBuilder kingdomBuilder;
 
     @BeforeAll
     static void beforeAll()
     {
-        config = new TestGameConfig().get();
+        game = new TestGame().get();
     }
 
     @BeforeEach
     void setUp()
     {
-        this.kingdomBuilder = new KingdomBuilder(config);
+        this.kingdomBuilder = new KingdomBuilder(game);
     }
 
     @Test

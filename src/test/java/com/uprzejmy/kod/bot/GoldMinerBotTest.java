@@ -1,30 +1,35 @@
 package com.uprzejmy.kod.bot;
 
-import com.uprzejmy.kod.TestGameConfig;
-import com.uprzejmy.kod.gameconfig.GameConfig;
-import com.uprzejmy.kod.kingdom.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import com.uprzejmy.kod.TestGame;
+import com.uprzejmy.kod.game.Game;
+import com.uprzejmy.kod.kingdom.BuildingName;
+import com.uprzejmy.kod.kingdom.KingdomBuilder;
+import com.uprzejmy.kod.kingdom.KingdomUnits;
+import com.uprzejmy.kod.kingdom.ResourceName;
+import com.uprzejmy.kod.kingdom.UnitName;
 
 class GoldMinerBotTest
 {
-    private static GameConfig config;
+    private static Game game;
     private KingdomBuilder kingdomBuilder;
 
     @BeforeAll
     static void beforeAll()
     {
-        config = new TestGameConfig().get();
+        game = new TestGame().get();
     }
 
     @BeforeEach
     void setUp()
     {
-        this.kingdomBuilder = new KingdomBuilder(config);
+        this.kingdomBuilder = new KingdomBuilder(game);
     }
 
     @Test

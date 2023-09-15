@@ -1,9 +1,12 @@
 package com.uprzejmy.kod.kingdom;
 
+import com.uprzejmy.kod.game.Game;
 import com.uprzejmy.kod.gameconfig.GameConfig;
+import com.uprzejmy.kod.market.Market;
 
 public class Kingdom
 {
+    private final Market market;
     private final GameConfig config;
     private final KingdomResources resources;
     private final KingdomBuildings buildings;
@@ -12,9 +15,10 @@ public class Kingdom
     private final KingdomTrainAction kingdomTrainAction = new KingdomTrainAction(this);
     private final KingdomTurnAction kingdomTurnAction = new KingdomTurnAction(this);
 
-    public Kingdom(GameConfig config, KingdomResources resources, KingdomBuildings buildings, KingdomUnits units)
+    public Kingdom(Game game, KingdomResources resources, KingdomBuildings buildings, KingdomUnits units)
     {
-        this.config = config;
+        this.config = game.getConfig();
+        this.market = game.getMarket();
         this.resources = resources;
         this.buildings = buildings;
         this.units = units;

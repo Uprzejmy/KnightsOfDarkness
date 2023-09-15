@@ -1,31 +1,38 @@
 package com.uprzejmy.kod.kingdom;
 
-import com.uprzejmy.kod.TestGameConfig;
-import com.uprzejmy.kod.gameconfig.GameConfig;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.EnumMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import com.uprzejmy.kod.TestGame;
+import com.uprzejmy.kod.game.Game;
+import com.uprzejmy.kod.gameconfig.GameConfig;
 
 class KingdomTurnTest
 {
+    private static Game game;
     private static GameConfig config;
+
     private KingdomBuilder kingdomBuilder;
 
     @BeforeAll
     static void beforeAll()
     {
-        config = new TestGameConfig().get();
+        game = new TestGame().get();
+        config = game.getConfig();
     }
 
     @BeforeEach
     void setUp()
     {
-        this.kingdomBuilder = new KingdomBuilder(config);
+        this.kingdomBuilder = new KingdomBuilder(game);
     }
 
     @Test

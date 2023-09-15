@@ -5,24 +5,24 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import com.uprzejmy.kod.TestGameConfig;
-import com.uprzejmy.kod.gameconfig.GameConfig;
+import com.uprzejmy.kod.TestGame;
+import com.uprzejmy.kod.game.Game;
 import com.uprzejmy.kod.kingdom.KingdomBuilder;
 
 public class MarketTest
 {
-    private static GameConfig config;
+    private static Game game;
 
     @BeforeAll
     static void beforeAll()
     {
-        config = new TestGameConfig().get();
+        game = new TestGame().get();
     }
 
     @Test
     void testAddOffer()
     {
-        var kingdom = new KingdomBuilder(config).build();
+        var kingdom = new KingdomBuilder(game).build();
         var market = new Market();
 
         market.addOffer(kingdom, MarketResource.food, 100, 50);
@@ -33,7 +33,7 @@ public class MarketTest
     @Test
     void testThreeOffers()
     {
-        var kingdom = new KingdomBuilder(config).build();
+        var kingdom = new KingdomBuilder(game).build();
         var market = new Market();
 
         market.addOffer(kingdom, MarketResource.food, 100, 50);
@@ -48,7 +48,7 @@ public class MarketTest
     @Test
     void testRemoveOffer()
     {
-        var kingdom = new KingdomBuilder(config).build();
+        var kingdom = new KingdomBuilder(game).build();
         var market = new Market();
         var offer = market.addOffer(kingdom, MarketResource.food, 100, 50);
 
@@ -60,7 +60,7 @@ public class MarketTest
     @Test
     void testRemoveThreeOffers()
     {
-        var kingdom = new KingdomBuilder(config).build();
+        var kingdom = new KingdomBuilder(game).build();
         var market = new Market();
         var offer1 = market.addOffer(kingdom, MarketResource.food, 100, 50);
         var offer2 = market.addOffer(kingdom, MarketResource.food, 100, 50);

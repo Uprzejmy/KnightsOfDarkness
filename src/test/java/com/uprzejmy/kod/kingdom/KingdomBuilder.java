@@ -1,15 +1,15 @@
 package com.uprzejmy.kod.kingdom;
 
-import com.uprzejmy.kod.gameconfig.GameConfig;
+import com.uprzejmy.kod.game.Game;
 
 public class KingdomBuilder
 {
     private final KingdomResources resources;
     private final KingdomBuildings buildings;
     private final KingdomUnits units;
-    private final GameConfig config;
+    private final Game game;
 
-    public KingdomBuilder(GameConfig config)
+    public KingdomBuilder(Game game)
     {
         this.resources = new KingdomResources();
         for (var resource : ResourceName.values())
@@ -29,7 +29,7 @@ public class KingdomBuilder
             this.units.setCount(unit, 1000);
         }
 
-        this.config = config;
+        this.game = game;
     }
 
     public KingdomBuilder withResource(ResourceName resource, int count)
@@ -52,8 +52,7 @@ public class KingdomBuilder
 
     public Kingdom build()
     {
-        return new Kingdom(config, resources, buildings, units);
+        return new Kingdom(game, resources, buildings, units);
     }
-
 
 }
