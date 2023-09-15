@@ -1,8 +1,12 @@
 package com.uprzejmy.kod.kingdom;
 
+import java.util.List;
+
 import com.uprzejmy.kod.game.Game;
 import com.uprzejmy.kod.gameconfig.GameConfig;
 import com.uprzejmy.kod.market.Market;
+import com.uprzejmy.kod.market.MarketRecord;
+import com.uprzejmy.kod.market.MarketResource;
 
 public class Kingdom
 {
@@ -14,6 +18,7 @@ public class Kingdom
     private final KingdomBuildAction kingdomBuildAction = new KingdomBuildAction(this);
     private final KingdomTrainAction kingdomTrainAction = new KingdomTrainAction(this);
     private final KingdomTurnAction kingdomTurnAction = new KingdomTurnAction(this);
+    private final KingdomMarketAction kingdomMarketAction = new KingdomMarketAction(this);
 
     public Kingdom(Game game, KingdomResources resources, KingdomBuildings buildings, KingdomUnits units)
     {
@@ -44,6 +49,16 @@ public class Kingdom
         return resources.getCount(ResourceName.land) - buildings.countAll();
     }
 
+    public void postMarketOffer(MarketResource resource, int count, int price)
+    {
+        this.kingdomMarketAction.postOffer(resource, count, price);
+    }
+
+    public List<MarketRecord> getMarketOffers()
+    {
+        return this.kingdomMarketAction.getMyOffers();
+    }
+
     public KingdomResources getResources()
     {
         return resources;
@@ -62,5 +77,10 @@ public class Kingdom
     public GameConfig getConfig()
     {
         return config;
+    }
+
+    public Market getMarket()
+    {
+        return market;
     }
 }

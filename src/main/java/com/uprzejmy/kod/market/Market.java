@@ -9,7 +9,7 @@ public class Market
 {
     List<MarketRecord> offers = new ArrayList<>();
 
-    MarketRecord addOffer(Kingdom kingdom, MarketResource resource, int count, int price)
+    public MarketRecord addOffer(Kingdom kingdom, MarketResource resource, int count, int price)
     {
         var offer = new MarketRecord(kingdom, resource, count, price);
         offers.add(offer);
@@ -17,17 +17,17 @@ public class Market
         return offer;
     }
 
-    void removeOffer(MarketRecord offer)
+    public void removeOffer(MarketRecord offer)
     {
         offers.remove(offer);
     }
 
-    List<MarketRecord> getOffersByResource(MarketResource resource)
+    public List<MarketRecord> getOffersByResource(MarketResource resource)
     {
         return offers.stream().filter(offer -> offer.resource == resource).toList();
     }
 
-    List<MarketRecord> getOffersByKingdom(Kingdom kingdom)
+    public List<MarketRecord> getOffersByKingdom(Kingdom kingdom)
     {
         return offers.stream().filter(offer -> offer.kingdom == kingdom).toList();
     }
