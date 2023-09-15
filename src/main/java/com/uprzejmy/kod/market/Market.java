@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.uprzejmy.kod.kingdom.Kingdom;
-import com.uprzejmy.kod.kingdom.MarketResource;
 
 public class Market
 {

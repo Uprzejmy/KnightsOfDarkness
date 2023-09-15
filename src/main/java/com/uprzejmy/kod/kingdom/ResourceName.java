@@ -2,6 +2,8 @@ package com.uprzejmy.kod.kingdom;
 
 import java.util.Set;
 
+import com.uprzejmy.kod.market.MarketResource;
+
 public enum ResourceName
 {
     land, buildingPoints, unemployed, gold, iron, food, tools, weapons, turns;

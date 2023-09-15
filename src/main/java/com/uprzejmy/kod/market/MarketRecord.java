@@ -1,7 +1,6 @@
 package com.uprzejmy.kod.market;
 
 import com.uprzejmy.kod.kingdom.Kingdom;
-import com.uprzejmy.kod.kingdom.MarketResource;
 
 public class MarketRecord
 {

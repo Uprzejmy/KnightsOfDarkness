@@ -1,4 +1,4 @@
-package com.uprzejmy.kod.kingdom;
+package com.uprzejmy.kod.market;
 
 public enum MarketResource
 {

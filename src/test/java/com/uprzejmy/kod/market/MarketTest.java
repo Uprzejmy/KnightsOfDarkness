@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import com.uprzejmy.kod.TestGameConfig;
 import com.uprzejmy.kod.gameconfig.GameConfig;
 import com.uprzejmy.kod.kingdom.KingdomBuilder;
-import com.uprzejmy.kod.kingdom.MarketResource;
 
 public class MarketTest
 {
