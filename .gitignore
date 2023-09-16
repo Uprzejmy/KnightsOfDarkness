@@ -17,4 +17,4 @@ out/
 ### VS Code ###
 .vscode/
 bin/
-.settings
+.settings/org.eclipse.buildship.core.prefs
