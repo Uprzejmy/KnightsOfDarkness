@@ -1,15 +1,12 @@
 package com.uprzejmy.kod.market;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
-
 import com.uprzejmy.kod.TestGame;
 import com.uprzejmy.kod.game.Game;
-import com.uprzejmy.kod.utils.KingdomBuilder;
+import com.uprzejmy.kod.kingdom.KingdomBuilder;
 
-public class MarketTest
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+class MarketTest
 {
     private static Game game;
 
