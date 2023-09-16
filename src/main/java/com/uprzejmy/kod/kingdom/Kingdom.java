@@ -5,7 +5,7 @@ import java.util.List;
 import com.uprzejmy.kod.game.Game;
 import com.uprzejmy.kod.gameconfig.GameConfig;
 import com.uprzejmy.kod.market.Market;
-import com.uprzejmy.kod.market.MarketRecord;
+import com.uprzejmy.kod.market.MarketOffer;
 import com.uprzejmy.kod.market.MarketResource;
 
 public class Kingdom
@@ -54,7 +54,7 @@ public class Kingdom
         this.kingdomMarketAction.postOffer(resource, count, price);
     }
 
-    public List<MarketRecord> getMarketOffers()
+    public List<MarketOffer> getMarketOffers()
     {
         return this.kingdomMarketAction.getMyOffers();
     }

@@ -2,7 +2,7 @@ package com.uprzejmy.kod.kingdom;
 
 import java.util.List;
 
-import com.uprzejmy.kod.market.MarketRecord;
+import com.uprzejmy.kod.market.MarketOffer;
 import com.uprzejmy.kod.market.MarketResource;
 
 public class KingdomMarketAction
@@ -23,7 +23,7 @@ public class KingdomMarketAction
         kingdom.getMarket().addOffer(kingdom, resource, count, price);
     }
 
-    public List<MarketRecord> getMyOffers()
+    public List<MarketOffer> getMyOffers()
     {
         return kingdom.getMarket().getOffersByKingdom(kingdom);
     }
