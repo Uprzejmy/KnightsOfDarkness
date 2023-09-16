@@ -16,4 +16,24 @@ public class MarketOffer
         this.count = count;
         this.price = price;
     }
+
+    public Kingdom getKingdom()
+    {
+        return kingdom;
+    }
+
+    public MarketResource getResource()
+    {
+        return resource;
+    }
+
+    public int getCount()
+    {
+        return count;
+    }
+
+    public int getPrice()
+    {
+        return price;
+    }
 }
