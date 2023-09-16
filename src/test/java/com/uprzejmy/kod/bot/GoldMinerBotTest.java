@@ -10,10 +10,10 @@ import org.junit.jupiter.api.Test;
 import com.uprzejmy.kod.TestGame;
 import com.uprzejmy.kod.game.Game;
 import com.uprzejmy.kod.kingdom.BuildingName;
-import com.uprzejmy.kod.kingdom.KingdomBuilder;
 import com.uprzejmy.kod.kingdom.KingdomUnits;
 import com.uprzejmy.kod.kingdom.ResourceName;
 import com.uprzejmy.kod.kingdom.UnitName;
+import com.uprzejmy.kod.utils.KingdomBuilder;
 
 class GoldMinerBotTest
 {

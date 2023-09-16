@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import com.uprzejmy.kod.TestGame;
 import com.uprzejmy.kod.game.Game;
 import com.uprzejmy.kod.gameconfig.GameConfig;
+import com.uprzejmy.kod.utils.KingdomBuilder;
 
 class KingdomBuildTest
 {

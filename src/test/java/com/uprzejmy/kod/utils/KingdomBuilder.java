@@ -1,6 +1,13 @@
-package com.uprzejmy.kod.kingdom;
+package com.uprzejmy.kod.utils;
 
 import com.uprzejmy.kod.game.Game;
+import com.uprzejmy.kod.kingdom.BuildingName;
+import com.uprzejmy.kod.kingdom.Kingdom;
+import com.uprzejmy.kod.kingdom.KingdomBuildings;
+import com.uprzejmy.kod.kingdom.KingdomResources;
+import com.uprzejmy.kod.kingdom.KingdomUnits;
+import com.uprzejmy.kod.kingdom.ResourceName;
+import com.uprzejmy.kod.kingdom.UnitName;
 
 public class KingdomBuilder
 {
