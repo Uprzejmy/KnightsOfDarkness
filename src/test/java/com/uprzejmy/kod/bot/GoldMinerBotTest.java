@@ -62,10 +62,7 @@ class GoldMinerBotTest
     {
         var kingdom = kingdomBuilder.build();
         var toTrain = new KingdomUnits();
-        for (var unitName : UnitName.values())
-        {
-            toTrain.addCount(unitName, 1);
-        }
+        toTrain.addCount(UnitName.goldMiner, 1);
 
         var bot = new GoldMinerBot(kingdom);
         bot.doTrainAction();

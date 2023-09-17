@@ -21,7 +21,7 @@ public class GoldMinerBot
     {
         var toBuild = new KingdomBuildings();
         var cheaperBuildingCost = Math.min(kingdom.getConfig().buildingPointCosts().goldMine(), kingdom.getConfig().buildingPointCosts().house());
-        while (kingdom.getResources().getCount(ResourceName.buildingPoints) > cheaperBuildingCost)
+        while (kingdom.getUnusedLand() > 0 && kingdom.getResources().getCount(ResourceName.buildingPoints) > cheaperBuildingCost)
         {
             toBuild.addCount(BuildingName.house, 1);
             toBuild.addCount(BuildingName.goldMine, 1);
