@@ -28,4 +28,9 @@ public class Game
     {
         return market;
     }
+
+    public void addKingdom(Kingdom kingdom)
+    {
+        this.kingdoms.add(kingdom);
+    }
 }
