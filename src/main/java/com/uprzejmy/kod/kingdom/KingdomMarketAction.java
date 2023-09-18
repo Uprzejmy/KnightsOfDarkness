@@ -27,4 +27,13 @@ public class KingdomMarketAction
     {
         return kingdom.getMarket().getOffersByKingdom(kingdom);
     }
+
+    public int buyMarketOffer(MarketOffer offer, int amount)
+    {
+        var amountBought = kingdom.getMarket().buyExistingOffer(offer, amount);
+        kingdom.getResources().subtractCount(ResourceName.gold, amountBought * offer.getPrice());
+        kingdom.getResources().addCount(ResourceName.from(offer.getResource()), amountBought);
+
+        return amountBought;
+    }
 }

@@ -31,4 +31,27 @@ public class Market
     {
         return offers.stream().filter(offer -> offer.kingdom == kingdom).toList();
     }
+
+    // TODO make a LOT of tests for this
+    public int buyExistingOffer(MarketOffer offer, int amount)
+    {
+        var potentialOffer = offers.stream().filter(element -> element.equals(offer)).findFirst();
+        if (!potentialOffer.isPresent())
+        {
+            return 0;
+        }
+
+        var sellingOffer = potentialOffer.get();
+
+        var maxToSell = Math.min(sellingOffer.count, amount);
+        sellingOffer.count -= maxToSell;
+
+        if (sellingOffer.count <= 0)
+        {
+            offers.remove(sellingOffer);
+        }
+
+        return maxToSell;
+    }
+
 }

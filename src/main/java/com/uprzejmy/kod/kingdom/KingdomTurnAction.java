@@ -11,6 +11,7 @@ public class KingdomTurnAction
 
     public boolean passTurn()
     {
+        // TODO people should eat here
         if (kingdom.getResources().getCount(ResourceName.turns) <= 0)
         {
             return false;

@@ -49,6 +49,11 @@ public class Kingdom
         return resources.getCount(ResourceName.land) - buildings.countAll();
     }
 
+    public int buyMarketOffer(MarketOffer offer, int amount)
+    {
+        return this.kingdomMarketAction.buyMarketOffer(offer, amount);
+    }
+
     public void postMarketOffer(MarketResource resource, int count, int price)
     {
         this.kingdomMarketAction.postOffer(resource, count, price);

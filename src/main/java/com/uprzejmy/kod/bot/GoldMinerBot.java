@@ -1,6 +1,7 @@
 package com.uprzejmy.kod.bot;
 
 import com.uprzejmy.kod.kingdom.*;
+import com.uprzejmy.kod.market.MarketResource;
 
 public class GoldMinerBot
 {
@@ -15,6 +16,30 @@ public class GoldMinerBot
     {
         doBuildAction();
         doTrainAction();
+        doMarketAction();
+    }
+
+    public void doMarketAction()
+    {
+        buyFood();
+
+    }
+
+    private void buyFood()
+    {
+        var foodAmount = kingdom.getResources().getCount(ResourceName.food);
+        var foodUpkeepCost = kingdom.getUnits().countAll() * 10;
+        var prefferedAmount = foodUpkeepCost * 3;
+        var amountToBuy = Math.max(0, prefferedAmount - foodAmount);
+
+        while (amountToBuy > 0)
+        {
+            // TODO find cheapest
+            // TODO stop buying if there are no offers
+            var offer = kingdom.getMarket().getOffersByResource(MarketResource.food).get(0);
+            var amountBought = kingdom.buyMarketOffer(offer, amountToBuy);
+            amountToBuy -= amountBought;
+        }
     }
 
     public void doBuildAction()
