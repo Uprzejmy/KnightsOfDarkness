@@ -8,6 +8,7 @@ import com.uprzejmy.kod.TestGame;
 import com.uprzejmy.kod.bot.FarmerBot;
 import com.uprzejmy.kod.bot.GoldMinerBot;
 import com.uprzejmy.kod.kingdom.ResourceName;
+import com.uprzejmy.kod.market.MarketResource;
 import com.uprzejmy.kod.utils.KingdomBuilder;
 
 public class BotGame
@@ -35,6 +36,7 @@ public class BotGame
         }
 
         assertEquals(0, farmerKingdom.getResources().getCount(ResourceName.turns));
+        assertEquals(10, game.getMarket().getOffersByResource(MarketResource.food).size());
     }
 
 }

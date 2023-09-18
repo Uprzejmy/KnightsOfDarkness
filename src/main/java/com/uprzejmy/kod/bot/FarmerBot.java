@@ -1,6 +1,7 @@
 package com.uprzejmy.kod.bot;
 
 import com.uprzejmy.kod.kingdom.*;
+import com.uprzejmy.kod.market.MarketResource;
 
 public class FarmerBot
 {
@@ -15,6 +16,19 @@ public class FarmerBot
     {
         doBuildAction();
         doTrainAction();
+        doMarketAction();
+    }
+
+    public void doMarketAction()
+    {
+        var foodAmount = kingdom.getResources().getCount(ResourceName.food);
+        var foodUpkeepCost = kingdom.getUnits().countAll() * 10;
+        var amountToOffer = foodAmount - foodUpkeepCost;
+
+        if (amountToOffer > 0)
+        {
+            kingdom.postMarketOffer(MarketResource.food, amountToOffer, 20);
+        }
     }
 
     public void doBuildAction()
