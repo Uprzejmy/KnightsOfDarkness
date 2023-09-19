@@ -64,6 +64,12 @@ public class Kingdom
         return this.kingdomMarketAction.getMyOffers();
     }
 
+    public int getFoodUpkeepCost()
+    {
+        // TODO move magic value to config
+        return units.countAll() * 10;
+    }
+
     public KingdomResources getResources()
     {
         return resources;

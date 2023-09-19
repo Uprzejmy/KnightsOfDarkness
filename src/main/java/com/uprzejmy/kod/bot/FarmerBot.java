@@ -22,7 +22,7 @@ public class FarmerBot
     public void doMarketAction()
     {
         var foodAmount = kingdom.getResources().getCount(ResourceName.food);
-        var foodUpkeepCost = kingdom.getUnits().countAll() * 10;
+        var foodUpkeepCost = kingdom.getFoodUpkeepCost();
         var amountToOffer = foodAmount - foodUpkeepCost;
 
         if (amountToOffer > 0)
@@ -49,8 +49,8 @@ public class FarmerBot
         KingdomUnits trainedUnits;
         do
         {
-            toTrain.addCount(UnitName.farmer, 10);
-            toTrain.addCount(UnitName.builder, 2);
+            toTrain.addCount(UnitName.farmer, 5);
+            toTrain.addCount(UnitName.builder, 1);
             trainedUnits = kingdom.train(toTrain);
         } while (trainedUnits.countAll() > 0);
     }

@@ -28,7 +28,7 @@ public class GoldMinerBot
     private void buyFood()
     {
         var foodAmount = kingdom.getResources().getCount(ResourceName.food);
-        var foodUpkeepCost = kingdom.getUnits().countAll() * 10;
+        var foodUpkeepCost = kingdom.getFoodUpkeepCost();
         var prefferedAmount = foodUpkeepCost * 3;
         var amountToBuy = Math.max(0, prefferedAmount - foodAmount);
 
