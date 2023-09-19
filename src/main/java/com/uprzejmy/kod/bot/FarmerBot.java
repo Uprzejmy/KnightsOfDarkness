@@ -58,5 +58,12 @@ public class FarmerBot
     public void passTurn()
     {
         kingdom.passTurn();
+        System.out.println(getKingdomInfo());
+    }
+
+    private String getKingdomInfo()
+    {
+        return String.format("[%s] passed turn, houses: %d, gold mines: %d, gold: %d, food: %d", kingdom.getName(), kingdom.getBuildings().getCount(BuildingName.goldMine), kingdom.getBuildings().getCount(BuildingName.farm),
+                kingdom.getResources().getCount(ResourceName.gold), kingdom.getResources().getCount(ResourceName.food));
     }
 }

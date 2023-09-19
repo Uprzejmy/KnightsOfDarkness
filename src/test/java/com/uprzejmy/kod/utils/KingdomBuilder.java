@@ -15,9 +15,11 @@ public class KingdomBuilder
     private final KingdomBuildings buildings;
     private final KingdomUnits units;
     private final Game game;
+    private String name;
 
     public KingdomBuilder(Game game)
     {
+        this.name = "test-kingdom";
         this.resources = new KingdomResources();
         for (var resource : ResourceName.values())
         {
@@ -57,9 +59,14 @@ public class KingdomBuilder
         return this;
     }
 
-    public Kingdom build()
+    public KingdomBuilder withName(String name)
     {
-        return new Kingdom(game, resources, buildings, units);
+        this.name = name;
+        return this;
     }
 
+    public Kingdom build()
+    {
+        return new Kingdom(name, game, resources, buildings, units);
+    }
 }

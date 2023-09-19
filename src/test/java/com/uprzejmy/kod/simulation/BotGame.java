@@ -19,20 +19,26 @@ public class BotGame
         var game = new TestGame().get();
         var kingdomBuilder = new KingdomBuilder(game).withResource(ResourceName.turns, 10);
 
-        var farmerKingdom = kingdomBuilder.build();
+        var farmerKingdom = kingdomBuilder.withName("FarmerBot").build();
         var farmerBot = new FarmerBot(farmerKingdom);
         game.addKingdom(farmerKingdom);
 
-        var goldMinerKingdom = kingdomBuilder.build();
-        var goldMinerBot = new GoldMinerBot(goldMinerKingdom);
-        game.addKingdom(goldMinerKingdom);
+        var goldMinerKingdom1 = kingdomBuilder.withName("GoldMinerBot1").build();
+        var goldMinerBot1 = new GoldMinerBot(goldMinerKingdom1);
+        game.addKingdom(goldMinerKingdom1);
+
+        var goldMinerKingdom2 = kingdomBuilder.withName("GoldMinerBot2").build();
+        var goldMinerBot2 = new GoldMinerBot(goldMinerKingdom2);
+        game.addKingdom(goldMinerKingdom2);
 
         for (var i = 0; i < 10; i++)
         {
             farmerBot.doAllActions();
-            goldMinerBot.doAllActions();
+            goldMinerBot1.doAllActions();
+            goldMinerBot2.doAllActions();
             farmerBot.passTurn();
-            goldMinerBot.passTurn();
+            goldMinerBot1.passTurn();
+            goldMinerBot2.passTurn();
         }
 
         assertEquals(0, farmerKingdom.getResources().getCount(ResourceName.turns));

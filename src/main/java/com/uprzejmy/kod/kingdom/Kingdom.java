@@ -10,6 +10,7 @@ import com.uprzejmy.kod.market.MarketResource;
 
 public class Kingdom
 {
+    private final String name;
     private final Market market;
     private final GameConfig config;
     private final KingdomResources resources;
@@ -20,8 +21,9 @@ public class Kingdom
     private final KingdomTurnAction kingdomTurnAction = new KingdomTurnAction(this);
     private final KingdomMarketAction kingdomMarketAction = new KingdomMarketAction(this);
 
-    public Kingdom(Game game, KingdomResources resources, KingdomBuildings buildings, KingdomUnits units)
+    public Kingdom(String name, Game game, KingdomResources resources, KingdomBuildings buildings, KingdomUnits units)
     {
+        this.name = name;
         this.config = game.getConfig();
         this.market = game.getMarket();
         this.resources = resources;
@@ -93,5 +95,10 @@ public class Kingdom
     public Market getMarket()
     {
         return market;
+    }
+
+    public String getName()
+    {
+        return name;
     }
 }
