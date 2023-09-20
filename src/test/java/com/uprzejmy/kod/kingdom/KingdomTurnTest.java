@@ -70,6 +70,7 @@ class KingdomTurnTest
         }
 
         var kingdom = kingdomBuilder.build();
+
         Map<ResourceName, Integer> resourcesBeforeTurn = new EnumMap<>(kingdom.getResources().resources);
 
         kingdom.passTurn();
@@ -79,7 +80,14 @@ class KingdomTurnTest
             var resourceName = config.production().getResource(unitName);
             var countBeforeTurn = resourcesBeforeTurn.get(resourceName);
             var countAfterTurn = kingdom.getResources().getCount(resourceName);
-            assertTrue(countBeforeTurn < countAfterTurn, "Resource " + resourceName + " before turn was " + countBeforeTurn + " and should be smaller than after production " + countAfterTurn);
+            // TODO move away food eating logic from this test - no "ifs" allowed
+            if (resourceName == ResourceName.food)
+            {
+                assertTrue(countBeforeTurn > countAfterTurn, "The food before turn was " + countBeforeTurn + " and should be larger than after turn " + countAfterTurn);
+            } else
+            {
+                assertTrue(countBeforeTurn < countAfterTurn, "Resource " + resourceName + " before turn was " + countBeforeTurn + " and should be smaller than after production " + countAfterTurn);
+            }
         }
     }
 

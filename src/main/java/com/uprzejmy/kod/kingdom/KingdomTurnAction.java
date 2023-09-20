@@ -11,17 +11,24 @@ public class KingdomTurnAction
 
     public boolean passTurn()
     {
-        // TODO people should eat here
         if (kingdom.getResources().getCount(ResourceName.turns) <= 0)
         {
             return false;
         }
 
         kingdom.getResources().subtractCount(ResourceName.turns, 1);
+        eatFood();
         doProduction();
         getNewPeople();
 
         return true;
+    }
+
+    private void eatFood()
+    {
+        // TODO consequences of not having enough food
+        var foodToEat = Math.min(kingdom.getResources().getCount(ResourceName.food), kingdom.getFoodUpkeepCost());
+        kingdom.getResources().subtractCount(ResourceName.food, foodToEat);
     }
 
     private void doProduction()

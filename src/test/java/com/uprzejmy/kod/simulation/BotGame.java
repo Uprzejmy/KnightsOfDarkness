@@ -43,7 +43,8 @@ public class BotGame
         }
 
         assertEquals(0, farmerKingdom.getResources().getCount(ResourceName.turns));
-        assertEquals(10, game.getMarket().getOffersByResource(MarketResource.food).size());
+        // TODO one offer was taken out by gold miners, those asserts don't make sense in this kind of test
+        assertEquals(9, game.getMarket().getOffersByResource(MarketResource.food).size());
     }
 
 }

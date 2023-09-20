@@ -64,21 +64,31 @@ public class GoldMinerBot implements Bot
         System.out.println(getKingdomInfo());
     }
 
-    private void buyFood()
+    private int buyFood()
     {
         var foodAmount = kingdom.getResources().getCount(ResourceName.food);
         var foodUpkeepCost = kingdom.getFoodUpkeepCost();
         var prefferedAmount = foodUpkeepCost * 3;
         var amountToBuy = Math.max(0, prefferedAmount - foodAmount);
+        var totalBought = 0;
 
+        // TODO accumulation of amountToBuy and totalBought is the same thing
         while (amountToBuy > 0)
         {
             // TODO find cheapest
-            // TODO stop buying if there are no offers
+            var offers = kingdom.getMarket().getOffersByResource(MarketResource.food);
+            if (offers.isEmpty())
+            {
+                return totalBought;
+            }
+
             var offer = kingdom.getMarket().getOffersByResource(MarketResource.food).get(0);
             var amountBought = kingdom.buyMarketOffer(offer, amountToBuy);
             amountToBuy -= amountBought;
+            totalBought += amountBought;
         }
+
+        return totalBought;
     }
 
     @Override
