@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import com.uprzejmy.kod.TestGame;
+import com.uprzejmy.kod.bot.Bot;
 import com.uprzejmy.kod.bot.FarmerBot;
 import com.uprzejmy.kod.bot.GoldMinerBot;
 import com.uprzejmy.kod.kingdom.ResourceName;
@@ -20,15 +21,15 @@ public class BotGame
         var kingdomBuilder = new KingdomBuilder(game).withResource(ResourceName.turns, 10);
 
         var farmerKingdom = kingdomBuilder.withName("FarmerBot").build();
-        var farmerBot = new FarmerBot(farmerKingdom);
+        Bot farmerBot = new FarmerBot(farmerKingdom);
         game.addKingdom(farmerKingdom);
 
         var goldMinerKingdom1 = kingdomBuilder.withName("GoldMinerBot1").build();
-        var goldMinerBot1 = new GoldMinerBot(goldMinerKingdom1);
+        Bot goldMinerBot1 = new GoldMinerBot(goldMinerKingdom1);
         game.addKingdom(goldMinerKingdom1);
 
         var goldMinerKingdom2 = kingdomBuilder.withName("GoldMinerBot2").build();
-        var goldMinerBot2 = new GoldMinerBot(goldMinerKingdom2);
+        Bot goldMinerBot2 = new GoldMinerBot(goldMinerKingdom2);
         game.addKingdom(goldMinerKingdom2);
 
         for (var i = 0; i < 10; i++)

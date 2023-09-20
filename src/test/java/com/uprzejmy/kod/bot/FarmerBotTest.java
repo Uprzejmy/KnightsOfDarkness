@@ -41,7 +41,7 @@ public class FarmerBotTest
         var farmsBefore = kingdom.getBuildings().getCount(BuildingName.farm);
         var housesBefore = kingdom.getBuildings().getCount(BuildingName.house);
 
-        var bot = new FarmerBot(kingdom);
+        Bot bot = new FarmerBot(kingdom);
         for (var i = 0; i < 10; i++)
         {
             bot.doAllActions();
@@ -64,7 +64,7 @@ public class FarmerBotTest
         var toTrain = new KingdomUnits();
         toTrain.addCount(UnitName.farmer, 1);
 
-        var bot = new FarmerBot(kingdom);
+        Bot bot = new FarmerBot(kingdom);
         bot.doTrainAction();
 
         var trainedUnits = kingdom.train(toTrain);

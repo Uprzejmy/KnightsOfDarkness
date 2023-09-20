@@ -1,9 +1,14 @@
 package com.uprzejmy.kod.bot;
 
-import com.uprzejmy.kod.kingdom.*;
+import com.uprzejmy.kod.kingdom.BuildingName;
+import com.uprzejmy.kod.kingdom.Kingdom;
+import com.uprzejmy.kod.kingdom.KingdomBuildings;
+import com.uprzejmy.kod.kingdom.KingdomUnits;
+import com.uprzejmy.kod.kingdom.ResourceName;
+import com.uprzejmy.kod.kingdom.UnitName;
 import com.uprzejmy.kod.market.MarketResource;
 
-public class FarmerBot
+public class FarmerBot implements Bot
 {
     private final Kingdom kingdom;
 
@@ -12,6 +17,7 @@ public class FarmerBot
         this.kingdom = kingdom;
     }
 
+    @Override
     public void doAllActions()
     {
         doBuildAction();
@@ -19,6 +25,7 @@ public class FarmerBot
         doMarketAction();
     }
 
+    @Override
     public void doMarketAction()
     {
         var foodAmount = kingdom.getResources().getCount(ResourceName.food);
@@ -31,6 +38,7 @@ public class FarmerBot
         }
     }
 
+    @Override
     public void doBuildAction()
     {
         var toBuild = new KingdomBuildings();
@@ -43,6 +51,7 @@ public class FarmerBot
         }
     }
 
+    @Override
     public void doTrainAction()
     {
         var toTrain = new KingdomUnits();
@@ -55,13 +64,15 @@ public class FarmerBot
         } while (trainedUnits.countAll() > 0);
     }
 
+    @Override
     public void passTurn()
     {
         kingdom.passTurn();
         System.out.println(getKingdomInfo());
     }
 
-    private String getKingdomInfo()
+    @Override
+    public String getKingdomInfo()
     {
         return String.format("[%s] passed turn, houses: %d, farms: %d, gold: %d, food: %d", kingdom.getName(), kingdom.getBuildings().getCount(BuildingName.house), kingdom.getBuildings().getCount(BuildingName.farm),
                 kingdom.getResources().getCount(ResourceName.gold), kingdom.getResources().getCount(ResourceName.food));
