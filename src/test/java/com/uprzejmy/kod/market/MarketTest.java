@@ -1,13 +1,14 @@
 package com.uprzejmy.kod.market;
 
-import com.uprzejmy.kod.TestGame;
-import com.uprzejmy.kod.game.Game;
-import com.uprzejmy.kod.utils.KingdomBuilder;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+
+import com.uprzejmy.kod.TestGame;
+import com.uprzejmy.kod.game.Game;
+import com.uprzejmy.kod.utils.KingdomBuilder;
 
 class MarketTest
 {
@@ -87,5 +88,37 @@ class MarketTest
 
         assertEquals(0, market.getOffersByResource(MarketResource.food).size());
         assertEquals(0, amountBought);
+    }
+
+    @Test
+    void buyingOffer_whenOneOfferExistsAndHasEnoughAmount_shouldSellEntireRequestedAmountAndStillHasOfferAvailable()
+    {
+        var kingdom = new KingdomBuilder(game).build();
+        var market = new Market();
+
+        market.addOffer(kingdom, MarketResource.food, 111, 100);
+        var offers = market.getOffersByResource(MarketResource.food);
+        assertTrue(!offers.isEmpty());
+
+        var amountBought = market.buyExistingOffer(offers.get(0), 100);
+
+        assertEquals(1, market.getOffersByResource(MarketResource.food).size());
+        assertEquals(100, amountBought);
+    }
+
+    @Test
+    void buyingOffer_whenOneOfferExistsAndHasExactlyTheSameAmount_shouldSellEntireRequestedAmountAndHasNoOffersAvailable()
+    {
+        var kingdom = new KingdomBuilder(game).build();
+        var market = new Market();
+
+        market.addOffer(kingdom, MarketResource.food, 100, 100);
+        var offers = market.getOffersByResource(MarketResource.food);
+        assertTrue(!offers.isEmpty());
+
+        var amountBought = market.buyExistingOffer(offers.get(0), 100);
+
+        assertEquals(0, market.getOffersByResource(MarketResource.food).size());
+        assertEquals(100, amountBought);
     }
 }
