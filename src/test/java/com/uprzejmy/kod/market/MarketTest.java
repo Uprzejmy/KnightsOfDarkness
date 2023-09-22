@@ -74,4 +74,18 @@ class MarketTest
 
         assertEquals(2, market.getOffersByResource(MarketResource.food).size());
     }
+
+    @Test
+    void buyingOffer_whenNoOffersExist_shouldNotBuyAnything()
+    {
+        var kingdom = new KingdomBuilder(game).build();
+        var market = new Market();
+
+        var offer = new MarketOffer(kingdom, MarketResource.food, 100, 100);
+
+        var amountBought = market.buyExistingOffer(offer, 100);
+
+        assertEquals(0, market.getOffersByResource(MarketResource.food).size());
+        assertEquals(0, amountBought);
+    }
 }

@@ -33,6 +33,9 @@ public class Market
     }
 
     // TODO make a LOT of tests for this
+    /**
+     * @return amount of resource which was actually sold
+     */
     public int buyExistingOffer(MarketOffer offer, int amount)
     {
         var potentialOffer = offers.stream().filter(element -> element.equals(offer)).findFirst();
