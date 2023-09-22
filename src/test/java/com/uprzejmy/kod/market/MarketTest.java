@@ -121,4 +121,38 @@ class MarketTest
         assertEquals(0, market.getOffersByResource(MarketResource.food).size());
         assertEquals(100, amountBought);
     }
+
+    @Test
+    void buyingOffer_whenOfferExist_shouldReduceTheAmountStillAvailableByTheAmountBought()
+    {
+        var kingdom = new KingdomBuilder(game).build();
+        var market = new Market();
+
+        market.addOffer(kingdom, MarketResource.food, 100, 100);
+        var offers = market.getOffersByResource(MarketResource.food);
+        assertTrue(!offers.isEmpty());
+        var offer = offers.get(0);
+
+        var amountBought = market.buyExistingOffer(offer, 20);
+
+        assertEquals(1, market.getOffersByResource(MarketResource.food).size());
+        assertEquals(100 - amountBought, offer.getCount());
+    }
+
+    @Test
+    void buyingOffer_whenMultipleOffersExistAndBuyersTakeTheEntireOne_shouldReduceNumberOfAvailableOffersByOne()
+    {
+        var kingdom = new KingdomBuilder(game).build();
+        var market = new Market();
+
+        market.addOffer(kingdom, MarketResource.food, 100, 100);
+        market.addOffer(kingdom, MarketResource.food, 100, 200);
+        var offers = market.getOffersByResource(MarketResource.food);
+        assertTrue(!offers.isEmpty());
+        var offer = offers.get(0);
+
+        market.buyExistingOffer(offer, 100);
+
+        assertEquals(1, market.getOffersByResource(MarketResource.food).size());
+    }
 }
