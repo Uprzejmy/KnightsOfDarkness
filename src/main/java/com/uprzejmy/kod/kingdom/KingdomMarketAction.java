@@ -36,4 +36,9 @@ public class KingdomMarketAction
 
         return amountBought;
     }
+
+    public void acceptOffer(int goldValue)
+    {
+        kingdom.getResources().addCount(ResourceName.gold, goldValue);
+    }
 }

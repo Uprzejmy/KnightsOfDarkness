@@ -66,6 +66,11 @@ public class Kingdom
         return this.kingdomMarketAction.getMyOffers();
     }
 
+    public void acceptMarketOffer(int goldValue)
+    {
+        this.kingdomMarketAction.acceptOffer(goldValue);
+    }
+
     public int getFoodUpkeepCost()
     {
         // TODO move magic value to config

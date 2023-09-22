@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.uprzejmy.kod.kingdom.Kingdom;
-import com.uprzejmy.kod.kingdom.ResourceName;
 
 public class Market
 {
@@ -46,7 +45,8 @@ public class Market
 
         var maxToSell = Math.min(sellingOffer.count, amount);
         sellingOffer.count -= maxToSell;
-        offer.kingdom.getResources().addCount(ResourceName.gold, maxToSell * offer.price);
+        var goldDue = maxToSell * sellingOffer.getPrice();
+        offer.kingdom.acceptMarketOffer(goldDue);
 
         if (sellingOffer.count <= 0)
         {
