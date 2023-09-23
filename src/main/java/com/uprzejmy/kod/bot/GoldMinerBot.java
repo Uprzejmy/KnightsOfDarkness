@@ -51,8 +51,8 @@ public class GoldMinerBot implements Bot
         KingdomUnits trainedUnits;
         do
         {
-            toTrain.addCount(UnitName.goldMiner, 10);
-            toTrain.addCount(UnitName.builder, 2);
+            toTrain.addCount(UnitName.goldMiner, 5);
+            toTrain.addCount(UnitName.builder, 1);
             trainedUnits = kingdom.train(toTrain);
         } while (trainedUnits.countAll() > 0);
     }
