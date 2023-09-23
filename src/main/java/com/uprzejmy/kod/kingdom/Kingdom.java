@@ -20,6 +20,7 @@ public class Kingdom
     private final KingdomTrainAction kingdomTrainAction = new KingdomTrainAction(this);
     private final KingdomTurnAction kingdomTurnAction = new KingdomTurnAction(this);
     private final KingdomMarketAction kingdomMarketAction = new KingdomMarketAction(this);
+    private final KingdomOtherAction kingdomOtherAction = new KingdomOtherAction(this);
 
     public Kingdom(String name, Game game, KingdomResources resources, KingdomBuildings buildings, KingdomUnits units)
     {
@@ -49,6 +50,11 @@ public class Kingdom
     public int getUnusedLand()
     {
         return resources.getCount(ResourceName.land) - buildings.countAll();
+    }
+
+    public int buyLand(int count)
+    {
+        return kingdomOtherAction.buyLand(count);
     }
 
     public int buyMarketOffer(MarketOffer offer, int amount)
