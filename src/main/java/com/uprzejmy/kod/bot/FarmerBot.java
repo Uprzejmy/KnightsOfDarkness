@@ -41,10 +41,10 @@ public class FarmerBot implements Bot
     @Override
     public void doBuildAction()
     {
-        var toBuild = new KingdomBuildings();
         var cheaperBuildingCost = Math.min(kingdom.getConfig().buildingPointCosts().farm(), kingdom.getConfig().buildingPointCosts().house());
         while (kingdom.getUnusedLand() > 0 && kingdom.getResources().getCount(ResourceName.buildingPoints) > cheaperBuildingCost)
         {
+            var toBuild = new KingdomBuildings();
             toBuild.addCount(BuildingName.house, 1);
             toBuild.addCount(BuildingName.farm, 1);
             kingdom.build(toBuild);
