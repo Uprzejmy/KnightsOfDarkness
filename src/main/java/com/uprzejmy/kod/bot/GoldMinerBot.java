@@ -34,12 +34,12 @@ public class GoldMinerBot implements Bot
     @Override
     public void doBuildAction()
     {
+        var toBuild = new KingdomBuildings();
+        toBuild.addCount(BuildingName.house, 1);
+        toBuild.addCount(BuildingName.goldMine, 1);
         var cheaperBuildingCost = Math.min(kingdom.getConfig().buildingPointCosts().goldMine(), kingdom.getConfig().buildingPointCosts().house());
         while (kingdom.getUnusedLand() > 0 && kingdom.getResources().getCount(ResourceName.buildingPoints) > cheaperBuildingCost)
         {
-            var toBuild = new KingdomBuildings();
-            toBuild.addCount(BuildingName.house, 1);
-            toBuild.addCount(BuildingName.goldMine, 1);
             kingdom.build(toBuild);
         }
     }
@@ -48,11 +48,11 @@ public class GoldMinerBot implements Bot
     public void doTrainAction()
     {
         var toTrain = new KingdomUnits();
+        toTrain.addCount(UnitName.goldMiner, 5);
+        toTrain.addCount(UnitName.builder, 1);
         KingdomUnits trainedUnits;
         do
         {
-            toTrain.addCount(UnitName.goldMiner, 5);
-            toTrain.addCount(UnitName.builder, 1);
             trainedUnits = kingdom.train(toTrain);
         } while (trainedUnits.countAll() > 0);
     }

@@ -41,12 +41,12 @@ public class FarmerBot implements Bot
     @Override
     public void doBuildAction()
     {
+        var toBuild = new KingdomBuildings();
+        toBuild.addCount(BuildingName.house, 1);
+        toBuild.addCount(BuildingName.farm, 1);
         var cheaperBuildingCost = Math.min(kingdom.getConfig().buildingPointCosts().farm(), kingdom.getConfig().buildingPointCosts().house());
         while (kingdom.getUnusedLand() > 0 && kingdom.getResources().getCount(ResourceName.buildingPoints) > cheaperBuildingCost)
         {
-            var toBuild = new KingdomBuildings();
-            toBuild.addCount(BuildingName.house, 1);
-            toBuild.addCount(BuildingName.farm, 1);
             kingdom.build(toBuild);
         }
     }
@@ -55,11 +55,11 @@ public class FarmerBot implements Bot
     public void doTrainAction()
     {
         var toTrain = new KingdomUnits();
+        toTrain.addCount(UnitName.farmer, 5);
+        toTrain.addCount(UnitName.builder, 1);
         KingdomUnits trainedUnits;
         do
         {
-            toTrain.addCount(UnitName.farmer, 5);
-            toTrain.addCount(UnitName.builder, 1);
             trainedUnits = kingdom.train(toTrain);
         } while (trainedUnits.countAll() > 0);
     }
