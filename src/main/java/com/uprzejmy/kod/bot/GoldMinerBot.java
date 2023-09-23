@@ -82,7 +82,7 @@ public class GoldMinerBot implements Bot
                 return totalBought;
             }
 
-            var offer = kingdom.getMarket().getOffersByResource(MarketResource.food).get(0);
+            var offer = offers.get(0);
             var amountBought = kingdom.buyMarketOffer(offer, amountToBuy);
             amountToBuy -= amountBought;
             totalBought += amountBought;
