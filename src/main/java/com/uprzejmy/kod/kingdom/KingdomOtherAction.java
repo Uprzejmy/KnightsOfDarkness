@@ -43,7 +43,7 @@ public class KingdomOtherAction
 
     static LandTransaction calculateCost(int initialLand, int count, int availableGold)
     {
-        var power = 2; // linear function f(x) = 10x
+        var power = 2; // linear function f(x) = 1/10 * x^2
         var landPrice = 0;
         var landToBuy = 0;
         while (landToBuy < count && landPrice <= availableGold)
