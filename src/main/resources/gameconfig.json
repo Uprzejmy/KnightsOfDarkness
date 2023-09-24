@@ -130,7 +130,7 @@
       "resource": "iron"
     },
     "farmer": {
-      "rate": 10,
+      "rate": 100,
       "resource": "food"
     },
     "blacksmith": {
