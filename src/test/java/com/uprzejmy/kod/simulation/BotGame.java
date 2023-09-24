@@ -8,8 +8,10 @@ import com.uprzejmy.kod.TestGame;
 import com.uprzejmy.kod.bot.Bot;
 import com.uprzejmy.kod.bot.FarmerBot;
 import com.uprzejmy.kod.bot.GoldMinerBot;
+import com.uprzejmy.kod.game.Game;
+import com.uprzejmy.kod.kingdom.BuildingName;
 import com.uprzejmy.kod.kingdom.ResourceName;
-import com.uprzejmy.kod.market.MarketResource;
+import com.uprzejmy.kod.kingdom.UnitName;
 import com.uprzejmy.kod.utils.KingdomBuilder;
 
 public class BotGame
@@ -19,6 +21,7 @@ public class BotGame
     {
         var game = new TestGame().get();
         var kingdomBuilder = new KingdomBuilder(game).withResource(ResourceName.turns, 10);
+        kingdomBuilder = setupKingdomStartConfiguration(kingdomBuilder, game);
 
         var farmerKingdom = kingdomBuilder.withName("FarmerBot").build();
         Bot farmerBot = new FarmerBot(farmerKingdom);
@@ -43,8 +46,26 @@ public class BotGame
         }
 
         assertEquals(0, farmerKingdom.getResources().getCount(ResourceName.turns));
-        // TODO one offer was taken out by gold miners, those asserts don't make sense in this kind of test
-        assertEquals(9, game.getMarket().getOffersByResource(MarketResource.food).size());
     }
 
+    private KingdomBuilder setupKingdomStartConfiguration(KingdomBuilder kingdomBuilder, Game game)
+    {
+        var startConfiguration = game.getConfig().kingdomStartConfiguration();
+        for (var building : BuildingName.values())
+        {
+            kingdomBuilder.withBuilding(building, startConfiguration.buildings().getCount(building));
+        }
+
+        for (var resource : ResourceName.values())
+        {
+            kingdomBuilder.withResource(resource, startConfiguration.resources().getCount(resource));
+        }
+
+        for (var unit : UnitName.values())
+        {
+            kingdomBuilder.withUnit(unit, startConfiguration.units().getCount(unit));
+        }
+
+        return kingdomBuilder;
+    }
 }

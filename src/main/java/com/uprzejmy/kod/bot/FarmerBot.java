@@ -45,8 +45,12 @@ public class FarmerBot implements Bot
         toBuild.addCount(BuildingName.house, 1);
         toBuild.addCount(BuildingName.farm, 1);
         var cheaperBuildingCost = Math.min(kingdom.getConfig().buildingPointCosts().farm(), kingdom.getConfig().buildingPointCosts().house());
-        while (kingdom.getUnusedLand() > 0 && kingdom.getResources().getCount(ResourceName.buildingPoints) > cheaperBuildingCost)
+        while (kingdom.getResources().getCount(ResourceName.buildingPoints) > cheaperBuildingCost)
         {
+            if (kingdom.getUnusedLand() == 0)
+            {
+                kingdom.buyLand(2);
+            }
             kingdom.build(toBuild);
         }
     }
@@ -74,7 +78,8 @@ public class FarmerBot implements Bot
     @Override
     public String getKingdomInfo()
     {
-        return String.format("[%s] passed turn, houses: %d, farms: %d, gold: %d, food: %d", kingdom.getName(), kingdom.getBuildings().getCount(BuildingName.house), kingdom.getBuildings().getCount(BuildingName.farm),
+        return String.format("[%s] passed turn, land: %d, houses: %d, farms: %d, gold: %d, food: %d", kingdom.getName(), kingdom.getResources().getCount(ResourceName.land), kingdom.getBuildings().getCount(BuildingName.house),
+                kingdom.getBuildings().getCount(BuildingName.farm),
                 kingdom.getResources().getCount(ResourceName.gold), kingdom.getResources().getCount(ResourceName.food));
     }
 }

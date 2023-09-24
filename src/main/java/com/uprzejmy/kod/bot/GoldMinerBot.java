@@ -38,8 +38,12 @@ public class GoldMinerBot implements Bot
         toBuild.addCount(BuildingName.house, 1);
         toBuild.addCount(BuildingName.goldMine, 1);
         var cheaperBuildingCost = Math.min(kingdom.getConfig().buildingPointCosts().goldMine(), kingdom.getConfig().buildingPointCosts().house());
-        while (kingdom.getUnusedLand() > 0 && kingdom.getResources().getCount(ResourceName.buildingPoints) > cheaperBuildingCost)
+        while (kingdom.getResources().getCount(ResourceName.buildingPoints) > cheaperBuildingCost)
         {
+            if (kingdom.getUnusedLand() == 0)
+            {
+                kingdom.buyLand(2);
+            }
             kingdom.build(toBuild);
         }
     }
@@ -94,7 +98,8 @@ public class GoldMinerBot implements Bot
     @Override
     public String getKingdomInfo()
     {
-        return String.format("[%s] passed turn, houses: %d, gold mines: %d, gold: %d, food: %d", kingdom.getName(), kingdom.getBuildings().getCount(BuildingName.house), kingdom.getBuildings().getCount(BuildingName.goldMine),
+        return String.format("[%s] passed turn, land: %d, houses: %d, gold mines: %d, gold: %d, food: %d", kingdom.getName(), kingdom.getResources().getCount(ResourceName.land), kingdom.getBuildings().getCount(BuildingName.house),
+                kingdom.getBuildings().getCount(BuildingName.goldMine),
                 kingdom.getResources().getCount(ResourceName.gold), kingdom.getResources().getCount(ResourceName.food));
     }
 }
