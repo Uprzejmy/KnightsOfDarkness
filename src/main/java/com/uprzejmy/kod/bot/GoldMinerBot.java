@@ -2,11 +2,8 @@ package com.uprzejmy.kod.bot;
 
 import com.uprzejmy.kod.kingdom.BuildingName;
 import com.uprzejmy.kod.kingdom.Kingdom;
-import com.uprzejmy.kod.kingdom.KingdomBuildings;
-import com.uprzejmy.kod.kingdom.KingdomUnits;
 import com.uprzejmy.kod.kingdom.ResourceName;
 import com.uprzejmy.kod.kingdom.UnitName;
-import com.uprzejmy.kod.market.MarketResource;
 
 public class GoldMinerBot implements Bot
 {
@@ -28,37 +25,19 @@ public class GoldMinerBot implements Bot
     @Override
     public void doMarketAction()
     {
-        buyFood();
+        BotFunctions.buyFood(kingdom);
     }
 
     @Override
     public void doBuildAction()
     {
-        var toBuild = new KingdomBuildings();
-        toBuild.addCount(BuildingName.house, 1);
-        toBuild.addCount(BuildingName.goldMine, 1);
-        var cheaperBuildingCost = Math.min(kingdom.getConfig().buildingPointCosts().goldMine(), kingdom.getConfig().buildingPointCosts().house());
-        while (kingdom.getResources().getCount(ResourceName.buildingPoints) > cheaperBuildingCost)
-        {
-            if (kingdom.getUnusedLand() == 0)
-            {
-                kingdom.buyLand(2);
-            }
-            kingdom.build(toBuild);
-        }
+        BotFunctions.buildAndBuyLandIfNeeded(kingdom, BuildingName.goldMine);
     }
 
     @Override
     public void doTrainAction()
     {
-        var toTrain = new KingdomUnits();
-        toTrain.addCount(UnitName.goldMiner, 5);
-        toTrain.addCount(UnitName.builder, 1);
-        KingdomUnits trainedUnits;
-        do
-        {
-            trainedUnits = kingdom.train(toTrain);
-        } while (trainedUnits.countAll() > 0);
+        BotFunctions.trainUnits(kingdom, UnitName.goldMiner);
     }
 
     @Override
@@ -66,33 +45,6 @@ public class GoldMinerBot implements Bot
     {
         kingdom.passTurn();
         System.out.println(getKingdomInfo());
-    }
-
-    private int buyFood()
-    {
-        var foodAmount = kingdom.getResources().getCount(ResourceName.food);
-        var foodUpkeepCost = kingdom.getFoodUpkeepCost();
-        var prefferedAmount = foodUpkeepCost * 3;
-        var amountToBuy = Math.max(0, prefferedAmount - foodAmount);
-        var totalBought = 0;
-
-        // TODO accumulation of amountToBuy and totalBought is the same thing
-        while (amountToBuy > 0)
-        {
-            // TODO find cheapest
-            var offers = kingdom.getMarket().getOffersByResource(MarketResource.food);
-            if (offers.isEmpty())
-            {
-                return totalBought;
-            }
-
-            var offer = offers.get(0);
-            var amountBought = kingdom.buyMarketOffer(offer, amountToBuy);
-            amountToBuy -= amountBought;
-            totalBought += amountBought;
-        }
-
-        return totalBought;
     }
 
     @Override

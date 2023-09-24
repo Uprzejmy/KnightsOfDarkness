@@ -4,13 +4,12 @@ import com.uprzejmy.kod.kingdom.BuildingName;
 import com.uprzejmy.kod.kingdom.Kingdom;
 import com.uprzejmy.kod.kingdom.ResourceName;
 import com.uprzejmy.kod.kingdom.UnitName;
-import com.uprzejmy.kod.market.MarketResource;
 
-public class FarmerBot implements Bot
+public class BlacksmithBot implements Bot
 {
     private final Kingdom kingdom;
 
-    public FarmerBot(Kingdom kingdom)
+    public BlacksmithBot(Kingdom kingdom)
     {
         this.kingdom = kingdom;
     }
@@ -26,26 +25,19 @@ public class FarmerBot implements Bot
     @Override
     public void doMarketAction()
     {
-        var foodAmount = kingdom.getResources().getCount(ResourceName.food);
-        var foodUpkeepCost = kingdom.getFoodUpkeepCost();
-        var amountToOffer = foodAmount - foodUpkeepCost;
-
-        if (amountToOffer > 0)
-        {
-            kingdom.postMarketOffer(MarketResource.food, amountToOffer, 20);
-        }
+        BotFunctions.buyFood(kingdom);
     }
 
     @Override
     public void doBuildAction()
     {
-        BotFunctions.buildAndBuyLandIfNeeded(kingdom, BuildingName.farm);
+        BotFunctions.buildAndBuyLandIfNeeded(kingdom, BuildingName.workshop);
     }
 
     @Override
     public void doTrainAction()
     {
-        BotFunctions.trainUnits(kingdom, UnitName.farmer);
+        BotFunctions.trainUnits(kingdom, UnitName.blacksmith);
     }
 
     @Override
@@ -59,7 +51,6 @@ public class FarmerBot implements Bot
     public String getKingdomInfo()
     {
         return String.format("[%s] passed turn, land: %d, houses: %d, farms: %d, gold: %d, food: %d", kingdom.getName(), kingdom.getResources().getCount(ResourceName.land), kingdom.getBuildings().getCount(BuildingName.house),
-                kingdom.getBuildings().getCount(BuildingName.farm),
-                kingdom.getResources().getCount(ResourceName.gold), kingdom.getResources().getCount(ResourceName.food));
+                kingdom.getBuildings().getCount(BuildingName.farm), kingdom.getResources().getCount(ResourceName.gold), kingdom.getResources().getCount(ResourceName.food));
     }
 }
