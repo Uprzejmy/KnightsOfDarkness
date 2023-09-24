@@ -64,4 +64,24 @@ public class BotFunctions
             trainedUnits = kingdom.train(toTrain);
         } while (trainedUnits.countAll() > 0);
     }
+
+    public static void buyTools(Kingdom kingdom, double goldPercentage)
+    {
+        // we always want to spend integer amount of gold and no more than we have, that's why we truncate to lower integer
+        var goldToSpend = (int) (kingdom.getResources().getCount(ResourceName.gold) * goldPercentage);
+
+        while (goldToSpend > 0)
+        {
+            // TODO find cheapest
+            var offers = kingdom.getMarket().getOffersByResource(MarketResource.tools);
+            if (offers.isEmpty())
+            {
+                return;
+            }
+
+            var offer = offers.get(0);
+            var amountToBuy = goldToSpend / offer.getPrice();
+            kingdom.buyMarketOffer(offer, amountToBuy);
+        }
+    }
 }

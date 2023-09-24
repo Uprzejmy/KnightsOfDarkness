@@ -26,6 +26,7 @@ public class GoldMinerBot implements Bot
     public void doMarketAction()
     {
         BotFunctions.buyFood(kingdom);
+        BotFunctions.buyTools(kingdom, 0.35);
     }
 
     @Override

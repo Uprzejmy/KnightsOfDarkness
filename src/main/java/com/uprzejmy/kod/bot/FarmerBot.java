@@ -26,6 +26,12 @@ public class FarmerBot implements Bot
     @Override
     public void doMarketAction()
     {
+        postFoodOffer();
+        BotFunctions.buyTools(kingdom, 0.2);
+    }
+
+    private void postFoodOffer()
+    {
         var foodAmount = kingdom.getResources().getCount(ResourceName.food);
         var foodUpkeepCost = kingdom.getFoodUpkeepCost();
         var amountToOffer = foodAmount - foodUpkeepCost;

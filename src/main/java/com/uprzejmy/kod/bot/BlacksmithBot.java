@@ -4,6 +4,7 @@ import com.uprzejmy.kod.kingdom.BuildingName;
 import com.uprzejmy.kod.kingdom.Kingdom;
 import com.uprzejmy.kod.kingdom.ResourceName;
 import com.uprzejmy.kod.kingdom.UnitName;
+import com.uprzejmy.kod.market.MarketResource;
 
 public class BlacksmithBot implements Bot
 {
@@ -26,6 +27,17 @@ public class BlacksmithBot implements Bot
     public void doMarketAction()
     {
         BotFunctions.buyFood(kingdom);
+        postToolsOffer();
+    }
+
+    private void postToolsOffer()
+    {
+        var toolsAmount = kingdom.getResources().getCount(ResourceName.tools);
+
+        if (toolsAmount > 0)
+        {
+            kingdom.postMarketOffer(MarketResource.tools, toolsAmount, 50);
+        }
     }
 
     @Override
@@ -50,7 +62,7 @@ public class BlacksmithBot implements Bot
     @Override
     public String getKingdomInfo()
     {
-        return String.format("[%s] passed turn, land: %d, houses: %d, farms: %d, gold: %d, food: %d", kingdom.getName(), kingdom.getResources().getCount(ResourceName.land), kingdom.getBuildings().getCount(BuildingName.house),
-                kingdom.getBuildings().getCount(BuildingName.farm), kingdom.getResources().getCount(ResourceName.gold), kingdom.getResources().getCount(ResourceName.food));
+        return String.format("[%s] passed turn, land: %d, houses: %d, workshops: %d, gold: %d, food: %d", kingdom.getName(), kingdom.getResources().getCount(ResourceName.land), kingdom.getBuildings().getCount(BuildingName.house),
+                kingdom.getBuildings().getCount(BuildingName.workshop), kingdom.getResources().getCount(ResourceName.gold), kingdom.getResources().getCount(ResourceName.food));
     }
 }
