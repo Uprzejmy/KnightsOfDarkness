@@ -58,7 +58,6 @@ public class FarmerBot implements Bot
     public void passTurn()
     {
         kingdom.passTurn();
-        System.out.println(getKingdomInfo());
     }
 
     @Override

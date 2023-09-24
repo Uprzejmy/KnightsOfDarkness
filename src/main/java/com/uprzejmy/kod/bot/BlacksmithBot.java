@@ -56,7 +56,6 @@ public class BlacksmithBot implements Bot
     public void passTurn()
     {
         kingdom.passTurn();
-        System.out.println(getKingdomInfo());
     }
 
     @Override

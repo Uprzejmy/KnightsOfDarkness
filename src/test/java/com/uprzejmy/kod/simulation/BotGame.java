@@ -11,6 +11,7 @@ import com.uprzejmy.kod.bot.FarmerBot;
 import com.uprzejmy.kod.bot.GoldMinerBot;
 import com.uprzejmy.kod.game.Game;
 import com.uprzejmy.kod.kingdom.BuildingName;
+import com.uprzejmy.kod.kingdom.Kingdom;
 import com.uprzejmy.kod.kingdom.ResourceName;
 import com.uprzejmy.kod.kingdom.UnitName;
 import com.uprzejmy.kod.utils.KingdomBuilder;
@@ -40,6 +41,9 @@ public class BotGame
         Bot goldMinerBot2 = new GoldMinerBot(goldMinerKingdom2);
         game.addKingdom(goldMinerKingdom2);
 
+        printResourcesHeader();
+        printLineSeparator();
+
         for (var i = 0; i < 10; i++)
         {
             farmerBot.doAllActions();
@@ -50,9 +54,24 @@ public class BotGame
             blacksmithBot.passTurn();
             goldMinerBot1.passTurn();
             goldMinerBot2.passTurn();
+            kingdomInfoPrinter(farmerKingdom);
+            kingdomInfoPrinter(blacksmithKingdom);
+            kingdomInfoPrinter(goldMinerKingdom1);
+            kingdomInfoPrinter(goldMinerKingdom2);
+            printLineSeparator();
         }
 
         assertEquals(0, farmerKingdom.getResources().getCount(ResourceName.turns));
+    }
+
+    private void printResourcesHeader()
+    {
+        System.out.format("Kingdom         | land  | ppl  | farmers | blacksmiths | goldMiners | ironMiners |    gold    |    food    |    tools   | marketOffers\n");
+    }
+
+    private void printLineSeparator()
+    {
+        System.out.format("======================================================================================================================================\n");
     }
 
     private KingdomBuilder setupKingdomStartConfiguration(KingdomBuilder kingdomBuilder, Game game)
@@ -74,5 +93,26 @@ public class BotGame
         }
 
         return kingdomBuilder;
+    }
+
+    private void kingdomInfoPrinter(Kingdom kingdom)
+    {
+        var resources = kingdom.getResources();
+        var units = kingdom.getUnits();
+        // @formatter:off 
+        System.out.format("%-15s | %5d | %4d | %7d | %11d | %10d | %10d | %10d | %10d | %10d | %2d\n", 
+            kingdom.getName(),
+            resources.getCount(ResourceName.land),
+            resources.getCount(ResourceName.unemployed),
+            units.getCount(UnitName.farmer),
+            units.getCount(UnitName.blacksmith),
+            units.getCount(UnitName.goldMiner),
+            units.getCount(UnitName.ironMiner),
+            resources.getCount(ResourceName.gold),
+            resources.getCount(ResourceName.food),
+            resources.getCount(ResourceName.tools),
+            kingdom.getMarketOffers().size()
+        );
+        // @formatter:on
     }
 }
