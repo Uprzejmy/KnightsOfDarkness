@@ -54,4 +54,10 @@ public class GoldMinerBot implements Bot
                 kingdom.getBuildings().getCount(BuildingName.goldMine),
                 kingdom.getResources().getCount(ResourceName.gold), kingdom.getResources().getCount(ResourceName.food));
     }
+
+    @Override
+    public Kingdom getKingdom()
+    {
+        return kingdom;
+    }
 }
