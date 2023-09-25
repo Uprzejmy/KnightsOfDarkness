@@ -32,9 +32,14 @@ public class Kingdom
         this.units = units;
     }
 
-    public void build(KingdomBuildings buildingsToBuild)
+    public int build(KingdomBuildings buildingsToBuild)
     {
-        kingdomBuildAction.build(buildingsToBuild);
+        return kingdomBuildAction.build(buildingsToBuild);
+    }
+
+    public int build(BuildingName building, int count)
+    {
+        return kingdomBuildAction.build(building, count);
     }
 
     public int getBuildingCapacity(BuildingName name)

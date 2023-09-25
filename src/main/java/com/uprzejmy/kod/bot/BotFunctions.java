@@ -2,7 +2,6 @@ package com.uprzejmy.kod.bot;
 
 import com.uprzejmy.kod.kingdom.BuildingName;
 import com.uprzejmy.kod.kingdom.Kingdom;
-import com.uprzejmy.kod.kingdom.KingdomBuildings;
 import com.uprzejmy.kod.kingdom.KingdomUnits;
 import com.uprzejmy.kod.kingdom.ResourceName;
 import com.uprzejmy.kod.kingdom.UnitName;
@@ -14,8 +13,8 @@ public class BotFunctions
     {
         var foodAmount = kingdom.getResources().getCount(ResourceName.food);
         var foodUpkeepCost = kingdom.getFoodUpkeepCost();
-        var prefferedAmount = foodUpkeepCost * 3;
-        var amountToBuy = Math.max(0, prefferedAmount - foodAmount);
+        var preferredAmount = foodUpkeepCost * 3;
+        var amountToBuy = Math.max(0, preferredAmount - foodAmount);
         var totalBought = 0;
 
         // TODO accumulation of amountToBuy and totalBought is the same thing
@@ -37,20 +36,25 @@ public class BotFunctions
         return totalBought;
     }
 
-    public static void buildAndBuyLandIfNeeded(Kingdom kingdom, BuildingName specialistBuilding)
+    public static int buildAndBuyLandIfNeeded(Kingdom kingdom, BuildingName specialistBuilding)
     {
-        var toBuild = new KingdomBuildings();
-        toBuild.addCount(BuildingName.house, 1);
-        toBuild.addCount(specialistBuilding, 1);
-        var cheaperBuildingCost = Math.min(kingdom.getConfig().buildingPointCosts().getCost(specialistBuilding), kingdom.getConfig().buildingPointCosts().house());
-        while (kingdom.getResources().getCount(ResourceName.buildingPoints) > cheaperBuildingCost)
+        int totalBuilt = 0;
+        int howManyWereBuilt = 0;
+        do
         {
-            if (kingdom.getUnusedLand() == 0)
+            howManyWereBuilt = 0;
+            if (kingdom.getUnusedLand() < 2)
             {
+                assert kingdom.getUnusedLand() >= 0;
                 kingdom.buyLand(2);
             }
-            kingdom.build(toBuild);
+            howManyWereBuilt += kingdom.build(BuildingName.house, 1);
+            howManyWereBuilt += kingdom.build(specialistBuilding, 1);
+            totalBuilt += howManyWereBuilt;
         }
+        while (howManyWereBuilt > 0);
+
+        return totalBuilt;
     }
 
     public static void trainUnits(Kingdom kingdom, UnitName specialistUnit)
