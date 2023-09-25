@@ -37,6 +37,11 @@ public class Kingdom
         kingdomBuildAction.build(buildingsToBuild);
     }
 
+    public int getBuildingCapacity(BuildingName name)
+    {
+        return buildings.getCapacity(name, config.buildingCapacity().getCapacity(name));
+    }
+
     public KingdomUnits train(KingdomUnits unitsToTrain)
     {
         return kingdomTrainAction.train(unitsToTrain);

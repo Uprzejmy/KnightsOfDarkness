@@ -25,6 +25,11 @@ public class KingdomBuildings
         return buildings.get(name);
     }
 
+    public int getCapacity(BuildingName name, int buildingCapacity)
+    {
+        return getCount(name) * buildingCapacity;
+    }
+
     public void addCount(BuildingName name, int count)
     {
         buildings.put(name, buildings.get(name) + count);
