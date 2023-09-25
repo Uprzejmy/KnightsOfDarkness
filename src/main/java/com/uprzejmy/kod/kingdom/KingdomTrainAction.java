@@ -31,6 +31,7 @@ public class KingdomTrainAction
                 var freeCapacity = kingdom.getBuildings().getCount(buildingType) * buildingCapacity - buildingOccupancy;
                 howManyToTrain = Math.max(0, Math.min(howManyToTrain, freeCapacity));
             }
+            howManyToTrain = Math.max(0, howManyToTrain); // train only positive number of specialists
             kingdom.getResources().subtractCount(ResourceName.gold, howManyToTrain * trainingCost.gold());
             kingdom.getResources().subtractCount(ResourceName.tools, howManyToTrain * trainingCost.tools());
             kingdom.getResources().subtractCount(ResourceName.weapons, howManyToTrain * trainingCost.weapons());
