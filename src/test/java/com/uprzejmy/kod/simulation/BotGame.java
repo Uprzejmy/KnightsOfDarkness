@@ -66,7 +66,7 @@ public class BotGame
 
     private void printResourcesHeader()
     {
-        System.out.format("Kingdom         | land  | ppl  | farmers | blacksmiths | goldMiners | ironMiners |    gold    |    food    |    tools   | marketOffers\n");
+        System.out.format("Kingdom         | land  | ppl  | unemployed | farmers | blacksmiths | goldMiners | ironMiners |    gold    |    food    |    tools   | marketOffers\n");
     }
 
     private void printLineSeparator()
@@ -100,9 +100,10 @@ public class BotGame
         var resources = kingdom.getResources();
         var units = kingdom.getUnits();
         // @formatter:off 
-        System.out.format("%-15s | %5d | %4d | %7d | %11d | %10d | %10d | %10d | %10d | %10d | %2d\n", 
+        System.out.format("%-15s | %5d | %4d | %10d | %7d | %11d | %10d | %10d | %10d | %10d | %10d | %2d\n", 
             kingdom.getName(),
             resources.getCount(ResourceName.land),
+            kingdom.getTotalPeopleCount(),
             resources.getCount(ResourceName.unemployed),
             units.getCount(UnitName.farmer),
             units.getCount(UnitName.blacksmith),

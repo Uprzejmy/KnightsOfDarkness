@@ -47,6 +47,11 @@ public class Kingdom
         return kingdomTurnAction.passTurn();
     }
 
+    public int getTotalPeopleCount()
+    {
+        return units.countAll() + resources.getCount(ResourceName.unemployed);
+    }
+
     public int getUnusedLand()
     {
         return resources.getCount(ResourceName.land) - buildings.countAll();

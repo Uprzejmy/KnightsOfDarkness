@@ -46,7 +46,7 @@ public class KingdomTurnAction
     private void getNewPeople()
     {
         var housingCapacity = kingdom.getBuildings().getCount(BuildingName.house) * kingdom.getConfig().buildingCapacity().getCapacity(BuildingName.house);
-        var peopleCount = kingdom.getUnits().countAll() + kingdom.getResources().getCount(ResourceName.unemployed);
+        var peopleCount = kingdom.getTotalPeopleCount();
         var peopleToAdd = housingCapacity - peopleCount;
         if (peopleToAdd > 0)
         {
