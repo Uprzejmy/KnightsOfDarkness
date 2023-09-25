@@ -122,11 +122,11 @@
   },
   "production": {
     "goldMiner": {
-      "rate": 10,
+      "rate": 1000,
       "resource": "gold"
     },
     "ironMiner": {
-      "rate": 10,
+      "rate": 100,
       "resource": "iron"
     },
     "farmer": {
@@ -134,11 +134,11 @@
       "resource": "food"
     },
     "blacksmith": {
-      "rate": 10,
+      "rate": 100,
       "resource": "tools"
     },
     "builder": {
-      "rate": 10,
+      "rate": 1000,
       "resource": "buildingPoints"
     }
   }

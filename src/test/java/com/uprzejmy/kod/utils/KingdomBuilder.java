@@ -23,7 +23,7 @@ public class KingdomBuilder
         this.resources = new KingdomResources();
         for (var resource : ResourceName.values())
         {
-            this.resources.setCount(resource, 1000000);
+            this.resources.setCount(resource, 50000);
         }
 
         this.buildings = new KingdomBuildings();
@@ -31,6 +31,7 @@ public class KingdomBuilder
         {
             this.buildings.setCount(building, 1000);
         }
+        this.buildings.setCount(BuildingName.house, 3000);
 
         this.units = new KingdomUnits();
         for (var unit : UnitName.values())
