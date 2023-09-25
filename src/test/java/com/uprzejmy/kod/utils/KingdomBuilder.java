@@ -23,8 +23,9 @@ public class KingdomBuilder
         this.resources = new KingdomResources();
         for (var resource : ResourceName.values())
         {
-            this.resources.setCount(resource, 50000);
+            this.resources.setCount(resource, 500000);
         }
+        this.resources.setCount(ResourceName.gold, 10000000);
 
         this.buildings = new KingdomBuildings();
         for (var building : BuildingName.values())
