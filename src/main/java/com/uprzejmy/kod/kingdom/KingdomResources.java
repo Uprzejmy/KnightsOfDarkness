@@ -27,11 +27,13 @@ public class KingdomResources
 
     public void subtractCount(ResourceName name, int count)
     {
+        assert resources.get(name) >= count;
         resources.put(name, resources.get(name) - count);
     }
 
     public void setCount(ResourceName name, int count)
     {
+        assert count >= 0;
         resources.put(name, count);
     }
 }
