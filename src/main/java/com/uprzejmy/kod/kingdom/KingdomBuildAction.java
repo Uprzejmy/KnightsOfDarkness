@@ -23,7 +23,8 @@ public class KingdomBuildAction
             var buildingCost = kingdom.getConfig().buildingPointCosts().getCost(buildingName);
             var pointsToPutIntoBuilding = Math.min(kingdom.getResources().getCount(ResourceName.buildingPoints), buildingsToBuild.getCount(buildingName) * buildingCost);
             var fullBuildings = pointsToPutIntoBuilding / buildingCost;
-            kingdom.getBuildings().addCount(buildingName, fullBuildings);
+            var howManyToBuild = Math.min(fullBuildings, kingdom.getUnusedLand());
+            kingdom.getBuildings().addCount(buildingName, howManyToBuild);
             kingdom.getResources().subtractCount(ResourceName.buildingPoints, pointsToPutIntoBuilding);
         }
     }

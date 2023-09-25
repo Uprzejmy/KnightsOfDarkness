@@ -100,4 +100,16 @@ class KingdomBuildTest
         assertEquals(existingBuildingsCount + 7, kingdom.getBuildings().countAll());
     }
 
+    @Test
+    void whenAllTheLandIsUsed_shouldNotBeAbleToBuild()
+    {
+        var kingdom = kingdomBuilder.withResource(ResourceName.land, 11000).build();
+        var buildingsCountBeforeBuild = kingdom.getBuildings().countAll();
+        var toBuild = new KingdomBuildings();
+        toBuild.addCount(BuildingName.house, 1);
+
+        kingdom.build(toBuild);
+
+        assertEquals(buildingsCountBeforeBuild, kingdom.getBuildings().countAll());
+    }
 }
