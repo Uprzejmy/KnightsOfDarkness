@@ -14,6 +14,7 @@ import com.uprzejmy.kod.kingdom.KingdomUnits;
 import com.uprzejmy.kod.kingdom.ResourceName;
 import com.uprzejmy.kod.kingdom.UnitName;
 import com.uprzejmy.kod.utils.KingdomBuilder;
+import com.uprzejmy.kod.utils.KingdomPrinter;
 
 class GoldMinerBotTest
 {
@@ -42,10 +43,14 @@ class GoldMinerBotTest
         var housesBefore = kingdom.getBuildings().getCount(BuildingName.house);
 
         var bot = new GoldMinerBot(kingdom);
+
+        KingdomPrinter.printResourcesHeader();
+        KingdomPrinter.printLineSeparator();
         for (var i = 0; i < 10; i++)
         {
             bot.doAllActions();
             bot.passTurn();
+            KingdomPrinter.kingdomInfoPrinter(kingdom);
         }
 
         var goldMinersAfter = kingdom.getUnits().getCount(UnitName.goldMiner);
