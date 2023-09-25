@@ -15,9 +15,17 @@ public class KingdomOtherActionTest
     }
 
     @Test
-    void testBuyLand_1001()
+    void testBuyLand_1001_withoutGold()
     {
         var transaction = KingdomOtherAction.calculateCost(1000, 1, 5000);
+        assertEquals(0, transaction.amount);
+        assertEquals(0, transaction.cost);
+    }
+
+    @Test
+    void testBuyLand_1001_withGold()
+    {
+        var transaction = KingdomOtherAction.calculateCost(1000, 1, 99999999);
         assertEquals(1, transaction.amount);
         assertEquals(100200, transaction.cost);
     }
@@ -27,6 +35,6 @@ public class KingdomOtherActionTest
     {
         var transaction = KingdomOtherAction.calculateCost(1000, 200, 99999999);
         assertEquals(200, transaction.amount);
-        assertEquals(24288580, transaction.cost);
+        assertEquals(24288680, transaction.cost);
     }
 }
