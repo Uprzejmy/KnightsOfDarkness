@@ -33,7 +33,11 @@ public class KingdomMarketAction
 
     public int buyMarketOffer(MarketOffer offer, int amount)
     {
-        var amountBought = kingdom.getMarket().buyExistingOffer(offer, amount);
+        // TODO test scenario for both sides of each Math.min()
+        var gold = kingdom.getResources().getCount(ResourceName.gold);
+        var maxToSpent = Math.min(gold, amount * offer.getPrice());
+        var maxAmount = Math.min(maxToSpent / offer.getPrice(), amount);
+        var amountBought = kingdom.getMarket().buyExistingOffer(offer, maxAmount);
         kingdom.getResources().subtractCount(ResourceName.gold, amountBought * offer.getPrice());
         kingdom.getResources().addCount(ResourceName.from(offer.getResource()), amountBought);
 
