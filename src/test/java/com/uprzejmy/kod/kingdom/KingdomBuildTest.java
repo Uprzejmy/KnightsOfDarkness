@@ -103,7 +103,7 @@ class KingdomBuildTest
     @Test
     void whenAllTheLandIsUsed_shouldNotBeAbleToBuild()
     {
-        var kingdom = kingdomBuilder.withResource(ResourceName.land, 11000).build();
+        var kingdom = kingdomBuilder.withResource(ResourceName.land, 13000).build();
         var buildingsCountBeforeBuild = kingdom.getBuildings().countAll();
         var toBuild = new KingdomBuildings();
         toBuild.addCount(BuildingName.house, 1);
