@@ -47,14 +47,14 @@ public class KingdomTurnAction
     {
         var housingCapacity = kingdom.getBuildings().getCount(BuildingName.house) * kingdom.getConfig().buildingCapacity().getCapacity(BuildingName.house);
         var peopleCount = kingdom.getTotalPeopleCount();
-        var peopleToAdd = housingCapacity - peopleCount;
-        if (peopleToAdd > 0)
+        if (housingCapacity > peopleCount)
         {
             kingdom.getResources().addCount(ResourceName.unemployed, housingCapacity - peopleCount);
-        } else
+        } else if (housingCapacity < peopleCount)
         {
+            // TODO test
             // TODO fire workers here
-            kingdom.getResources().setCount(ResourceName.unemployed, 0);
+            kingdom.getResources().subtractCount(ResourceName.unemployed, peopleCount - housingCapacity);
         }
     }
 }
