@@ -9,12 +9,12 @@ public class KingdomPrinter
 {
     public static void printResourcesHeader()
     {
-        System.out.format("Kingdom         | land  |  ppl  | unemployed | builders |    farmers    |  blacksmiths  |    goldMiners   |   ironMiners  |    gold    |    food    |    tools   | marketOffers\n");
+        System.out.format("Kingdom         | land  |   ppl  | unemployed | builders |    farmers    |  blacksmiths  |    goldMiners   |   ironMiners  |    gold    |    food    |    tools   | marketOffers\n");
     }
 
     public static void printLineSeparator()
     {
-        System.out.format("===============================================================================================================================================================================\n");
+        System.out.format("================================================================================================================================================================================\n");
     }
 
     public static void kingdomInfoPrinter(Kingdom kingdom)
@@ -22,7 +22,7 @@ public class KingdomPrinter
         var resources = kingdom.getResources();
         var units = kingdom.getUnits();
         // @formatter:off 
-        System.out.format("%-15s | %5d | %5d | %10d | %8d | %6d/%-6d | %6d/%-6d | %7d/%-7d | %6d/%-6d | %10d | %10d | %10d | %2d\n", 
+        System.out.format("%-15s | %5d | %6d | %10d | %8d | %6d/%-6d | %6d/%-6d | %7d/%-7d | %6d/%-6d | %10d | %10d | %10d | %2d\n", 
             kingdom.getName(),
             resources.getCount(ResourceName.land),
             kingdom.getTotalPeopleCount(),
