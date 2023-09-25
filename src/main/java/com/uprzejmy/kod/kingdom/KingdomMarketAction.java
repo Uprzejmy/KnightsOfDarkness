@@ -16,11 +16,14 @@ public class KingdomMarketAction
 
     public void postOffer(MarketResource resource, int count, int price)
     {
-        // TODO validate if there are enough resources in kingdom before posting the offer
-        // TODO remove resources from kingdom when offer has been accepted
         // TODO in game configuration add limit on number of offers from a single kingdom
-        // REMINDER test above scenarios
-        kingdom.getMarket().addOffer(kingdom, resource, count, price);
+        var maxToPost = Math.min(count, kingdom.getResources().getCount(ResourceName.from(resource)));
+        if (maxToPost > 0)
+        {
+            kingdom.getMarket().addOffer(kingdom, resource, count, price);
+            kingdom.getResources().subtractCount(ResourceName.from(resource), count);
+        }
+        // TODO test above scenarios
     }
 
     public List<MarketOffer> getMyOffers()
