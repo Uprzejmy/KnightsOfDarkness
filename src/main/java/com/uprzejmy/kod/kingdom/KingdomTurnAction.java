@@ -27,7 +27,7 @@ public class KingdomTurnAction
     private void eatFood()
     {
         // TODO consequences of not having enough food
-        var foodToEat = Math.min(kingdom.getResources().getCount(ResourceName.food), kingdom.getFoodUpkeepCost());
+        var foodToEat = Math.min(kingdom.getResources().getCount(ResourceName.food), kingdom.getFoodUpkeep());
         kingdom.getResources().subtractCount(ResourceName.food, foodToEat);
     }
 

@@ -17,28 +17,13 @@ public class GoldMinerBot implements Bot
     @Override
     public void doAllActions()
     {
-        doBuildAction();
-        doTrainAction();
-        doMarketAction();
-    }
-
-    @Override
-    public void doMarketAction()
-    {
-        BotFunctions.buyFood(kingdom);
-        BotFunctions.buyTools(kingdom, 0.35);
-    }
-
-    @Override
-    public void doBuildAction()
-    {
-        BotFunctions.buildAndBuyLandIfNeeded(kingdom, BuildingName.goldMine);
-    }
-
-    @Override
-    public void doTrainAction()
-    {
-        BotFunctions.trainUnits(kingdom, UnitName.goldMiner);
+        BotFunctions.buyFoodForUpkeep(kingdom);
+        BotFunctions.buyLandToMaintainUnused(kingdom, 2);
+        BotFunctions.build(kingdom, BuildingName.house, 1);
+        BotFunctions.build(kingdom, BuildingName.goldMine, 1);
+        BotFunctions.buyToolsToMaintainCount(kingdom, 5 * 15 + 20); // TODO calculate this from training cost configuration
+        BotFunctions.trainUnits(kingdom, UnitName.builder, 1);
+        BotFunctions.trainUnits(kingdom, UnitName.goldMiner, 5);
     }
 
     @Override

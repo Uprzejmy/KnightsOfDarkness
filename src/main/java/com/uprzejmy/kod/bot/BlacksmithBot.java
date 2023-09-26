@@ -18,15 +18,11 @@ public class BlacksmithBot implements Bot
     @Override
     public void doAllActions()
     {
-        doBuildAction();
-        doTrainAction();
-        doMarketAction();
-    }
-
-    @Override
-    public void doMarketAction()
-    {
-        BotFunctions.buyFood(kingdom);
+        BotFunctions.buyLandToMaintainUnused(kingdom, 2);
+        BotFunctions.build(kingdom, BuildingName.house, 1);
+        BotFunctions.build(kingdom, BuildingName.workshop, 1);
+        BotFunctions.trainUnits(kingdom, UnitName.builder, 1);
+        BotFunctions.trainUnits(kingdom, UnitName.blacksmith, 5);
         postToolsOffer();
     }
 
@@ -38,18 +34,6 @@ public class BlacksmithBot implements Bot
         {
             kingdom.postMarketOffer(MarketResource.tools, toolsAmount, 50);
         }
-    }
-
-    @Override
-    public void doBuildAction()
-    {
-        BotFunctions.buildAndBuyLandIfNeeded(kingdom, BuildingName.workshop);
-    }
-
-    @Override
-    public void doTrainAction()
-    {
-        BotFunctions.trainUnits(kingdom, UnitName.blacksmith);
     }
 
     @Override

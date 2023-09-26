@@ -9,11 +9,37 @@ import com.uprzejmy.kod.market.MarketResource;
 
 public class BotFunctions
 {
+    public static int buyFoodForUpkeep(Kingdom kingdom)
+    {
+        var foodAmount = kingdom.getResources().getCount(ResourceName.food);
+        var foodUpkeep = kingdom.getFoodUpkeep();
+        var amountToBuy = Math.max(0, foodUpkeep - foodAmount);
+        var totalBought = 0;
+
+        // TODO accumulation of amountToBuy and totalBought is the same thing
+        while (amountToBuy > 0)
+        {
+            var offers = kingdom.getMarket().getOffersByResource(MarketResource.food);
+            if (offers.isEmpty())
+            {
+                return totalBought;
+            }
+
+            // TODO find cheapest
+            var offer = offers.get(0);
+            var amountBought = kingdom.buyMarketOffer(offer, amountToBuy);
+            amountToBuy -= amountBought;
+            totalBought += amountBought;
+        }
+
+        return totalBought;
+    }
+
     public static int buyFood(Kingdom kingdom)
     {
         var foodAmount = kingdom.getResources().getCount(ResourceName.food);
-        var foodUpkeepCost = kingdom.getFoodUpkeepCost();
-        var preferredAmount = foodUpkeepCost * 3;
+        var foodUpkeep = kingdom.getFoodUpkeep();
+        var preferredAmount = foodUpkeep * 3;
         var amountToBuy = Math.max(0, preferredAmount - foodAmount);
         var totalBought = 0;
 
@@ -87,5 +113,39 @@ public class BotFunctions
             var amountToBuy = goldToSpend / offer.getPrice();
             kingdom.buyMarketOffer(offer, amountToBuy);
         }
+    }
+
+    public static void buyLandToMaintainUnused(Kingdom kingdom, int count)
+    {
+        var unusedLand = kingdom.getUnusedLand();
+        assert unusedLand >= 0;
+        if (unusedLand < 2)
+        {
+            kingdom.buyLand(2);
+        }
+    }
+
+    public static void build(Kingdom kingdom, BuildingName building, int count)
+    {
+        kingdom.build(building, count);
+    }
+
+    public static void trainUnits(Kingdom kingdom, UnitName unit, int count)
+    {
+        var toTrain = new KingdomUnits();
+        toTrain.addCount(unit, count);
+        kingdom.train(toTrain);
+    }
+
+    public static void buyToolsToMaintainCount(Kingdom kingdom, int count)
+    {
+        var offers = kingdom.getMarket().getOffersByResource(MarketResource.tools);
+        if (offers.isEmpty())
+        {
+            return;
+        }
+
+        var offer = offers.get(0); // TODO find cheapest
+        kingdom.buyMarketOffer(offer, count);
     }
 }

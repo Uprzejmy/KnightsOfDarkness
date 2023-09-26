@@ -92,7 +92,7 @@ public class Kingdom
         this.kingdomMarketAction.acceptOffer(goldValue);
     }
 
-    public int getFoodUpkeepCost()
+    public int getFoodUpkeep()
     {
         // TODO move magic value to config
         return units.countAll() * 10;

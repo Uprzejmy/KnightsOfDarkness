@@ -18,40 +18,25 @@ public class FarmerBot implements Bot
     @Override
     public void doAllActions()
     {
-        doBuildAction();
-        doTrainAction();
-        doMarketAction();
-    }
-
-    @Override
-    public void doMarketAction()
-    {
+        BotFunctions.buyLandToMaintainUnused(kingdom, 2);
+        BotFunctions.build(kingdom, BuildingName.house, 1);
+        BotFunctions.build(kingdom, BuildingName.farm, 1);
+        BotFunctions.buyToolsToMaintainCount(kingdom, 5 * 5 + 20); // TODO calculate this from training cost configuration
+        BotFunctions.trainUnits(kingdom, UnitName.builder, 1);
+        BotFunctions.trainUnits(kingdom, UnitName.farmer, 5);
         postFoodOffer();
-        BotFunctions.buyTools(kingdom, 0.2);
     }
 
     private void postFoodOffer()
     {
         var foodAmount = kingdom.getResources().getCount(ResourceName.food);
-        var foodUpkeepCost = kingdom.getFoodUpkeepCost();
-        var amountToOffer = foodAmount - foodUpkeepCost;
+        var foodUpkeep = kingdom.getFoodUpkeep();
+        var amountToOffer = foodAmount - foodUpkeep;
 
         if (amountToOffer > 0)
         {
             kingdom.postMarketOffer(MarketResource.food, amountToOffer, 20);
         }
-    }
-
-    @Override
-    public void doBuildAction()
-    {
-        BotFunctions.buildAndBuyLandIfNeeded(kingdom, BuildingName.farm);
-    }
-
-    @Override
-    public void doTrainAction()
-    {
-        BotFunctions.trainUnits(kingdom, UnitName.farmer);
     }
 
     @Override
