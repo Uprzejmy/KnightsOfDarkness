@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class KingdomBuildings
 {
-    final Map<BuildingName, Integer> buildings = new EnumMap<>(BuildingName.class);
+    Map<BuildingName, Integer> buildings = new EnumMap<>(BuildingName.class);
 
     public KingdomBuildings()
     {
@@ -13,6 +13,11 @@ public class KingdomBuildings
         {
             buildings.put(name, 0);
         }
+    }
+
+    public KingdomBuildings(KingdomBuildings other)
+    {
+        buildings = new EnumMap<>(other.buildings);
     }
 
     public int countAll()

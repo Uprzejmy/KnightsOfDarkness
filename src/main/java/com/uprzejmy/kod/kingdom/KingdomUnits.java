@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class KingdomUnits
 {
-    final Map<UnitName, Integer> units = new EnumMap<>(UnitName.class);
+    Map<UnitName, Integer> units = new EnumMap<>(UnitName.class);
 
     public KingdomUnits()
     {
@@ -13,6 +13,11 @@ public class KingdomUnits
         {
             units.put(name, 0);
         }
+    }
+
+    public KingdomUnits(KingdomUnits other)
+    {
+        units = new EnumMap<>(other.units);
     }
 
     public int getCount(UnitName name)

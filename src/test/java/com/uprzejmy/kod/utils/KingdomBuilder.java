@@ -69,6 +69,6 @@ public class KingdomBuilder
 
     public Kingdom build()
     {
-        return new Kingdom(name, game, resources, buildings, units);
+        return new Kingdom(name, game, new KingdomResources(resources), new KingdomBuildings(buildings), new KingdomUnits(units));
     }
 }

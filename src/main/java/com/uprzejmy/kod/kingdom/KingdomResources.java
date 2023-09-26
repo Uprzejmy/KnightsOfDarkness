@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class KingdomResources
 {
-    final Map<ResourceName, Integer> resources = new EnumMap<>(ResourceName.class);
+    Map<ResourceName, Integer> resources = new EnumMap<>(ResourceName.class);
 
     public KingdomResources()
     {
@@ -13,6 +13,11 @@ public class KingdomResources
         {
             resources.put(name, 0);
         }
+    }
+
+    public KingdomResources(KingdomResources other)
+    {
+        resources = new EnumMap<>(other.resources);
     }
 
     public int getCount(ResourceName name)
