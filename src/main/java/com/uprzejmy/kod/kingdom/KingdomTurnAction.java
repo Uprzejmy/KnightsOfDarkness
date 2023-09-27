@@ -39,6 +39,13 @@ public class KingdomTurnAction
         {
             var resourceType = production.getResource(unitName);
             var resourceProduction = kingdom.getUnits().getCount(unitName) * production.getProductionRate(unitName);
+            if (unitName == UnitName.blacksmith)
+            {
+                var neededIron = resourceProduction; // TODO have the rate somewhere in the config
+                var maxIronToSpend = Math.min(neededIron, kingdom.getResources().getCount(ResourceName.iron));
+                resourceProduction = Math.min(resourceProduction, maxIronToSpend);
+                kingdom.getResources().subtractCount(ResourceName.iron, maxIronToSpend);
+            }
             kingdom.getResources().addCount(resourceType, resourceProduction);
         }
     }

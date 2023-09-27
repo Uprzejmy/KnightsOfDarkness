@@ -70,9 +70,7 @@ class KingdomTurnTest
         }
 
         var kingdom = kingdomBuilder.build();
-
         Map<ResourceName, Integer> resourcesBeforeTurn = new EnumMap<>(kingdom.getResources().resources);
-
         kingdom.passTurn();
 
         for (var unitName : UnitName.getProductionUnits())
@@ -80,14 +78,16 @@ class KingdomTurnTest
             var resourceName = config.production().getResource(unitName);
             var countBeforeTurn = resourcesBeforeTurn.get(resourceName);
             var countAfterTurn = kingdom.getResources().getCount(resourceName);
-            // TODO move away food eating logic from this test - no "ifs" allowed
+            // TODO move away food eating and iron consumption logic from this test - no "ifs" allowed
+            var spentDuringTurn = 0;
             if (resourceName == ResourceName.food)
             {
-                assertTrue(countBeforeTurn > countAfterTurn, "The food before turn was " + countBeforeTurn + " and should be larger than after turn " + countAfterTurn);
-            } else
+                spentDuringTurn = kingdom.getFoodUpkeep();
+            } else if (resourceName == ResourceName.iron)
             {
-                assertTrue(countBeforeTurn < countAfterTurn, "Resource " + resourceName + " before turn was " + countBeforeTurn + " and should be smaller than after production " + countAfterTurn);
+                spentDuringTurn = kingdom.getUnits().getCount(UnitName.blacksmith); // TODO as in the normal code, resource spending ratios should be in config file
             }
+            assertTrue(countBeforeTurn < countAfterTurn + spentDuringTurn, "Resource " + resourceName + " before turn was " + countBeforeTurn + " and should be smaller than after production " + countAfterTurn);
         }
     }
 
