@@ -1,13 +1,13 @@
 package com.uprzejmy.kod.kingdom;
 
-import java.util.Set;
+import java.util.List;
 
 public enum UnitName
 {
     goldMiner, ironMiner, farmer, blacksmith, builder, carrier, guard, spy, infantry, bowmen, cavalry;
 
-    static Set<UnitName> getProductionUnits()
+    static List<UnitName> getProductionUnits()
     {
-        return Set.of(goldMiner, ironMiner, farmer, blacksmith, builder);
+        return List.of(goldMiner, ironMiner, farmer, blacksmith, builder);
     }
 }
