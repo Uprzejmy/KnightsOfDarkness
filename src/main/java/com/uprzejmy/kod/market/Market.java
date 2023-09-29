@@ -2,6 +2,7 @@ package com.uprzejmy.kod.market;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import com.uprzejmy.kod.kingdom.Kingdom;
 
@@ -25,6 +26,11 @@ public class Market
     public List<MarketOffer> getOffersByResource(MarketResource resource)
     {
         return offers.stream().filter(offer -> offer.resource == resource).toList();
+    }
+
+    public Optional<MarketOffer> getCheapestOfferByResource(MarketResource resource)
+    {
+        return offers.stream().filter(offer -> offer.resource == resource).sorted(Market::offerComparator).findFirst();
     }
 
     public List<MarketOffer> getOffersByKingdom(Kingdom kingdom)
@@ -59,4 +65,8 @@ public class Market
         return maxToSell;
     }
 
+    static int offerComparator(MarketOffer offer1, MarketOffer offer2)
+    {
+        return offer1.price - offer2.price;
+    }
 }

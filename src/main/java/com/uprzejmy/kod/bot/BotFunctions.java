@@ -19,14 +19,13 @@ public class BotFunctions
         // TODO accumulation of amountToBuy and totalBought is the same thing
         while (amountToBuy > 0)
         {
-            var offers = kingdom.getMarket().getOffersByResource(MarketResource.food);
-            if (offers.isEmpty())
+            var optionalOffer = kingdom.getMarket().getCheapestOfferByResource(MarketResource.food);
+            if (optionalOffer.isEmpty())
             {
                 return totalBought;
             }
 
-            // TODO find cheapest
-            var offer = offers.get(0);
+            var offer = optionalOffer.get();
             var amountBought = kingdom.buyMarketOffer(offer, amountToBuy);
             amountToBuy -= amountBought;
             totalBought += amountBought;
