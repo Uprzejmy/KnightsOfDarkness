@@ -34,33 +34,6 @@ public class BotFunctions
         return totalBought;
     }
 
-    public static int buyFood(Kingdom kingdom)
-    {
-        var foodAmount = kingdom.getResources().getCount(ResourceName.food);
-        var foodUpkeep = kingdom.getFoodUpkeep();
-        var preferredAmount = foodUpkeep * 3;
-        var amountToBuy = Math.max(0, preferredAmount - foodAmount);
-        var totalBought = 0;
-
-        // TODO accumulation of amountToBuy and totalBought is the same thing
-        while (amountToBuy > 0)
-        {
-            // TODO find cheapest
-            var offers = kingdom.getMarket().getOffersByResource(MarketResource.food);
-            if (offers.isEmpty())
-            {
-                return totalBought;
-            }
-
-            var offer = offers.get(0);
-            var amountBought = kingdom.buyMarketOffer(offer, amountToBuy);
-            amountToBuy -= amountBought;
-            totalBought += amountBought;
-        }
-
-        return totalBought;
-    }
-
     public static int buildAndBuyLandIfNeeded(Kingdom kingdom, BuildingName specialistBuilding)
     {
         int totalBuilt = 0;
@@ -101,14 +74,13 @@ public class BotFunctions
 
         while (goldToSpend > 0)
         {
-            // TODO find cheapest
-            var offers = kingdom.getMarket().getOffersByResource(MarketResource.tools);
-            if (offers.isEmpty())
+            var optionalOffer = kingdom.getMarket().getCheapestOfferByResource(MarketResource.tools);
+            if (optionalOffer.isEmpty())
             {
                 return;
             }
 
-            var offer = offers.get(0);
+            var offer = optionalOffer.get();
             var amountToBuy = goldToSpend / offer.getPrice();
             kingdom.buyMarketOffer(offer, amountToBuy);
         }
@@ -138,13 +110,13 @@ public class BotFunctions
 
     public static void buyToolsToMaintainCount(Kingdom kingdom, int count)
     {
-        var offers = kingdom.getMarket().getOffersByResource(MarketResource.tools);
-        if (offers.isEmpty())
+        var optionalOffer = kingdom.getMarket().getCheapestOfferByResource(MarketResource.tools);
+        if (optionalOffer.isEmpty())
         {
             return;
         }
 
-        var offer = offers.get(0); // TODO find cheapest
+        var offer = optionalOffer.get();
         kingdom.buyMarketOffer(offer, count);
     }
 }
