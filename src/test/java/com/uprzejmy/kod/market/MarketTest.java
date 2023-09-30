@@ -194,4 +194,44 @@ class MarketTest
 
         assertEquals(0, Market.offerComparator(offer, offer));
     }
+
+    @Test
+    void findCheapestOffer_withNoOffers_shouldReturnEmpty()
+    {
+        var market = new Market();
+
+        var emptyOffer = market.getCheapestOfferByResource(MarketResource.food);
+
+        assertTrue(emptyOffer.isEmpty());
+    }
+
+    @Test
+    void findCheapestOffer_withOnlyOneOffer_shouldReturnThatOffer()
+    {
+        var kingdom = new KingdomBuilder(game).build();
+        var market = new Market();
+        market.addOffer(kingdom, MarketResource.food, 100, 1);
+
+        var onlyOffer = market.getCheapestOfferByResource(MarketResource.food);
+
+        assertTrue(onlyOffer.isPresent());
+        assertEquals(100, onlyOffer.get().count);
+        assertEquals(1, onlyOffer.get().price);
+    }
+
+    @Test
+    void findCheapestOffer_withAFewOffers_shouldReturnTheCheapestOne()
+    {
+        var kingdom = new KingdomBuilder(game).build();
+        var market = new Market();
+        market.addOffer(kingdom, MarketResource.food, 100, 2);
+        market.addOffer(kingdom, MarketResource.food, 100, 2);
+        market.addOffer(kingdom, MarketResource.food, 100, 3);
+        market.addOffer(kingdom, MarketResource.food, 100, 4);
+        market.addOffer(kingdom, MarketResource.food, 100, 1);
+
+        var cheapestOffer = market.getCheapestOfferByResource(MarketResource.food);
+
+        assertEquals(1, cheapestOffer.get().price);
+    }
 }
