@@ -39,58 +39,6 @@ public class BotFunctions
         return totalBought;
     }
 
-    public static int buildAndBuyLandIfNeeded(Kingdom kingdom, BuildingName specialistBuilding)
-    {
-        int totalBuilt = 0;
-        int howManyWereBuilt = 0;
-        do
-        {
-            howManyWereBuilt = 0;
-            if (kingdom.getUnusedLand() < 2)
-            {
-                assert kingdom.getUnusedLand() >= 0;
-                kingdom.buyLand(2);
-            }
-            howManyWereBuilt += kingdom.build(BuildingName.house, 1);
-            howManyWereBuilt += kingdom.build(specialistBuilding, 1);
-            totalBuilt += howManyWereBuilt;
-        }
-        while (howManyWereBuilt > 0);
-
-        return totalBuilt;
-    }
-
-    public static void trainUnits(Kingdom kingdom, UnitName specialistUnit)
-    {
-        var toTrain = new KingdomUnits();
-        toTrain.addCount(specialistUnit, 5);
-        toTrain.addCount(UnitName.builder, 1);
-        KingdomUnits trainedUnits;
-        do
-        {
-            trainedUnits = kingdom.train(toTrain);
-        } while (trainedUnits.countAll() > 0);
-    }
-
-    public static void buyTools(Kingdom kingdom, double goldPercentage)
-    {
-        // we always want to spend integer amount of gold and no more than we have, that's why we truncate to lower integer
-        var goldToSpend = (int) (kingdom.getResources().getCount(ResourceName.gold) * goldPercentage);
-
-        while (goldToSpend > 0)
-        {
-            var optionalOffer = kingdom.getMarket().getCheapestOfferByResource(MarketResource.tools);
-            if (optionalOffer.isEmpty())
-            {
-                return;
-            }
-
-            var offer = optionalOffer.get();
-            var amountToBuy = goldToSpend / offer.getPrice();
-            kingdom.buyMarketOffer(offer, amountToBuy);
-        }
-    }
-
     public static int buyEnoughIronToMaintainFullProduction(Kingdom kingdom)
     {
         var blacksmithProduction = kingdom.getUnits().getCount(UnitName.blacksmith) * kingdom.getConfig().production().getProductionRate(UnitName.blacksmith);
@@ -123,37 +71,40 @@ public class BotFunctions
         return totalBought;
     }
 
-    public static void buyLandToMaintainUnused(Kingdom kingdom, int count)
+    public static int buyLandToMaintainUnused(Kingdom kingdom, int count)
     {
         var unusedLand = kingdom.getUnusedLand();
         assert unusedLand >= 0;
         if (unusedLand < 2)
         {
-            kingdom.buyLand(2);
+            return kingdom.buyLand(2);
         }
+
+        return 0;
     }
 
-    public static void build(Kingdom kingdom, BuildingName building, int count)
+    public static int build(Kingdom kingdom, BuildingName building, int count)
     {
-        kingdom.build(building, count);
+        return kingdom.build(building, count);
     }
 
-    public static void trainUnits(Kingdom kingdom, UnitName unit, int count)
+    public static int trainUnits(Kingdom kingdom, UnitName unit, int count)
     {
         var toTrain = new KingdomUnits();
         toTrain.addCount(unit, count);
-        kingdom.train(toTrain);
+        var trainedUnits = kingdom.train(toTrain);
+        return trainedUnits.countAll();
     }
 
-    public static void buyToolsToMaintainCount(Kingdom kingdom, int count)
+    public static int buyToolsToMaintainCount(Kingdom kingdom, int count)
     {
         var optionalOffer = kingdom.getMarket().getCheapestOfferByResource(MarketResource.tools);
         if (optionalOffer.isEmpty())
         {
-            return;
+            return 0;
         }
 
         var offer = optionalOffer.get();
-        kingdom.buyMarketOffer(offer, count);
+        return kingdom.buyMarketOffer(offer, count);
     }
 }
