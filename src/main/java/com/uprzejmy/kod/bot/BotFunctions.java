@@ -91,6 +91,38 @@ public class BotFunctions
         }
     }
 
+    public static int buyEnoughIronToMaintainFullProduction(Kingdom kingdom)
+    {
+        var blacksmithProduction = kingdom.getUnits().getCount(UnitName.blacksmith) * kingdom.getConfig().production().getProductionRate(UnitName.blacksmith);
+        var ironNeeded = blacksmithProduction;
+
+        var ironAmount = kingdom.getResources().getCount(ResourceName.iron);
+        var amountToBuy = Math.max(0, ironNeeded - ironAmount);
+        var totalBought = 0;
+
+        // TODO accumulation of amountToBuy and totalBought is the same thing
+        while (amountToBuy > 0)
+        {
+            var optionalOffer = kingdom.getMarket().getCheapestOfferByResource(MarketResource.iron);
+            if (optionalOffer.isEmpty())
+            {
+                return totalBought;
+            }
+
+            var offer = optionalOffer.get();
+            var amountBought = kingdom.buyMarketOffer(offer, amountToBuy);
+            if (amountBought == 0)
+            {
+                // Could not afford, TODO tests
+                return totalBought;
+            }
+            amountToBuy -= amountBought;
+            totalBought += amountBought;
+        }
+
+        return totalBought;
+    }
+
     public static void buyLandToMaintainUnused(Kingdom kingdom, int count)
     {
         var unusedLand = kingdom.getUnusedLand();
