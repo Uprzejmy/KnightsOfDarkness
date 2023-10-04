@@ -9,6 +9,7 @@ import com.uprzejmy.kod.bot.BlacksmithBot;
 import com.uprzejmy.kod.bot.Bot;
 import com.uprzejmy.kod.bot.FarmerBot;
 import com.uprzejmy.kod.bot.GoldMinerBot;
+import com.uprzejmy.kod.bot.IronMinerBot;
 import com.uprzejmy.kod.kingdom.ResourceName;
 import com.uprzejmy.kod.utils.KingdomBuilder;
 import com.uprzejmy.kod.utils.KingdomPrinter;
@@ -27,6 +28,11 @@ public class BotGame
         Bot farmerBot = new FarmerBot(farmerKingdom);
         game.addKingdom(farmerKingdom);
         bots.add(farmerBot);
+
+        var ironMinerKingdom = kingdomBuilder.withName("IronMinerBot").build();
+        Bot ironMinerBot = new IronMinerBot(ironMinerKingdom);
+        game.addKingdom(ironMinerKingdom);
+        bots.add(ironMinerBot);
 
         var blacksmithKingdom = kingdomBuilder.withName("BlacksmithBot").build();
         Bot blacksmithBot = new BlacksmithBot(blacksmithKingdom);
