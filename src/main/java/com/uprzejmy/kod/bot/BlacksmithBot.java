@@ -18,12 +18,41 @@ public class BlacksmithBot implements Bot
     @Override
     public void doAllActions()
     {
+        BotFunctions.buyFoodForUpkeep(kingdom);
         BotFunctions.buyLandToMaintainUnused(kingdom, 2);
         BotFunctions.build(kingdom, BuildingName.house, 1);
         BotFunctions.build(kingdom, BuildingName.workshop, 1);
         BotFunctions.trainUnits(kingdom, UnitName.builder, 1);
         BotFunctions.trainUnits(kingdom, UnitName.blacksmith, 5);
         postToolsOffer();
+        buyIron();
+    }
+
+    private int buyIron()
+    {
+        var blacksmithProduction = kingdom.getUnits().getCount(UnitName.blacksmith) * kingdom.getConfig().production().getProductionRate(UnitName.blacksmith);
+        var ironNeeded = blacksmithProduction;
+
+        var ironAmount = kingdom.getResources().getCount(ResourceName.iron);
+        var amountToBuy = Math.max(0, ironNeeded - ironAmount);
+        var totalBought = 0;
+
+        // TODO accumulation of amountToBuy and totalBought is the same thing
+        while (amountToBuy > 0)
+        {
+            var optionalOffer = kingdom.getMarket().getCheapestOfferByResource(MarketResource.iron);
+            if (optionalOffer.isEmpty())
+            {
+                return totalBought;
+            }
+
+            var offer = optionalOffer.get();
+            var amountBought = kingdom.buyMarketOffer(offer, amountToBuy);
+            amountToBuy -= amountBought;
+            totalBought += amountBought;
+        }
+
+        return totalBought;
     }
 
     private void postToolsOffer()
