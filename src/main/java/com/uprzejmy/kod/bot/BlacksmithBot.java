@@ -19,6 +19,7 @@ public class BlacksmithBot implements Bot
     public void doAllActions()
     {
         BotFunctions.buyFoodForUpkeep(kingdom);
+        BotFunctions.buyEnoughIronToMaintainFullProduction(kingdom);
         BotFunctions.buyLandToMaintainUnused(kingdom, 2);
         BotFunctions.build(kingdom, BuildingName.house, 1);
         BotFunctions.build(kingdom, BuildingName.workshop, 1);
