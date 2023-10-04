@@ -27,6 +27,11 @@ public class BotFunctions
 
             var offer = optionalOffer.get();
             var amountBought = kingdom.buyMarketOffer(offer, amountToBuy);
+            if (amountBought == 0)
+            {
+                // Could not afford, TODO tests
+                return totalBought;
+            }
             amountToBuy -= amountBought;
             totalBought += amountBought;
         }
