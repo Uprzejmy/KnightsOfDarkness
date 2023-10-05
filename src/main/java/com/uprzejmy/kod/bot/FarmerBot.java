@@ -16,27 +16,34 @@ public class FarmerBot implements Bot
     }
 
     @Override
-    public void doAllActions()
+    public boolean doAllActions()
     {
-        BotFunctions.buyLandToMaintainUnused(kingdom, 2);
-        BotFunctions.build(kingdom, BuildingName.house, 1);
-        BotFunctions.build(kingdom, BuildingName.farm, 1);
-        BotFunctions.buyToolsToMaintainCount(kingdom, 5 * 5 + 20); // TODO calculate this from training cost configuration
-        BotFunctions.trainUnits(kingdom, UnitName.builder, 1);
-        BotFunctions.trainUnits(kingdom, UnitName.farmer, 5);
-        postFoodOffer();
+        int actionResultsAggregate = 0;
+
+        actionResultsAggregate += BotFunctions.buyToolsToMaintainCount(kingdom, 5 * 5 + 20); // TODO calculate this from training cost configuration
+        actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.builder, 1);
+        actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.farmer, 5);
+        actionResultsAggregate += BotFunctions.buyLandToMaintainUnused(kingdom, 2);
+        actionResultsAggregate += BotFunctions.build(kingdom, BuildingName.house, 1);
+        actionResultsAggregate += BotFunctions.build(kingdom, BuildingName.farm, 1);
+        actionResultsAggregate += postFoodOffer();
+
+        boolean hasAnythingHappen = actionResultsAggregate > 0;
+        return hasAnythingHappen;
     }
 
-    private void postFoodOffer()
+    private int postFoodOffer()
     {
         var foodAmount = kingdom.getResources().getCount(ResourceName.food);
         var foodUpkeep = kingdom.getFoodUpkeep();
-        var amountToOffer = foodAmount - foodUpkeep;
+        var amountToOffer = Math.max(0, foodAmount - foodUpkeep);
 
         if (amountToOffer > 0)
         {
             kingdom.postMarketOffer(MarketResource.food, amountToOffer, 20);
         }
+
+        return amountToOffer;
     }
 
     @Override

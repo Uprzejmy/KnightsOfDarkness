@@ -16,20 +16,24 @@ public class BlacksmithBot implements Bot
     }
 
     @Override
-    public void doAllActions()
+    public boolean doAllActions()
     {
-        BotFunctions.buyFoodForUpkeep(kingdom);
-        BotFunctions.buyEnoughIronToMaintainFullProduction(kingdom);
-        BotFunctions.buyLandToMaintainUnused(kingdom, 2);
-        BotFunctions.build(kingdom, BuildingName.house, 1);
-        BotFunctions.build(kingdom, BuildingName.workshop, 1);
-        BotFunctions.trainUnits(kingdom, UnitName.builder, 1);
-        BotFunctions.trainUnits(kingdom, UnitName.blacksmith, 5);
-        postToolsOffer();
-        BotFunctions.buyEnoughIronToMaintainFullProduction(kingdom);
+        int actionResultsAggregate = 0;
+        actionResultsAggregate += BotFunctions.buyFoodForUpkeep(kingdom);
+        actionResultsAggregate += BotFunctions.buyEnoughIronToMaintainFullProduction(kingdom);
+        actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.builder, 1);
+        actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.blacksmith, 5);
+        actionResultsAggregate += BotFunctions.buyLandToMaintainUnused(kingdom, 2);
+        actionResultsAggregate += BotFunctions.build(kingdom, BuildingName.house, 1);
+        actionResultsAggregate += BotFunctions.build(kingdom, BuildingName.workshop, 1);
+        actionResultsAggregate += postToolsOffer();
+        actionResultsAggregate += BotFunctions.buyEnoughIronToMaintainFullProduction(kingdom);
+
+        boolean hasAnythingHappen = actionResultsAggregate > 0;
+        return hasAnythingHappen;
     }
 
-    private void postToolsOffer()
+    private int postToolsOffer()
     {
         var toolsAmount = kingdom.getResources().getCount(ResourceName.tools);
 
@@ -37,6 +41,8 @@ public class BlacksmithBot implements Bot
         {
             kingdom.postMarketOffer(MarketResource.tools, toolsAmount, 50);
         }
+
+        return toolsAmount;
     }
 
     @Override

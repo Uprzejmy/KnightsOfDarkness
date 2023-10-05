@@ -4,7 +4,7 @@ import com.uprzejmy.kod.kingdom.Kingdom;
 
 public interface Bot
 {
-	void doAllActions();
+	boolean doAllActions();
 
 	void passTurn();
 

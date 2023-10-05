@@ -44,4 +44,9 @@ public class KingdomUnits
     {
         return units.values().stream().mapToInt(Integer::intValue).sum();
     }
+
+    public String toString()
+    {
+        return units.toString();
+    }
 }

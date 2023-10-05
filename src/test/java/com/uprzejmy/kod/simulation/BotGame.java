@@ -59,9 +59,19 @@ public class BotGame
 
         for (var i = 0; i < 10; i++)
         {
+            boolean hasAnythingHappened = false;
+            do
+            {
+                hasAnythingHappened = false;
+                for (var bot : bots)
+                {
+                    var result = bot.doAllActions();
+                    hasAnythingHappened = hasAnythingHappened || result;
+                }
+            } while (hasAnythingHappened);
+
             for (var bot : bots)
             {
-                bot.doAllActions();
                 bot.passTurn();
                 KingdomPrinter.kingdomInfoPrinter(bot.getKingdom());
             }
