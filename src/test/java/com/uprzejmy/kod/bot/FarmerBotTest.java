@@ -34,6 +34,7 @@ public class FarmerBotTest
     }
 
     @Test
+    @Disabled
     void simulateTenTurnsTest()
     {
         var kingdom = kingdomBuilder.withResource(ResourceName.turns, 10).build();

@@ -24,8 +24,7 @@ public class IronMinerBot implements Bot
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.builder, 1);
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.ironMiner, 5);
         actionResultsAggregate += BotFunctions.buyLandToMaintainUnused(kingdom, 2);
-        actionResultsAggregate += BotFunctions.build(kingdom, BuildingName.house, 1);
-        actionResultsAggregate += BotFunctions.build(kingdom, BuildingName.ironMine, 1);
+        actionResultsAggregate += BotFunctions.buildSpecialistBuildingAndHouses(kingdom, BuildingName.ironMine, 1);
         actionResultsAggregate += postIronOffer();
 
         boolean hasAnythingHappen = actionResultsAggregate > 0;

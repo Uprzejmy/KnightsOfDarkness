@@ -24,8 +24,7 @@ public class GoldMinerBot implements Bot
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.builder, 1);
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.goldMiner, 5);
         actionResultsAggregate += BotFunctions.buyLandToMaintainUnused(kingdom, 2);
-        actionResultsAggregate += BotFunctions.build(kingdom, BuildingName.house, 1);
-        actionResultsAggregate += BotFunctions.build(kingdom, BuildingName.goldMine, 1);
+        actionResultsAggregate += BotFunctions.buildSpecialistBuildingAndHouses(kingdom, BuildingName.goldMine, 1);
 
         boolean hasAnythingHappen = actionResultsAggregate > 0;
         return hasAnythingHappen;

@@ -24,8 +24,7 @@ public class BlacksmithBot implements Bot
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.builder, 1);
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.blacksmith, 5);
         actionResultsAggregate += BotFunctions.buyLandToMaintainUnused(kingdom, 2);
-        actionResultsAggregate += BotFunctions.build(kingdom, BuildingName.house, 1);
-        actionResultsAggregate += BotFunctions.build(kingdom, BuildingName.workshop, 1);
+        actionResultsAggregate += BotFunctions.buildSpecialistBuildingAndHouses(kingdom, BuildingName.workshop, 1);
         actionResultsAggregate += postToolsOffer();
         actionResultsAggregate += BotFunctions.buyEnoughIronToMaintainFullProduction(kingdom);
 

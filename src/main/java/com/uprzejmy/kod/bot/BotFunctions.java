@@ -83,9 +83,26 @@ public class BotFunctions
         return 0;
     }
 
-    public static int build(Kingdom kingdom, BuildingName building, int count)
+    public static int buildSpecialistBuildingAndHouses(Kingdom kingdom, BuildingName building, int count)
     {
-        return kingdom.build(building, count);
+        var unit = UnitName.getByBuilding(building);
+        var unitCount = kingdom.getUnits().getCount(unit);
+        var fullCapacity = kingdom.getBuildingCapacity(building);
+        var freeCapacity = fullCapacity - unitCount;
+        var perBuildingCapacity = kingdom.getConfig().buildingCapacity().getCapacity(building);
+        var desiredFreeCapacity = perBuildingCapacity * count;
+        if (freeCapacity >= desiredFreeCapacity)
+        {
+            return 0;
+        }
+
+        var lackingCapacity = desiredFreeCapacity - freeCapacity;
+        var buildingsToBuild = (int) Math.ceil((double) lackingCapacity / perBuildingCapacity);
+
+        int buildingsBuilt = kingdom.build(BuildingName.house, buildingsToBuild);
+        buildingsBuilt += kingdom.build(building, buildingsToBuild);
+
+        return buildingsBuilt;
     }
 
     public static int trainUnits(Kingdom kingdom, UnitName unit, int count)

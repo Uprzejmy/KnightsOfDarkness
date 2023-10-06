@@ -24,8 +24,7 @@ public class FarmerBot implements Bot
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.builder, 1);
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.farmer, 5);
         actionResultsAggregate += BotFunctions.buyLandToMaintainUnused(kingdom, 2);
-        actionResultsAggregate += BotFunctions.build(kingdom, BuildingName.house, 1);
-        actionResultsAggregate += BotFunctions.build(kingdom, BuildingName.farm, 1);
+        actionResultsAggregate += BotFunctions.buildSpecialistBuildingAndHouses(kingdom, BuildingName.farm, 1);
         actionResultsAggregate += postFoodOffer();
 
         boolean hasAnythingHappen = actionResultsAggregate > 0;
