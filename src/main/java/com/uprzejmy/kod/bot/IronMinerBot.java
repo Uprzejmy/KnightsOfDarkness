@@ -37,7 +37,7 @@ public class IronMinerBot implements Bot
 
         if (ironAmount > 0)
         {
-            kingdom.postMarketOffer(MarketResource.iron, ironAmount, 40);
+            kingdom.postMarketOffer(MarketResource.iron, ironAmount, 25);
         }
 
         return ironAmount;

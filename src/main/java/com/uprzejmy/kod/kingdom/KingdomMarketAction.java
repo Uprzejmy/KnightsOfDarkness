@@ -48,4 +48,12 @@ public class KingdomMarketAction
     {
         kingdom.getResources().addCount(ResourceName.gold, goldValue);
     }
+
+    public void withdrawMarketOffer(MarketOffer offer)
+    {
+        if (offer.getKingdom() == kingdom)
+        {
+            kingdom.getMarket().removeOffer(offer);
+        }
+    }
 }

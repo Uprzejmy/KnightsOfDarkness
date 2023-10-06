@@ -87,6 +87,11 @@ public class Kingdom
         return this.kingdomMarketAction.getMyOffers();
     }
 
+    public void withdrawMarketOffer(MarketOffer offer)
+    {
+        this.kingdomMarketAction.withdrawMarketOffer(offer);
+    }
+
     public void acceptMarketOffer(int goldValue)
     {
         this.kingdomMarketAction.acceptOffer(goldValue);

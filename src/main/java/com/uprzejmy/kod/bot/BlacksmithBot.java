@@ -21,8 +21,10 @@ public class BlacksmithBot implements Bot
         int actionResultsAggregate = 0;
         actionResultsAggregate += BotFunctions.buyFoodForUpkeep(kingdom);
         actionResultsAggregate += BotFunctions.buyEnoughIronToMaintainFullProduction(kingdom);
+        actionResultsAggregate += withdrawToolsOffer();
+        actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.blacksmith, 3);
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.builder, 1);
-        actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.blacksmith, 5);
+        actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.blacksmith, 2);
         actionResultsAggregate += BotFunctions.buyLandToMaintainUnused(kingdom, 2);
         actionResultsAggregate += BotFunctions.buildSpecialistBuildingAndHouses(kingdom, BuildingName.workshop, 1);
         actionResultsAggregate += postToolsOffer();
@@ -32,13 +34,25 @@ public class BlacksmithBot implements Bot
         return hasAnythingHappen;
     }
 
+    private int withdrawToolsOffer()
+    {
+        var kingdomOffers = kingdom.getMarketOffers();
+        var count = kingdomOffers.size();
+        for (var offer : kingdomOffers)
+        {
+            kingdom.withdrawMarketOffer(offer);
+        }
+
+        return count;
+    }
+
     private int postToolsOffer()
     {
         var toolsAmount = kingdom.getResources().getCount(ResourceName.tools);
 
         if (toolsAmount > 0)
         {
-            kingdom.postMarketOffer(MarketResource.tools, toolsAmount, 50);
+            kingdom.postMarketOffer(MarketResource.tools, toolsAmount, 100);
         }
 
         return toolsAmount;

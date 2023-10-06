@@ -21,7 +21,7 @@ public class BotGame
     {
         var game = new TestGame().get();
         var bots = new ArrayList<Bot>();
-        var numberOfTurns = 36;
+        var numberOfTurns = 10;
         var kingdomBuilder = new KingdomBuilder(game).withResource(ResourceName.turns, numberOfTurns);
         kingdomBuilder = Utils.setupKingdomStartConfiguration(kingdomBuilder, game);
 
