@@ -18,16 +18,27 @@ public class BlacksmithBot implements Bot
     @Override
     public boolean doAllActions()
     {
+        boolean hasAnythingHappened = true;
+        do
+        {
+            hasAnythingHappened = doActionCycle();
+        } while (hasAnythingHappened);
+
+        return hasAnythingHappened;
+    }
+
+    private boolean doActionCycle()
+    {
         int actionResultsAggregate = 0;
         actionResultsAggregate += BotFunctions.buyFoodForUpkeep(kingdom);
         actionResultsAggregate += BotFunctions.buyEnoughIronToMaintainFullProduction(kingdom);
-        actionResultsAggregate += withdrawToolsOffer();
+        withdrawToolsOffer();
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.blacksmith, 3);
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.builder, 1);
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.blacksmith, 2);
         actionResultsAggregate += BotFunctions.buyLandToMaintainUnused(kingdom, 2);
         actionResultsAggregate += BotFunctions.buildSpecialistBuildingAndHouses(kingdom, BuildingName.workshop, 1);
-        actionResultsAggregate += postToolsOffer();
+        postToolsOffer();
         actionResultsAggregate += BotFunctions.buyEnoughIronToMaintainFullProduction(kingdom);
 
         boolean hasAnythingHappen = actionResultsAggregate > 0;

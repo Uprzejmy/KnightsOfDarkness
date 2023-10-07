@@ -46,7 +46,7 @@ public class KingdomTurnAction
                 resourceProduction = Math.min(resourceProduction, maxIronToSpend);
                 kingdom.getResources().subtractCount(ResourceName.iron, maxIronToSpend);
             }
-            kingdom.getResources().addCount(resourceType, resourceProduction);
+            kingdom.getResources().addCount(resourceType, (int) Math.round(resourceProduction * getProductionBonus()));
         }
     }
 
@@ -63,5 +63,28 @@ public class KingdomTurnAction
             // TODO fire workers here
             kingdom.getResources().subtractCount(ResourceName.unemployed, peopleCount - housingCapacity);
         }
+    }
+
+    private double getProductionBonus()
+    {
+        var land = kingdom.getResources().getCount(ResourceName.land);
+        var landFactor = 1000 - Math.max(100, land); // we don't give a bonus for land below 100 to avoid exploits
+        var bonus = getBonusFactorBasedOnLand(landFactor);
+
+        return bonus;
+    }
+
+    /**
+     * the bonus factor decreases exponentially, max is 5 at 100 land, min is 1 at
+     * 1000 land
+     * 
+     * @param land
+     * @return
+     */
+    private double getBonusFactorBasedOnLand(int land)
+    {
+        var bonus = 6.5 * Math.exp(-0.0047 * land) - 0.06;
+        var minBonus = Math.max(0, bonus);
+        return 1 + minBonus;
     }
 }
