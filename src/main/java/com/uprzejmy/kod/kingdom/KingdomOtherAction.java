@@ -49,7 +49,7 @@ public class KingdomOtherAction
         var power = 2; // linear function f(x) = 1/10 * x^2
         var landPrice = 0;
         var landToBuy = 0;
-        var nextCalculatedPrice = (int) Math.round(Math.pow(initialLand + 1, power) / 10);
+        var nextCalculatedPrice = (int) Math.round(Math.pow((double) initialLand + 1, power) / 10);
         while (landToBuy < count && landPrice + nextCalculatedPrice <= availableGold)
         {
             landPrice += nextCalculatedPrice;
