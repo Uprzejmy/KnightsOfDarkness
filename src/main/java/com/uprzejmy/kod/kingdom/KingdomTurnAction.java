@@ -68,6 +68,11 @@ public class KingdomTurnAction
     private double getProductionBonus()
     {
         var land = kingdom.getResources().getCount(ResourceName.land);
+        if (land > 1000)
+        {
+            return 1.0;
+        }
+
         var landFactor = 1000 - Math.max(100, land); // we don't give a bonus for land below 100 to avoid exploits
         var bonus = getBonusFactorBasedOnLand(landFactor);
 
