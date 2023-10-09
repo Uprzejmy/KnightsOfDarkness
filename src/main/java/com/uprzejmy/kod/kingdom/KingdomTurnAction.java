@@ -61,8 +61,9 @@ public class KingdomTurnAction
             if (unitName == UnitName.blacksmith)
             {
                 // TODO have the rate somewhere in the config
+                int ironConsumptionPerOneProductionUnit = 1;
                 // unfed blacksmith who don't work, will not consume any iron either
-                int neededIron = (int) (resourceProduction);
+                int neededIron = (int) (resourceProduction * ironConsumptionPerOneProductionUnit);
                 var maxIronToSpend = Math.min(neededIron, kingdom.getResources().getCount(ResourceName.iron));
                 resourceProduction = Math.min(resourceProduction, maxIronToSpend);
                 kingdom.getResources().subtractCount(ResourceName.iron, maxIronToSpend);
