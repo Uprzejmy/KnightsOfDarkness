@@ -124,4 +124,22 @@ public class BotFunctions
         var offer = optionalOffer.get();
         return kingdom.buyMarketOffer(offer, count);
     }
+
+    public static int trainBuilders(Kingdom kingdom, int count, double desiredBuilderToSpecialistRatio)
+    {
+        int builderCount = kingdom.getUnits().getCount(UnitName.builder);
+        int unitCount = kingdom.getTotalPeopleCount();
+        double currentBuilderRatio = (double) builderCount / unitCount;
+
+        if (currentBuilderRatio >= desiredBuilderToSpecialistRatio)
+        {
+            // we have enough builders already
+            return 0;
+        }
+
+        var toTrain = new KingdomUnits();
+        toTrain.addCount(UnitName.builder, count);
+        var trainedUnits = kingdom.train(toTrain);
+        return trainedUnits.countAll();
+    }
 }

@@ -9,6 +9,7 @@ import com.uprzejmy.kod.market.MarketResource;
 public class FarmerBot implements Bot
 {
     private final Kingdom kingdom;
+    private final double builderToSpecialistRatio = 0.1;
 
     public FarmerBot(Kingdom kingdom)
     {
@@ -21,7 +22,7 @@ public class FarmerBot implements Bot
         int actionResultsAggregate = 0;
 
         actionResultsAggregate += BotFunctions.buyToolsToMaintainCount(kingdom, 5 * 5 + 20); // TODO calculate this from training cost configuration
-        actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.builder, 1);
+        actionResultsAggregate += BotFunctions.trainBuilders(kingdom, 1, builderToSpecialistRatio);
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.farmer, 5);
         actionResultsAggregate += BotFunctions.buyLandToMaintainUnused(kingdom, 2);
         actionResultsAggregate += BotFunctions.buildSpecialistBuildingAndHouses(kingdom, BuildingName.farm, 1);

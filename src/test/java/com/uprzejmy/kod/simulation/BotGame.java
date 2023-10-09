@@ -78,5 +78,7 @@ public class BotGame
             }
             KingdomPrinter.printLineSeparator();
         }
+
+        KingdomPrinter.printResourcesHeader();
     }
 }

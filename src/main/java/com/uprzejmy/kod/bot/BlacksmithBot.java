@@ -9,6 +9,7 @@ import com.uprzejmy.kod.market.MarketResource;
 public class BlacksmithBot implements Bot
 {
     private final Kingdom kingdom;
+    private final double builderToSpecialistRatio = 0.1;
 
     public BlacksmithBot(Kingdom kingdom)
     {
@@ -34,7 +35,7 @@ public class BlacksmithBot implements Bot
         actionResultsAggregate += BotFunctions.buyEnoughIronToMaintainFullProduction(kingdom);
         withdrawToolsOffer();
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.blacksmith, 3);
-        actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.builder, 1);
+        actionResultsAggregate += BotFunctions.trainBuilders(kingdom, 1, builderToSpecialistRatio);
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.blacksmith, 2);
         actionResultsAggregate += BotFunctions.buyLandToMaintainUnused(kingdom, 2);
         actionResultsAggregate += BotFunctions.buildSpecialistBuildingAndHouses(kingdom, BuildingName.workshop, 1);

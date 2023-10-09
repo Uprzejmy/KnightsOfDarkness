@@ -8,6 +8,7 @@ import com.uprzejmy.kod.kingdom.UnitName;
 public class GoldMinerBot implements Bot
 {
     private final Kingdom kingdom;
+    private final double builderToSpecialistRatio = 0.15;
 
     public GoldMinerBot(Kingdom kingdom)
     {
@@ -21,7 +22,7 @@ public class GoldMinerBot implements Bot
 
         actionResultsAggregate += BotFunctions.buyFoodForUpkeep(kingdom);
         actionResultsAggregate += BotFunctions.buyToolsToMaintainCount(kingdom, 5 * 15 + 20); // TODO calculate this from training cost configuration
-        actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.builder, 1);
+        actionResultsAggregate += BotFunctions.trainBuilders(kingdom, 1, builderToSpecialistRatio);
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.goldMiner, 5);
         actionResultsAggregate += BotFunctions.buyLandToMaintainUnused(kingdom, 2);
         actionResultsAggregate += BotFunctions.buildSpecialistBuildingAndHouses(kingdom, BuildingName.goldMine, 1);
