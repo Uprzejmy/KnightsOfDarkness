@@ -83,7 +83,7 @@ public class BotFunctions
         return 0;
     }
 
-    public static int buildSpecialistBuildingAndHouses(Kingdom kingdom, BuildingName building, int count)
+    public static int buildSpecialistBuilding(Kingdom kingdom, BuildingName building, int count)
     {
         var unit = UnitName.getByBuilding(building);
         var unitCount = kingdom.getUnits().getCount(unit);
@@ -99,10 +99,7 @@ public class BotFunctions
         var lackingCapacity = desiredFreeCapacity - freeCapacity;
         var buildingsToBuild = (int) Math.ceil((double) lackingCapacity / perBuildingCapacity);
 
-        int buildingsBuilt = kingdom.build(BuildingName.house, buildingsToBuild);
-        buildingsBuilt += kingdom.build(building, buildingsToBuild);
-
-        return buildingsBuilt;
+        return kingdom.build(building, buildingsToBuild);
     }
 
     public static int trainUnits(Kingdom kingdom, UnitName unit, int count)
@@ -141,5 +138,20 @@ public class BotFunctions
         toTrain.addCount(UnitName.builder, count);
         var trainedUnits = kingdom.train(toTrain);
         return trainedUnits.countAll();
+    }
+
+    public static int buildHouses(Kingdom kingdom, int count, double desiredHousesToSpecialistBuildingRatio)
+    {
+        int housesCount = kingdom.getBuildings().getCount(BuildingName.house);
+        int buildingsCount = kingdom.getBuildings().countAll();
+        double currentHousesRatio = (double) housesCount / buildingsCount;
+
+        if (currentHousesRatio >= desiredHousesToSpecialistBuildingRatio)
+        {
+            // we have enough houses already
+            return 0;
+        }
+
+        return kingdom.build(BuildingName.house, count);
     }
 }

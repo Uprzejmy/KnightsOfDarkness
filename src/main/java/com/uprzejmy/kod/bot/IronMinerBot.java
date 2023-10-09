@@ -10,6 +10,7 @@ public class IronMinerBot implements Bot
 {
     private final Kingdom kingdom;
     private final double builderToSpecialistRatio = 0.15;
+    private final double housesToSpecialistBuildingRatio = 0.6;
 
     public IronMinerBot(Kingdom kingdom)
     {
@@ -25,7 +26,8 @@ public class IronMinerBot implements Bot
         actionResultsAggregate += BotFunctions.trainBuilders(kingdom, 1, builderToSpecialistRatio);
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.ironMiner, 5);
         actionResultsAggregate += BotFunctions.buyLandToMaintainUnused(kingdom, 2);
-        actionResultsAggregate += BotFunctions.buildSpecialistBuildingAndHouses(kingdom, BuildingName.ironMine, 1);
+        actionResultsAggregate += BotFunctions.buildSpecialistBuilding(kingdom, BuildingName.ironMine, 1);
+        actionResultsAggregate += BotFunctions.buildHouses(kingdom, 1, housesToSpecialistBuildingRatio);
         actionResultsAggregate += postIronOffer();
 
         boolean hasAnythingHappen = actionResultsAggregate > 0;

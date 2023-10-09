@@ -10,6 +10,7 @@ public class BlacksmithBot implements Bot
 {
     private final Kingdom kingdom;
     private final double builderToSpecialistRatio = 0.1;
+    private final double housesToSpecialistBuildingRatio = 0.55;
 
     public BlacksmithBot(Kingdom kingdom)
     {
@@ -38,7 +39,8 @@ public class BlacksmithBot implements Bot
         actionResultsAggregate += BotFunctions.trainBuilders(kingdom, 1, builderToSpecialistRatio);
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.blacksmith, 2);
         actionResultsAggregate += BotFunctions.buyLandToMaintainUnused(kingdom, 2);
-        actionResultsAggregate += BotFunctions.buildSpecialistBuildingAndHouses(kingdom, BuildingName.workshop, 1);
+        actionResultsAggregate += BotFunctions.buildSpecialistBuilding(kingdom, BuildingName.workshop, 1);
+        actionResultsAggregate += BotFunctions.buildHouses(kingdom, 1, housesToSpecialistBuildingRatio);
         postToolsOffer();
         actionResultsAggregate += BotFunctions.buyEnoughIronToMaintainFullProduction(kingdom);
 

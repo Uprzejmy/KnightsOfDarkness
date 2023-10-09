@@ -10,6 +10,7 @@ public class FarmerBot implements Bot
 {
     private final Kingdom kingdom;
     private final double builderToSpecialistRatio = 0.1;
+    private final double housesToSpecialistBuildingRatio = 0.55;
 
     public FarmerBot(Kingdom kingdom)
     {
@@ -25,7 +26,8 @@ public class FarmerBot implements Bot
         actionResultsAggregate += BotFunctions.trainBuilders(kingdom, 1, builderToSpecialistRatio);
         actionResultsAggregate += BotFunctions.trainUnits(kingdom, UnitName.farmer, 5);
         actionResultsAggregate += BotFunctions.buyLandToMaintainUnused(kingdom, 2);
-        actionResultsAggregate += BotFunctions.buildSpecialistBuildingAndHouses(kingdom, BuildingName.farm, 1);
+        actionResultsAggregate += BotFunctions.buildSpecialistBuilding(kingdom, BuildingName.farm, 1);
+        actionResultsAggregate += BotFunctions.buildHouses(kingdom, 1, housesToSpecialistBuildingRatio);
         actionResultsAggregate += postFoodOffer();
 
         boolean hasAnythingHappen = actionResultsAggregate > 0;

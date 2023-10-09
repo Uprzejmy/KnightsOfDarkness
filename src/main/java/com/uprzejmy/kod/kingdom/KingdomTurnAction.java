@@ -46,6 +46,8 @@ public class KingdomTurnAction
 
         // there wasn't food for everyone
         double fedPeopleRatio = (double) foodAvailable / foodUpkeep;
+        // TODO real traces
+        System.out.println("There wasn't enough food in " + kingdom.getName() + " only " + fedPeopleRatio + "% were fed");
         kingdom.getResources().subtractCount(ResourceName.food, foodAvailable);
         return fedPeopleRatio;
     }
