@@ -48,6 +48,12 @@ public class FarmerBot implements Bot
     @Override
     public void passTurn()
     {
+        // TODO make it more sophisticated to withdraw only necessary amount
+        var offers = kingdom.getMarketOffers();
+        if (!offers.isEmpty())
+        {
+            kingdom.withdrawMarketOffer(offers.get(0));
+        }
         kingdom.passTurn();
     }
 

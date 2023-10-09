@@ -31,6 +31,7 @@
       "buildingPoints": 10000,
       "unemployed": 10,
       "gold": 200000,
+      "food": 2000,
       "iron": 100,
       "tools": 500,
       "weapons": 10,

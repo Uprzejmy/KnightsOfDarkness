@@ -17,31 +17,52 @@ public class KingdomTurnAction
         }
 
         kingdom.getResources().subtractCount(ResourceName.turns, 1);
-        eatFood();
-        doProduction();
+        double fedPeopleRatio = eatFood();
+        doProduction(fedPeopleRatio);
+        // TODO food production should happen before consumption
         getNewPeople();
 
         return true;
     }
 
-    private void eatFood()
+    /*
+     * returns factor of people who were fed during current cycle
+     * for example if we need to feed 10 people and we only have food for 8
+     * then the factor of people who were fed is 8/10 = 0.8
+     */
+    private double eatFood()
     {
         // TODO consequences of not having enough food
-        var foodToEat = Math.min(kingdom.getResources().getCount(ResourceName.food), kingdom.getFoodUpkeep());
-        kingdom.getResources().subtractCount(ResourceName.food, foodToEat);
+        int foodAvailable = kingdom.getResources().getCount(ResourceName.food);
+        int foodUpkeep = kingdom.getFoodUpkeep();
+
+        if (foodAvailable >= foodUpkeep)
+        {
+            kingdom.getResources().subtractCount(ResourceName.food, foodUpkeep);
+
+            // everyone was fed
+            return 1.0;
+        }
+
+        // there wasn't food for everyone
+        double fedPeopleRatio = (double) foodAvailable / foodUpkeep;
+        kingdom.getResources().subtractCount(ResourceName.food, foodAvailable);
+        return fedPeopleRatio;
     }
 
-    private void doProduction()
+    private void doProduction(double baseProductionRate)
     {
-        var production = kingdom.getConfig().production();
+        var productionConfig = kingdom.getConfig().production();
 
         for (var unitName : UnitName.getProductionUnits())
         {
-            var resourceType = production.getResource(unitName);
-            var resourceProduction = kingdom.getUnits().getCount(unitName) * production.getProductionRate(unitName);
+            var resourceType = productionConfig.getResource(unitName);
+            var resourceProduction = kingdom.getUnits().getCount(unitName) * baseProductionRate * productionConfig.getProductionRate(unitName);
             if (unitName == UnitName.blacksmith)
             {
-                var neededIron = resourceProduction; // TODO have the rate somewhere in the config
+                // TODO have the rate somewhere in the config
+                // unfed blacksmith who don't work, will not consume any iron either
+                int neededIron = (int) (resourceProduction);
                 var maxIronToSpend = Math.min(neededIron, kingdom.getResources().getCount(ResourceName.iron));
                 resourceProduction = Math.min(resourceProduction, maxIronToSpend);
                 kingdom.getResources().subtractCount(ResourceName.iron, maxIronToSpend);
