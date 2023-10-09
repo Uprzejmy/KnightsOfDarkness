@@ -40,7 +40,7 @@ public class FarmerBot implements Bot
 
         if (amountToOffer > 0)
         {
-            kingdom.postMarketOffer(MarketResource.food, amountToOffer, 20);
+            kingdom.postMarketOffer(MarketResource.food, amountToOffer, 15);
         }
 
         return amountToOffer;
