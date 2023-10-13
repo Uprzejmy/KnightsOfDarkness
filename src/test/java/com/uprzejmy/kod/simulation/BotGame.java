@@ -73,11 +73,17 @@ public class BotGame
 
             for (var bot : bots)
             {
-                bot.passTurn();
                 KingdomPrinter.kingdomInfoPrinter(bot.getKingdom());
+                bot.passTurn();
             }
             KingdomPrinter.printLineSeparator();
         }
+
+        for (var bot : bots)
+        {
+            KingdomPrinter.kingdomInfoPrinter(bot.getKingdom());
+        }
+        KingdomPrinter.printLineSeparator();
 
         KingdomPrinter.printResourcesHeader();
     }
