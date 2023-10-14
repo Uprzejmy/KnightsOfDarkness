@@ -10,7 +10,7 @@ public class BlacksmithBot implements Bot
 {
     private final Kingdom kingdom;
     private final double builderToSpecialistRatio = 0.1;
-    private final double housesToSpecialistBuildingRatio = 0.55;
+    private final double housesToSpecialistBuildingRatio = 0.6;
 
     public BlacksmithBot(Kingdom kingdom)
     {
@@ -66,7 +66,7 @@ public class BlacksmithBot implements Bot
 
         if (toolsAmount > 0)
         {
-            kingdom.postMarketOffer(MarketResource.tools, toolsAmount, 100);
+            kingdom.postMarketOffer(MarketResource.tools, toolsAmount, 140);
         }
 
         return toolsAmount;

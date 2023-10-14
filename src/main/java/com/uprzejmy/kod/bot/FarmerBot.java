@@ -58,6 +58,7 @@ public class FarmerBot implements Bot
             kingdom.withdrawMarketOffer(offers.get(0));
         }
         kingdom.passTurn();
+        postFoodOffer();
     }
 
     @Override
