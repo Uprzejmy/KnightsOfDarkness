@@ -44,4 +44,9 @@ public class KingdomPrinter
         );
         // @formatter:on
     }
+
+    public static void printTurnInfo(int currentTurn)
+    {
+        System.out.format("Turn %d\n", currentTurn);
+    }
 }

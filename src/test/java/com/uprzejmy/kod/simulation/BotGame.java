@@ -22,8 +22,7 @@ public class BotGame
         var game = new TestGame().get();
         var bots = new ArrayList<Bot>();
         var numberOfTurns = 10;
-        var kingdomBuilder = new KingdomBuilder(game).withResource(ResourceName.turns, numberOfTurns);
-        kingdomBuilder = Utils.setupKingdomStartConfiguration(kingdomBuilder, game);
+        var kingdomBuilder = Utils.setupKingdomStartConfiguration(new KingdomBuilder(game), game).withResource(ResourceName.turns, numberOfTurns);
 
         var farmerKingdom = kingdomBuilder.withName("FarmerBot").build();
         Bot farmerBot = new FarmerBot(farmerKingdom);
@@ -58,8 +57,14 @@ public class BotGame
         }
         KingdomPrinter.printLineSeparator();
 
-        for (var i = 0; i < numberOfTurns; i++)
+        for (var currentTurn = 0; currentTurn < numberOfTurns; currentTurn++)
         {
+            for (var bot : bots)
+            {
+                KingdomPrinter.kingdomInfoPrinter(bot.getKingdom());
+            }
+            KingdomPrinter.printLineSeparator();
+
             boolean hasAnythingHappened = false;
             do
             {
@@ -73,9 +78,10 @@ public class BotGame
 
             for (var bot : bots)
             {
-                KingdomPrinter.kingdomInfoPrinter(bot.getKingdom());
                 bot.passTurn();
             }
+            KingdomPrinter.printLineSeparator();
+            KingdomPrinter.printTurnInfo(currentTurn);
             KingdomPrinter.printLineSeparator();
         }
 

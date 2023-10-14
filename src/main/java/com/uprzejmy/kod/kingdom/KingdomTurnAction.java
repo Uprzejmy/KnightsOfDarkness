@@ -70,7 +70,8 @@ public class KingdomTurnAction
                 resourceProduction = Math.min(resourceProduction, maxIronToSpend);
                 kingdom.getResources().subtractCount(ResourceName.iron, maxIronToSpend);
             }
-            kingdom.getResources().addCount(resourceType, (int) Math.round(resourceProduction * getProductionBonus()));
+            int actualProduction = (int) Math.round(resourceProduction * getProductionBonus());
+            kingdom.getResources().addCount(resourceType, actualProduction);
         }
     }
 
