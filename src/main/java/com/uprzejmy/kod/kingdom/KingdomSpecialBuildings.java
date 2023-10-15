@@ -25,11 +25,6 @@ public class KingdomSpecialBuildings
                 new KingdomSpecialBuilding(SpecialBuildingName.emptyBuilding), new KingdomSpecialBuilding(SpecialBuildingName.emptyBuilding));
     }
 
-    public int countAll()
-    {
-        return specialBuildings.size();
-    }
-
     public Optional<Integer> startNew(SpecialBuildingName specialBuilding, int buildingPlace)
     {
         int listIndex = buildingPlace - 1;
@@ -59,5 +54,10 @@ public class KingdomSpecialBuildings
         }
 
         specialBuildings.set(listIndex, new KingdomSpecialBuilding(SpecialBuildingName.emptyBuilding));
+    }
+
+    public KingdomSpecialBuilding getAt(int buildingPlace)
+    {
+        return specialBuildings.get(buildingPlace - 1);
     }
 }
