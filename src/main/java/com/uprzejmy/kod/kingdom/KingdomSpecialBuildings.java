@@ -56,8 +56,13 @@ public class KingdomSpecialBuildings
         specialBuildings.set(listIndex, new KingdomSpecialBuilding(SpecialBuildingName.emptyBuilding));
     }
 
-    public KingdomSpecialBuilding getAt(int buildingPlace)
+    public Optional<KingdomSpecialBuilding> getAt(int buildingPlace)
     {
-        return specialBuildings.get(buildingPlace - 1);
+        if (buildingPlace < 1 || buildingPlace > 5)
+        {
+            return Optional.empty();
+        }
+
+        return Optional.of(specialBuildings.get(buildingPlace - 1));
     }
 }
