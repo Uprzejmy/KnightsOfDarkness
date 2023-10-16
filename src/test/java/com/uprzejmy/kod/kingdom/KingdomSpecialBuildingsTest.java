@@ -40,7 +40,8 @@ public class KingdomSpecialBuildingsTest
         int buildingPlace = 1;
         var specialBuildings = new KingdomSpecialBuildings();
         specialBuildings.startNew(SpecialBuildingName.goldShaft, 1);
+        var currentBuilding = specialBuildings.getAt(buildingPlace);
         specialBuildings.startNew(SpecialBuildingName.ironShaft, 1);
-        assertEquals(SpecialBuildingName.goldShaft, specialBuildings.getAt(buildingPlace).buildingType);
+        assertEquals(currentBuilding, specialBuildings.getAt(buildingPlace));
     }
 }
