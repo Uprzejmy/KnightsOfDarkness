@@ -19,7 +19,7 @@ dependencies {
     implementation("com.fasterxml.jackson.core:jackson-core:2.15.2")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.15.2")
     implementation("com.github.victools:jsonschema-generator:4.31.1")
-    implementation("org.json:json:20230618")
+    implementation("org.json:json:20231013")
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
