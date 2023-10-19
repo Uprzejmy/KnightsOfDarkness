@@ -8,6 +8,7 @@ class KingdomSpecialBuilding
 {
     SpecialBuildingName buildingType;
     int level = 0;
+    int buildingPointsPut = 0;
 
     public KingdomSpecialBuilding(SpecialBuildingName specialBuilding)
     {
@@ -18,8 +19,9 @@ class KingdomSpecialBuilding
 public class KingdomSpecialBuildings
 {
     List<KingdomSpecialBuilding> specialBuildings;
+    Kingdom kingdom;
 
-    public KingdomSpecialBuildings()
+    public KingdomSpecialBuildings(Kingdom kingdom)
     {
         specialBuildings = Arrays.asList(new KingdomSpecialBuilding(SpecialBuildingName.emptyBuilding), new KingdomSpecialBuilding(SpecialBuildingName.emptyBuilding), new KingdomSpecialBuilding(SpecialBuildingName.emptyBuilding),
                 new KingdomSpecialBuilding(SpecialBuildingName.emptyBuilding), new KingdomSpecialBuilding(SpecialBuildingName.emptyBuilding));
@@ -64,5 +66,34 @@ public class KingdomSpecialBuildings
         }
 
         return Optional.of(specialBuildings.get(buildingPlace - 1));
+    }
+
+    public void build(int buildingPlace, int buildingPoints)
+    {
+        if (buildingPlace < 1 || buildingPlace > 5)
+        {
+            return;
+        }
+
+        var building = specialBuildings.get(buildingPlace - 1);
+
+        if (building.level >= 5)
+        {
+            return;
+        }
+
+        int buildingCost = kingdom.getConfig().specialBuildingCosts().getCost(building.buildingType);
+        int remainingCost = buildingCost - building.buildingPointsPut;
+        int buildingPointsToSpend = Math.min(buildingPoints, kingdom.getResources().getCount(ResourceName.buildingPoints));
+
+        if (buildingPointsToSpend >= remainingCost)
+        {
+            building.level++;
+            building.buildingPointsPut = 0;
+            return; // TODO indicate building points spent?
+        }
+
+        building.buildingPointsPut += buildingPointsToSpend;
+        return;
     }
 }
